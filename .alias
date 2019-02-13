@@ -1,0 +1,7 @@
+alias vim="nvim"
+
+alias "git-patch"="git add -p"
+
+alias cdsrc="cd /data/src"
+
+alias dco="docker-compose"

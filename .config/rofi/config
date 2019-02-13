@@ -1,0 +1,18 @@
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! User: chrsm
+! ------------------------------------------------------------------------------
+rofi.color-enabled: true
+rofi.color-window: #37304d, #37304d, #37304d
+rofi.color-normal: #1e282d, #ffffff, #1e282d, #1e282d, #0083ff
+rofi.color-active: #1e282d, #268bd2, #1e282d, #1e282d, #fff675
+rofi.color-urgent: #1e282d, #dc322f, #1e282d, #1e282d, #ff0700
+
+! new
+rofi.color-window: argb:C837304d, argb:C837304d, argb:C837304d
+rofi.color-normal: argb:C837304d, #ffffff, argb:C837304d, argb:C837304d, #ffc200
+rofi.color-active: argb:C837304d, #ffffff, argb:C837304d, argb:C837304d, #ffba00
+rofi.color-urgent: argb:C837304d, #ff0000, argb:C837304d, argb:C837304d, #ffba00
+
+! modi
+rofi.modi: run,window,ssh,docker:/home/c/.local/bin/rofi-docker.sh

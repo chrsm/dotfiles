@@ -1,0 +1,16 @@
+[user]
+	email = xrefs_github@theinternetemail.com
+	name = xrefs
+[color]
+	ui = auto
+
+[alias]
+	st = status
+	addp = add -p
+[push]
+	default = tracking
+
+[core]
+	excludesfile = /home/c/.gitignore
+	pager = less -F
+

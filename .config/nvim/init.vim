@@ -14,7 +14,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'gregsexton/gitv'
 
 
-	" misc programming
+	" misc
 	Plug 'rking/ag.vim'
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'rhysd/committia.vim'
@@ -22,6 +22,8 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'stephpy/vim-yaml'
 	Plug 'vim-ruby/vim-ruby'
 	Plug 'w0rp/ale'
+	Plug 'posva/vim-vue'
+	Plug 'HerringonDarkholme/yats.vim'
 
 	Plug 'autozimu/LanguageClient-neovim', {
 		\ 'branch': 'next',
@@ -30,20 +32,14 @@ call plug#begin('~/.config/nvim/plugged')
 
 	" golang
 	Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-	" Plug 'zchee/deoplete-go', { 'do': 'make' }
-	" Plug 'sebdah/vim-delve'
+	Plug 'sebdah/vim-delve'
 
 	" C++
 	" Plug 'zchee/deoplete-clang'
 	Plug 'rhysd/vim-clang-format'
 
-	" php
-	" Plug 'StanAngeloff/php.vim'
-
 	" rust
 	Plug 'rust-lang/rust.vim'
-	"Plug 'racer-rust/vim-racer'
-	" Plug 'sebastianmarkow/deoplete-rust'
 
 	" colo
 	Plug 'chrsm/vim-colors-paramount'
@@ -153,10 +149,8 @@ call plug#end()
 	let g:ale_linters = {
 		\ 'rust': [ 'rustc' ],
 		\ 'javascript': [],
+		\ 'go': [ 'gometalinter', 'gofmt', 'staticcheck', 'go build', 'gosimple' ],
 		\ }
-	"\ 'go': [ 'gometalinter', 'gofmt', 'staticcheck', 'go build', 'gosimple' ],
-	
-
 " }}}
 
 " languageclient / lsp {{{
@@ -166,15 +160,17 @@ call plug#end()
 		\ 'rust': [ '~/.cargo/bin/rustup', 'run', 'stable', 'rls' ],
 		\ }
 
-	" doesn't work :(
-	" \ 'php': [ 'docker', 'run', '-it', '--rm', '--net=host', '-v', '/etc/hosts:/etc/hosts:ro', '-v', '$(pwd):/opt/host', '-w', '/opt/host', 'c/php', 'phan', '--daemonize-tcp-port', '4846', '--quick' ],
-
 	let g:LanguageClient_autoStart = 1
 " }}}
 
 " golang {{{
 	let g:ale_go_gometalinter_enabled = 1
-	let g:go_fmt_command = "goimports"
+
+	let g:deoplete#sources#go#pointer = 1
+
+	let g:go_debug = ['shell-commands']
+	let g:go_code_completion_enabled = 0
+	let g:go_fmt_command = "gofumports"
 	let g:go_fmt_fail_silently = 1
 	let g:go_highlight_build_constraints = 1
 	let g:go_highlight_extra_types = 1
@@ -185,8 +181,6 @@ call plug#end()
 	let g:go_highlight_structs = 1
 	let g:go_highlight_types = 1
 	let g:go_auto_type_info = 1
-
-	let g:deoplete#sources#go#pointer = 1
 
 	" lol no generics
 	autocmd BufNewFile,BufRead *.go_gen set syntax=go
@@ -203,7 +197,8 @@ call plug#end()
 
 	let g:clang_format#code_style = 'llvm'
 	let g:clang_format#auto_format = 1
-
+	let g:clang_format#style_options = {
+		\ "SortIncludes": "false" }
 " }}}
 
 " javascript {{{
@@ -272,4 +267,9 @@ call plug#end()
 
 " lua {{{
 	au FileType lua setl ts=2 sw=2 expandtab
+" }}}
+
+" typescript {{{
+	let g:typescript_indent_disable = 1
+	au BufWrite *.ts :Autoformat
 " }}}

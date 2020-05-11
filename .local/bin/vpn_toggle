@@ -1,0 +1,19 @@
+#!/bin/bash
+
+THEARG=$1
+WG_V="wg1"
+
+if [ "$THEARG" == "" ] ; then
+	# nothing
+	WG_V="wg1"
+else
+	WG_V=$THEARG
+fi
+
+IS_UP=$(nmcli c show --active | grep $WG_V)
+
+if [ "$IS_UP" == "" ]; then
+	wg-quick up /etc/wireguard/$WG_V.conf
+else
+	wg-quick down /etc/wireguard/$WG_V.conf
+fi

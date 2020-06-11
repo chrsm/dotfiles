@@ -48,11 +48,30 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = i3 xwindow
-modules-center = eth wlan pubipcheck vpncheck
-modules-right = filesystem volume memory cpu temperature date powermenu
+modules-center = eth vpncheck wgipcheck
+; eth wlan pubipcheck vpncheck
+modules-right = volume filesystem memory cpu temperature date powermenu
 
 tray-position = right
 tray-padding = 2
+;tray-transparent = true
+;tray-background = #0063ff
+
+;wm-restack = bspwm
+
+; allow other windows above the bar
+;wm-restack = i3
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+;[module/xwindow]
+;type = internal/xwindow
+;label = %title:0:30:...%
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -186,7 +205,7 @@ label = "mem: %percentage_used%%"
 
 [module/wlan]
 type = internal/network
-interface = wlp5s0
+interface = wlp0s20u10u2
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
@@ -208,7 +227,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = eno1
+interface = enp4s0
 interval = 3.0
 
 format-connected-underline = #55aa55
@@ -232,7 +251,7 @@ date = " %Y-%m-%d"
 
 ;time = %H:%M
 ; renamed time-alt to time
-time = %H:%M:%S
+time = %H:%M:%S %z
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
@@ -241,7 +260,34 @@ format-underline = #0a6cf5
 label = %date% %time%
 
 [module/volume]
-type = internal/volume
+type = internal/pulseaudio
+
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL %percentage%%
+label-volume-foreground = ${root.foreground}
+
+label-muted = 🔇 muted
+label-muted-foreground = #666
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/alsa]
+type = internal/alsa
 
 format-volume = <label-volume> <bar-volume>
 label-volume = VOL
@@ -267,6 +313,7 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
+
 
 [module/battery]
 type = internal/battery
@@ -317,6 +364,8 @@ ramp-foreground = ${colors.foreground-alt}
 [module/powermenu]
 type = custom/menu
 
+expand-right = true
+
 format-spacing = 1
 
 label-open = 
@@ -341,23 +390,31 @@ menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
-[module/vpncheck]
+[module/wgipcheck]
 type = custom/script
-exec = "(pgrep openvpn >/dev/null && echo 'vpn: on') || echo 'vpn: off'; exit 0"
-interval = 600
-label = %output%
-format-prefix = " "
+exec = "curl https://am.i.mullvad.net/ip 2>/dev/null"
+exec-if = "nmcli c show --active | grep wireguard > /dev/null"
+interval = 120
+format = pub-ip: <label>
+format-underline = #5b
+format-prefix = "🖧 "
 format-prefix-foreground = #5b
 
-[module/pubipcheck]
+[module/vpncheck]
 type = custom/script
-exec = $HOME/.local/bin/getpubip.sh
-interval = 120
-label = %output%
+exec = "((nmcli c show --active | grep wireguard > /dev/null) && echo 'on') || echo 'off'; exit 0"
+interval = 10
+format = wg/vpn: <label>
+format-prefix = " "
 format-prefix-foreground = #5b
+format-underline = #5b
 
 [settings]
 screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
 
 [global/wm]
 margin-top = 5

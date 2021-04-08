@@ -1,45 +1,68 @@
 call plug#begin('~/.config/nvim/plugged')
 
+
 " plugins {{{
 	Plug 'justinmk/vim-dirvish'
-	Plug 'sjl/gundo.vim'
 	Plug 'vim-airline/vim-airline'
-	Plug 'ctrlpvim/ctrlp.vim'
-	Plug 'talek/obvious-resize'
 	Plug 'tpope/vim-eunuch'
 
 	" git
-	Plug 'tpope/vim-fugitive'
-	Plug 'tommcdo/vim-fugitive-blame-ext'
-	Plug 'gregsexton/gitv'
-
-
-	" misc
-	Plug 'rking/ag.vim'
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	"Plug 'tpope/vim-fugitive'
+	"Plug 'tommcdo/vim-fugitive-blame-ext'
+	"Plug 'gregsexton/gitv', { 'on': ['Gitv'] }
+	"Plug 'airblade/vim-gitgutter'
+	Plug 'TimUntersberger/neogit'
 	Plug 'rhysd/committia.vim'
+	
+	" better in-fn context
+	"Plug 'wellle/context.vim'
 
-	Plug 'stephpy/vim-yaml'
-	Plug 'vim-ruby/vim-ruby'
-	Plug 'w0rp/ale'
-	Plug 'posva/vim-vue'
-	Plug 'HerringonDarkholme/yats.vim'
+	" treesitter is a parser improvement thign
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
+	" :TSInstall bash
+	" :TSInstall c
+	" :TSInstall cpp
+	" :TSInstall go
+	" :TSInstall lua
+	" :TSInstall rust
+	" :TSInstall json
+	" :TSInstall vue
+	" :TSInstall jsonc
+	" :TSInstall php
+	" :TSInstall yaml
+	" :TSInstall javascript
+	
+	" lintin'
+	Plug 'dense-analysis/ale'
 
-	Plug 'autozimu/LanguageClient-neovim', {
-		\ 'branch': 'next',
-		\ 'do': 'bash install.sh',
-		\ }
+	" lsp stuff, 0.5+
+	Plug 'neovim/nvim-lspconfig'
+	Plug 'nvim-lua/completion-nvim'
+	Plug 'nvim-lua/lsp-status.nvim'
+	Plug 'nvim-lua/diagnostic-nvim'
+	Plug 'sbdchd/neoformat'
+
+	" telescopic!
+	Plug 'nvim-lua/popup.nvim'
+	Plug 'nvim-lua/plenary.nvim'
+	Plug 'nvim-telescope/telescope.nvim'
 
 	" golang
-	Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-	Plug 'sebdah/vim-delve'
+	"Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+	" Plug 'zchee/deoplete-go', { 'do': 'make' }
+	" Plug 'sebdah/vim-delve'
 
 	" C++
 	" Plug 'zchee/deoplete-clang'
-	Plug 'rhysd/vim-clang-format'
+	"Plug 'rhysd/vim-clang-format'
+
+	" php
+	" Plug 'StanAngeloff/php.vim'
 
 	" rust
-	Plug 'rust-lang/rust.vim'
+	"Plug 'rust-lang/rust.vim'
+	"Plug 'racer-rust/vim-racer'
+	" Plug 'sebastianmarkow/deoplete-rust'
 
 	" colo
 	Plug 'chrsm/vim-colors-paramount'
@@ -47,12 +70,22 @@ call plug#begin('~/.config/nvim/plugged')
 
 call plug#end()
 
+lua require('init')
+
+lua <<EOF
+require('nvim-treesitter.configs').setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = { --[[ "javascript"]] }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { --[["c", "rust"]] },  -- list of language that will be disabled
+  },
+}
+EOF
+
 " vim settings {{{
-	if &term == "xterm-256color"
-		set termguicolors
-	endif
 	set nowrap
-	set shell=/usr/bin/zsh
+	" set shell=/usr/bin/zsh
 	set number
 	set showmode
 	set showcmd
@@ -61,14 +94,14 @@ call plug#end()
 	set pumheight=10
 	set noswapfile
 	set hidden
-	set clipboard=unnamedplus
+	set clipboard+=unnamedplus
 	set lazyredraw
 	set showmatch
 	set matchtime=2
 	set nostartofline
 	set scrolloff=5
 	set updatetime=1000
-	set synmaxcol=160
+	set synmaxcol=5000
 
 	set splitbelow
 	set splitright
@@ -93,12 +126,16 @@ call plug#end()
 	filetype indent on
 	syntax on
 
-	set completeopt+=noinsert,noselect
+	"set completeopt+=noinsert,noselect
+	"set completeopt-=preview
+	set updatetime=300
+	set completeopt=menuone
+	set completeopt+=noinsert
 	set completeopt-=preview
-
-	let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+	set shortmess+=c
 
 	set background=dark
+	set termguicolors
 	colo paramount
 " }}}
 
@@ -132,45 +169,42 @@ call plug#end()
 	" highlight last inserted text, via dougblack.io
 	nmap gV `[v`]
 
-	" leaders
 	nnoremap <leader>w :w<CR>
+	nnoremap <leader>g :Neogit<CR>
+
+	" tab, shift-tab
+	inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+	inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 	" CtrlP (+ag)
-	nnoremap <leader>p :CtrlP<CR>
-	nnoremap <leader>b :CtrlPBuffer<CR>
+	"nnoremap <leader>p :CtrlP<CR>
+	"nnoremap <leader>b :CtrlPBuffer<CR>
 " }}}
 
-" ale {{{
-	let g:airline#extensions#ale#enabled = 1
+" general conf {{{
+	let g:committia_open_only_vim_starting = 1
 
+	let g:airline#extensions#ale#enabled = 1
 	let g:ale_sign_error = '⤫'
 	let g:ale_sign_warning = '⚠'
-
 	let g:ale_linters = {
 		\ 'rust': [ 'rustc' ],
 		\ 'javascript': [],
-		\ 'go': [ 'gometalinter', 'gofmt', 'staticcheck', 'go build', 'gosimple' ],
-		\ }
-" }}}
-
-" languageclient / lsp {{{
-	let g:LanguageClient_serverCommands = {
-		\ 'cpp': [ 'clangd' ],
-		\ 'go': [ 'go-langserver', '-gocodecompletion', '-func-snippet-enabled' ],
-		\ 'rust': [ '~/.cargo/bin/rustup', 'run', 'stable', 'rls' ],
+		\ 'go': ['gopls'],
 		\ }
 
-	let g:LanguageClient_autoStart = 1
+	" telescope
+	nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
+	nnoremap <leader>p <cmd>lua require('telescope.builtin').find_files()<cr>
+	nnoremap <leader>lg <cmd>lua require('telescope.builtin').live_grep()<cr>
 " }}}
 
-" golang {{{
+" language-specific {{{
+" golang
 	let g:ale_go_gometalinter_enabled = 1
 
-	let g:deoplete#sources#go#pointer = 1
-
-	let g:go_debug = ['shell-commands']
-	let g:go_code_completion_enabled = 0
-	let g:go_fmt_command = "gofumports"
+	" TODO: find replacements?
+	let g:go_fmt_command = "goimports"
 	let g:go_fmt_fail_silently = 1
 	let g:go_highlight_build_constraints = 1
 	let g:go_highlight_extra_types = 1
@@ -181,15 +215,14 @@ call plug#end()
 	let g:go_highlight_structs = 1
 	let g:go_highlight_types = 1
 	let g:go_auto_type_info = 1
+	let g:go_code_completion_enabled = 0
+
+	let g:deoplete#sources#go#pointer = 1
 
 	" lol no generics
 	autocmd BufNewFile,BufRead *.go_gen set syntax=go
-" }}}
 
-" c++ {{{
-	" deoplete/c++ specific crap
-	" let g:deoplete#sources#clang#std = {'c': 'c11', 'cpp': 'c++17', 'objc': 'c11', 'objcpp': 'c++1z'}
-	
+" c++
 	let g:ale_cpp_clang_options = '-std=c++1z -Wall'
 	let g:ale_cpp_gcc_options = '-std=c++1z -Wall'
 
@@ -197,79 +230,17 @@ call plug#end()
 
 	let g:clang_format#code_style = 'llvm'
 	let g:clang_format#auto_format = 1
-	let g:clang_format#style_options = {
-		\ "SortIncludes": "false" }
-" }}}
 
-" javascript {{{
+" javascript
 	au FileType javascript setl ts=4 sw=4
-" }}}
 
-" deoplete {{{
-	let g:deoplete#enable_at_startup = 1
-	let g:deoplete#enable_smart_case = 1
-	let g:deoplete#disable_auto_complete = 0
-	let g:deoplete#ignore_sources = {}
-	let g:deoplete#ignore_sources._ = ['buffer', 'member', 'tag', 'file', 'neosnippet']
-	let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-	let g:deoplete#sources#go#align_class = 1
-
-	call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy'])
-	call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
-	call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
-
-	" Let <Tab> also do completion
-	inoremap <silent><expr> <TAB>
-		\ pumvisible() ? "\<C-n>" :
-		\ <SID>check_back_space() ? "\<TAB>" :
-		\ deoplete#mappings#manual_complete()
-		function! s:check_back_space() abort "{{{
-		let col = col('.') - 1
-		return !col || getline('.')[col - 1]  =~ '\s'
-		endfunction"}}}
-
-	" close doc window when completion is done
-	autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-" }}}
-
-" ag + ctrlp {{{
-	set grepprg=ag\ --nogroup\ --nocolor
-	set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.bin
-
-	let g:ctrlp_custom_ignore = {
-		\ 'dir': '\v[\/]\.(git|hg|svn)$',
-		\ 'file': '\v\.(exe|so|dll|bin)$',
-	\ }
-
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-	let g:ctrlp_use_caching = 0
-" }}}
-
-" committia, vim-fugitive, etc {{{
-	let g:committia_open_only_vim_starting = 1
-" }}}
-
-" rust {{{
-	"let g:rustfmt_autosave = 1
-	"let g:racer_cmd = '/home/c/.cargo/bin/racer'
-	"let $RUST_SRC_PATH='/home/chrsm/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
-	"let g:racer_experimental_completer = 1
-	"let g:deoplete#sources#rust#racer_binary='/home/c/.cargo/bin/racer'
-	"let g:deoplete#sources#rust#rust_source_path=$RUST_SRC_PATH
-	"let g:deoplete#sources#rust#show_duplicates=0
-
-	au FileType rust setl ts=4 sw=4 expandtab
-" }}}
-
-" ruby {{{
-	au FileType ruby setl ts=2 sw=2 expandtab
-" }}}
-
-" lua {{{
+" lua
 	au FileType lua setl ts=2 sw=2 expandtab
-" }}}
 
-" typescript {{{
-	let g:typescript_indent_disable = 1
-	au BufWrite *.ts :Autoformat
+" rust
+	au FileType rust setl ts=4 sw=4 expandtab
+
+" ruby
+	au FileType ruby setl ts=2 sw=2 expandtab
+
 " }}}

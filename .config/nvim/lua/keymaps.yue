@@ -13,6 +13,12 @@ no '<C-k>', '<C-w>k'
 no '<C-l>', '<C-w>l'
 no '<C-h>', '<C-w>h'
 
+-- resize
+no '<C-K>', ':ObviousResizeUp<CR>', nors
+no '<C-J>', ':ObviousResizeDown<CR>', nors
+no '<C-H>', ':ObviousResizeLeft<CR>', nors
+no '<C-L>', ':ObviousResizeRight<CR>', nors
+
 -- arrow keys r bad mmkay
 no '<Up>', '<NOP>', nors
 no '<Down>', '<NOP>', nors

@@ -1,0 +1,25 @@
+import "util" as { :leader, :ins, :no, :nor, :nors }
+
+no ';', ':', nor
+no ':', ';', nor
+no 'Y', 'y$', nor
+
+-- the only way to escape!
+ins 'jj', '<ESC>'
+
+-- split switch
+no '<C-j>', '<C-w>j'
+no '<C-k>', '<C-w>k'
+no '<C-l>', '<C-w>l'
+no '<C-h>', '<C-w>h'
+
+-- arrow keys r bad mmkay
+no '<Up>', '<NOP>', nors
+no '<Down>', '<NOP>', nors
+no '<Left>', '<NOP>', nors
+no '<Right>', '<NOP>', nors
+
+-- telescope
+no '<leader>p', '<cmd>Telescope find_files<CR>', nor
+no '<leader>b', '<cmd>Telescope buffers<CR>', nor
+no '<leader>g', '<cmd>Telescope live_grep<CR>', nor

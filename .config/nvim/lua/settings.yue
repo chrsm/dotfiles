@@ -1,0 +1,55 @@
+v = vim or {}
+
+-- TODO: translate as many of these as possible to vim.o/vim.wo/etc
+v.cmd [[
+colorscheme paramount
+set background=dark
+
+set nowrap
+set number
+set showcmd
+set textwidth=120
+set cmdheight=1
+set pumheight=10
+set noswapfile
+set hidden
+set clipboard+=unnamedplus
+set lazyredraw
+set showmatch
+set matchtime=2
+set nostartofline
+set scrolloff=5
+set updatetime=1000
+set synmaxcol=5000
+
+set splitbelow
+set splitright
+
+set notimeout
+set ttimeout
+set ttimeoutlen=10
+
+set ignorecase
+set smartcase
+set wrapscan
+set nohlsearch
+
+"set backup
+"set backupdir=~/.config/nvim/backups/
+"set undofile
+"set undodir=~/.config/nvim/undos/
+
+set mouse=a
+
+filetype plugin on
+filetype indent on
+syntax on
+
+set updatetime=300
+set completeopt=menuone
+set completeopt+=noinsert
+set completeopt-=preview
+set shortmess+=c
+
+set termguicolors
+]]

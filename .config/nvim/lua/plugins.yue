@@ -1,0 +1,53 @@
+import "packer" as packer
+
+v = vim or {}
+
+v._update_package_paths?!
+
+packer.startup () ->
+  use 'wbthomason/packer.nvim'
+
+  -- misc/util
+  use 'justinmk/vim-dirvish'
+  use 'vim-airline/vim-airline'
+  use 'tpope/vim-eunuch'
+  use 'talek/obvious-resize'
+  use 'rhysd/committia.vim'
+  
+  use 'nvim-lua/popup.nvim'
+  use 'nvim-lua/plenary.nvim'
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires: {
+      { 'nvim-lua/plenary.nvim' },
+    },
+  }
+
+  use 'chrsm/vim-colors-paramount' -- da bess
+
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run: ->
+      v.cmd [[ :TSUpdate ]]
+    ,
+  }
+
+  use 'dense-analysis/ale'
+
+  -- all LSP stuff
+  use 'neovim/nvim-lspconfig'
+  use 'nvim-lua/completion-nvim'
+  use 'nvim-lua/lsp-status.nvim'
+  use 'nvim-lua/diagnostic-nvim'
+  use 'sbdchd/neoformat'
+
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/nvim-cmp'
+
+  -- lang-specific
+  use 'leafo/moonscript-vim'
+  use 'pigpigyyy/Yuescript-vim'
+  use 'gleam-lang/gleam.vim'
+  use 'nathom/filetype.nvim'
+

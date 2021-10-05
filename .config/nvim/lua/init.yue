@@ -1,0 +1,13 @@
+reqs = {
+  'plugins',
+  'settings',
+  'keymaps',
+  'ft',
+  'nvim-cmp',
+}
+
+for _, v in ipairs reqs
+  require v
+
+{
+}

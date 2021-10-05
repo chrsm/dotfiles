@@ -1,0 +1,79 @@
+import "cmp" as cmp
+import "cmp_nvim_lsp" as cap
+import "lspconfig" as lsp
+
+v = vim or {}
+
+setup =
+  mapping: {
+    '<C-d>': cmp.mapping.scroll_docs -4,
+    '<C-f>': cmp.mapping.scroll_docs 4,
+    '<C-Space>': cmp.mapping.complete!,
+    '<Tab>': cmp.mapping(cmp.mapping.select_next_item!, { 'i', 's' }),
+    '<C-e>': cmp.mapping.close!,
+    '<CR>': cmp.mapping.confirm { select: true, behavior: cmp.ConfirmBehavior.Replace, },
+  }
+  sources: {
+    { name: 'nvim_lsp' },
+    { name: 'buffer' },
+  }
+
+cmp.setup setup
+
+lsp.gopls.setup { capabilities: cap.update_capabilities v.lsp.protocol.make_client_capabilities! }
+
+on_attach = (c, buf) ->
+  setkey = (...) -> v.api.nvim_buf_set_keymap buf, ...
+  setopt = (...) -> v.api.nvim_buf_set_option buf, ...
+
+  setopt 'omnifunc', 'v:lua.vim.lsp.omnifunc'
+  
+  opts =
+    noremap: true
+    silent: true
+
+  setkey 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts
+  setkey 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts
+
+  -- TODO: import more? don't really use any of those..
+  -- setkey('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  
+  if c.resolved_capabilities.document_formatting
+    setkey 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts
+  else
+    setkey 'n', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts
+
+  if c.resolved_capabilities.document_highlight
+    v.api.nvim_exec [[
+      augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 300)
+      augroup END
+    ]], false
+  else
+    v.api.nvim_exec [[
+      autocmd!
+        autocmd BufWritePre * Neoformat
+      augroup END
+    ]], false
+
+lsp.gopls.setup {
+  on_attach: on_attach,
+  flags: { debounce_text_changes: 150 },
+  codelens: { generate: true, gc_details: true },
+  semanticTokens: true,
+  experimentalWorkspaceModule: true,
+  settings: {
+    gopls: {
+      analyses: {
+        shadow: true,
+      },
+    },
+  },
+}
+
+v.lsp.handlers['textDocument/publishDiagnostics'] = v.lsp.with v.lsp.diagnostic.on_publish_diagnostics,
+  { underline: true, virtual_text: false, signs: true, update_in_insert: true }
+

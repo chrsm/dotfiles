@@ -1,6 +1,7 @@
 import "cmp" as cmp
 import "cmp_nvim_lsp" as cap
 import "lspconfig" as lsp
+import "lsp_signature" as lsp_sig
 
 v = vim or {}
 
@@ -58,6 +59,8 @@ on_attach = (c, buf) ->
         autocmd BufWritePre * Neoformat
       augroup END
     ]], false
+
+  lsp_sig.on_attach!
 
 lsp.gopls.setup {
   on_attach: on_attach,

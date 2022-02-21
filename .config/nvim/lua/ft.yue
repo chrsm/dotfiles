@@ -2,6 +2,7 @@ v = vim or {}
 
 v.cmd [[
 autocmd BufNewFile,BufRead *.go_gen set syntax=go
+autocmd BufNewFile,BufRead *.ksy set syntax=yaml
 
 au FileType cpp setl ts=4 sw=4 expandtab
 au FileType go setl ts=4 sw=4
@@ -10,5 +11,7 @@ au FileType lua setl ts=2 sw=2 expandtab
 au FileType rust setl ts=4 sw=4 expandtab
 au FileType ruby setl ts=2 sw=2 expandtab
 au FileType yue setl ts=2 sw=2 expandtab
+au FileType yaml setl ts=2 sw=2 expandtab
+au FileType ksy setl ts=2 sw=2 expandtab
 ]]
 

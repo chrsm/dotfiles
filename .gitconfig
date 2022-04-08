@@ -1,16 +1,41 @@
-[user]
-	email = xrefs_github@theinternetemail.com
-	name = xrefs
 [color]
 	ui = auto
 
 [alias]
 	st = status
 	addp = add -p
+	redate = rebase --commiter-date-is-author-date
+	
 [push]
 	default = tracking
 
 [core]
-	excludesfile = /home/c/.gitignore
+	excludesfile = ~/.gitignore
 	pager = less -F
+	autocrlf = input
+	eol = native
 
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+
+[gpg]
+	program = gpg2
+
+[init]
+	defaultBranch = master
+
+[fetch]
+	prune = true
+
+[commit]
+	gpgsign = true
+	template = ~/.local/commit_template
+
+[url "git@github.com:"]
+	insteadOf = https://github.com
+
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com

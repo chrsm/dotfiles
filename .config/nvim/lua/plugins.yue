@@ -1,8 +1,6 @@
 import "packer" as packer
 
-v = vim or {}
-
-v._update_package_paths?!
+vim._update_package_paths?!
 
 packer.startup () ->
   use 'wbthomason/packer.nvim'
@@ -28,7 +26,7 @@ packer.startup () ->
   use {
     'nvim-treesitter/nvim-treesitter',
     run: ->
-      v.cmd [[ :TSUpdate ]]
+      vim.cmd [[ :TSUpdate ]]
     ,
   }
 
@@ -52,3 +50,4 @@ packer.startup () ->
   use 'gleam-lang/gleam.vim'
   use 'nathom/filetype.nvim'
 
+nil

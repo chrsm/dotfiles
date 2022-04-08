@@ -1,13 +1,11 @@
-v = vim or {}
-
 nor = { noremap: true }
 nors = { noremap: true, silent: true }
 
 leader = ','
 
-v.g.mapleader = leader
+vim.g.mapleader = leader
 
-keymap = v.api.nvim_set_keymap
+keymap = vim.api.nvim_set_keymap
 ins = (lhs, rhs, opts = {}) ->
   keymap 'i', lhs, rhs, opts
 

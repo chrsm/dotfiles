@@ -3,8 +3,6 @@ import "cmp_nvim_lsp" as cap
 import "lspconfig" as lsp
 import "lsp_signature" as lsp_sig
 
-v = vim or {}
-
 setup =
   mapping: {
     '<C-d>': cmp.mapping.scroll_docs -4,
@@ -21,11 +19,11 @@ setup =
 
 cmp.setup setup
 
-lsp.gopls.setup { capabilities: cap.update_capabilities v.lsp.protocol.make_client_capabilities! }
+lsp.gopls.setup { capabilities: cap.update_capabilities vim.lsp.protocol.make_client_capabilities! }
 
 on_attach = (c, buf) ->
-  setkey = (...) -> v.api.nvim_buf_set_keymap buf, ...
-  setopt = (...) -> v.api.nvim_buf_set_option buf, ...
+  setkey = (...) -> vim.api.nvim_buf_set_keymap buf, ...
+  setopt = (...) -> vim.api.nvim_buf_set_option buf, ...
 
   setopt 'omnifunc', 'v:lua.vim.lsp.omnifunc'
   
@@ -45,7 +43,7 @@ on_attach = (c, buf) ->
     setkey 'n', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts
 
   if c.resolved_capabilities.document_highlight
-    v.api.nvim_exec [[
+    vim.api.nvim_exec [[
       augroup lsp_document_highlight
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
@@ -54,7 +52,7 @@ on_attach = (c, buf) ->
       augroup END
     ]], false
   else
-    v.api.nvim_exec [[
+    vim.api.nvim_exec [[
       autocmd!
         autocmd BufWritePre * Neoformat
       augroup END
@@ -77,6 +75,7 @@ lsp.gopls.setup {
   },
 }
 
-v.lsp.handlers['textDocument/publishDiagnostics'] = v.lsp.with v.lsp.diagnostic.on_publish_diagnostics,
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with vim.lsp.diagnostic.on_publish_diagnostics,
   { underline: true, virtual_text: false, signs: true, update_in_insert: true }
 
+nil

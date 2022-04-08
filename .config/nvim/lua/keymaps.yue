@@ -29,3 +29,5 @@ no '<Right>', '<NOP>', nors
 no '<leader>p', '<cmd>Telescope find_files<CR>', nor
 no '<leader>b', '<cmd>Telescope buffers<CR>', nor
 no '<leader>g', '<cmd>Telescope live_grep<CR>', nor
+
+nil

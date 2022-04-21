@@ -1,8 +1,0 @@
-export SRCPATH=/data/src
-export LOCALBIN=$HOME/.local/bin
-export GOROOT=$HOME/.local/go1.11.5
-export GOPATH=$SRCPATH/gocode
-export RUST_SRC_PATH=$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.local/lib"
-export PATH="$LOCALBIN:$GOROOT/bin:$GOPATH/bin:$PATH:$HOME/.cargo/bin"
-

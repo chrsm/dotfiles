@@ -7,7 +7,10 @@ packer.startup () ->
   use 'wbthomason/packer.nvim'
 
   -- misc/util
-  use 'justinmk/vim-dirvish'
+  use {
+    'elihunter173/dirbuf.nvim'
+    config: $do_cfg "dirbuf"
+  }
   use 'vim-airline/vim-airline'
   use 'tpope/vim-eunuch'
   use {

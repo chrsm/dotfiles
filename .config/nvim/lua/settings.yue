@@ -12,6 +12,10 @@ runcmds = (cmds) ->
   for _, v in ipairs cmds
     vim.cmd v
 
+setopts vim.g, mkdef
+  * { "loaded_netrwPlugin", 1 }
+  * { "loaded_netrw", 1 }
+
 setopts vim.opt, mkdef
   * "number"
   * "showcmd"

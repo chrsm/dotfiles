@@ -1,3 +1,4 @@
+import "macros" as { $ }
 import "packer" as packer
 
 vim._update_package_paths?!
@@ -9,25 +10,30 @@ packer.startup () ->
   use 'justinmk/vim-dirvish'
   use 'vim-airline/vim-airline'
   use 'tpope/vim-eunuch'
-  use 'talek/obvious-resize'
+  use {
+    'talek/obvious-resize'
+    config: $do_cfg 'obvious_resize'
+  }
   use 'rhysd/committia.vim'
   
   use 'nvim-lua/popup.nvim'
-  use 'nvim-lua/plenary.nvim'
   use {
     'nvim-telescope/telescope.nvim',
+    config: $do_cfg 'telescope'
     requires: {
       { 'nvim-lua/plenary.nvim' },
     },
   }
 
-  use 'chrsm/vim-colors-paramount' -- da bess
+  -- da bess colorscheme
+  use {
+    'chrsm/vim-colors-paramount'
+    config: $do_cfg "paramount"
+  }
 
   use {
     'nvim-treesitter/nvim-treesitter',
-    run: ->
-      vim.cmd [[ :TSUpdate ]]
-    ,
+    run: $do_run "treesitter"
   }
 
   use 'dense-analysis/ale'
@@ -39,13 +45,29 @@ packer.startup () ->
   use 'nvim-lua/diagnostic-nvim'
   use 'sbdchd/neoformat'
 
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/nvim-cmp'
-  use 'ray-x/lsp_signature.nvim'
+  use {
+    'hrsh7th/nvim-cmp'
+    config: $do_cfg "cmp"
+    wants:
+      * "LuaSnip"
+    requires:
+      * "hrsh7th/cmp-nvim-lsp"
+      * "hrsh7th/cmp-buffer"
+      --[[* "hrsh7th/cmp-path"
+      * "hrsh7th/cmp-nvim-lua"
+      * "hrsh7th/cmp-cmdline"
+      * "hrsh7th/cmp-calc"
+      * "hrsh7th/cmp-emoji"]]
+      * "ray-x/cmp-treesitter"
+      * "ray-x/lsp_signature.nvim"
+      * {
+        "L3MON4D3/LuaSnip"
+        wants: "friendly-snippets"
+        config: $do_cfg "luasnip"
+      }
+  }
 
   -- lang-specific
-  use 'leafo/moonscript-vim'
   use 'pigpigyyy/Yuescript-vim'
   use 'gleam-lang/gleam.vim'
   use 'nathom/filetype.nvim'

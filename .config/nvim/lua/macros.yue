@@ -1,0 +1,27 @@
+--[[ keybind macros ]]
+export macro normal = (lhs, rhs, opt = {}) ->
+  "vim.api.nvim_set_keymap 'n', #{lhs}, #{rhs}, #{opt}"
+
+export macro insert = (lhs, rhs, opt = {}) ->
+  "vim.api.nvim_set_keymap 'i', #{lhs}, #{rhs}, #{opt}"
+
+export macro noremap = (lhs, rhs) ->
+  "vim.api.nvim_set_keymap 'n', #{lhs}, #{rhs}, {noremap: true}"
+
+export macro nosilent = (lhs, rhs) ->
+  "vim.api.nvim_set_keymap 'n', #{lhs}, #{rhs}, {noremap: true, silent: true}"
+
+--[[ buf specific macros ]]
+export macro setopt = (ctx, lhs, rhs) ->
+  "vim.api.nvim_buf_set_option " ..
+  "#{ ctx }, #{ lhs }, #{ rhs }"
+
+export macro setkey = (ctx, lhs, rhs, cmd, opts = {}) ->
+  "vim.api.nvim_buf_set_keymap " ..
+  "#{ ctx }, #{ lhs }, #{ rhs }, #{ cmd }, #{ opts }"
+
+--[[ cfg macros ]]
+export macro do_cfg = (plug) ->
+  "(...) -> require(\"plug.\" .. #{ plug }).setup ..."
+export macro do_run = (plug) ->
+  "(...) -> require(\"plug.\" .. #{ plug }).run ..."

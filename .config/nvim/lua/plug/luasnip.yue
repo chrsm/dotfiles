@@ -1,0 +1,14 @@
+export default {
+  setup: (...) ->
+    import "luasnip" as luasnip
+
+    luasnip.config.set_config {
+      history: false
+      updateevents: "TextChanged,TextChangedI"
+    }
+
+    with require "luasnip/loaders/from_vscode"
+      .load!
+
+    nil
+}

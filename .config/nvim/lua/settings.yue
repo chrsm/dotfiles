@@ -1,55 +1,50 @@
--- TODO: translate as many of these as possible to vim.o/vim.wo/etc
-vim.cmd [[
-colorscheme paramount
-set background=dark
+mkdef = (tbl, default = true) ->
+  for i, v in ipairs tbl
+    unless type(v) == "table"
+      tbl[i] = { v, default }
+  tbl
 
-set nowrap
-set number
-set showcmd
-set textwidth=120
-set cmdheight=1
-set pumheight=10
-set noswapfile
-set hidden
-set clipboard+=unnamedplus
-set lazyredraw
-set showmatch
-set matchtime=2
-set nostartofline
-set scrolloff=5
-set updatetime=1000
-set synmaxcol=5000
+setopts = (vimo, tbl) ->
+  for _, v in ipairs tbl
+    vimo[v[1]] = v[2]
 
-set splitbelow
-set splitright
+runcmds = (cmds) ->
+  for _, v in ipairs cmds
+    vim.cmd v
 
-set notimeout
-set ttimeout
-set ttimeoutlen=10
+setopts vim.opt, mkdef
+  * "number"
+  * "showcmd"
+  * "hidden"
+  * "lazyredraw"
+  * "showmatch"
+  * "splitbelow"
+  * "splitright"
+  * "ignorecase"
+  * "smartcase"
+  * "wrapscan"
+  * "termguicolors"
+  * { "swapfile", false }
+  * { "startofline", false }
+  * { "hlsearch", false }
+  * { "textwidth", 120 }
+  * { "cmdheight", 1 }
+  * { "pumheight", 10 }
+  * { "clipboard", "unnamedplus" }
+  * { "scrolloff", 5 }
+  * { "updatetime", 300 }
+  * { "synmaxcol", 5000 }
+  * { "mouse", "a" }
+  * { "completeopt", "menu,menuone,noselect" }
+  * { "matchtime", 2 }
+  * { "shortmess", "c" }
 
-set ignorecase
-set smartcase
-set wrapscan
-set nohlsearch
+setopts vim.wo, mkdef
+  * { "wrap", false }
 
-"set backup
-"set backupdir=~/.config/nvim/backups/
-"set undofile
-"set undodir=~/.config/nvim/undos/
-
-set mouse=a
-
-filetype plugin on
-filetype indent on
-syntax on
-
-set updatetime=300
-set completeopt=menuone
-set completeopt+=noinsert
-set completeopt-=preview
-set shortmess+=c
-
-set termguicolors
-]]
+cmds = runcmds
+  * "filetype plugin on"
+  * "filetype indent on"
+  * "syntax on"
 
 nil

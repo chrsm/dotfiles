@@ -1,13 +1,8 @@
-reqs = {
-  'plugins',
-  'settings',
-  'keymaps',
-  'ft',
-  'nvim-cmp',
-}
+reqs =
+  * 'plugins'
+  * 'settings'
+  * 'keymaps'
+  * 'nvim_lsp'
+  * 'ft'
 
-for _, v in ipairs reqs
-  require v
-
-{
-}
+[require r for _, r in ipairs reqs]

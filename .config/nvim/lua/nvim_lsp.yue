@@ -1,0 +1,105 @@
+import "macros" as { $ }
+import "lspconfig" as lsp
+import "lsp_signature" as lsp_sig
+import "cmp_nvim_lsp" as cap
+
+($do_cfg "cmp")!
+
+on_attach = (c, buf) ->
+  $setopt buf, 'omnifunc', 'v:lua.vim.lsp.omnifunc'
+  
+  opts =
+    noremap: true
+    silent: true
+
+  $setkey buf, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts
+  $setkey buf, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts
+
+  -- TODO: import more? don't really use any of those..
+  -- $setkey('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+
+  if c.resolved_capabilities.document_formatting
+    $setkey buf, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts
+  else
+    $setkey buf, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts
+
+  fmtcaps = [[
+      autocmd!
+        autocmd BufWritePre * Neoformat
+      augroup END
+  ]]
+  if c.resolved_capabilities.document_highlight
+    fmtcaps = [[
+      augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 5000)
+      augroup END
+    ]], false
+
+  vim.api.nvim_exec fmtcaps, false
+
+  lsp_sig.on_attach!
+
+with lsp.gopls
+  .setup {
+    capabilities: cap.update_capabilities vim.lsp.protocol.make_client_capabilities!
+    on_attach: on_attach
+    flags:
+      debounce_text_changes: 150
+    codelens:
+      generate: true
+      gc_details: true
+      vendor: true
+    semanticTokens: true
+    experimentalWorkspaceModule: true
+    settings:
+      gopls:
+        allExperiments: true
+        analyses:
+          shadow: true
+          unreachable: true
+          unusedparams: true
+          staticcheck: true
+          composites: true
+          copylocks: true
+          errorsas: true
+          fieldalignment: true
+          httpresponse: true
+          infertypeargs: true
+          loopclosure: true
+          lostcancel: true
+          nilfunc: true
+          nilness: true
+          printf: true
+          shadow: true
+          simplifycompositelit: true
+          simplifyrange: true
+          simplifyslice: true
+          stdmethods: true
+          stringintconv: true
+          structtag: true
+          testinggoroutine: true
+          tests: true
+          unmarshal: true
+          unsafeptr: true
+          unusedresult: true
+          unusedwrite: true
+          useany: true
+  }
+
+with vim.lsp
+  n = 'textDocument/publishDiagnostics'
+
+  opts =
+    underline: true
+    virtual_text: false
+    signs: true
+    update_in_insert: true
+
+  hnd = vim.lsp.with vim.lsp.diagnostic.on_publish_diagnostics, opts
+
+  .handlers[n] = hnd
+
+nil

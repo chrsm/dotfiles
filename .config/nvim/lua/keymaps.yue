@@ -1,33 +1,30 @@
-import "util" as { :leader, :ins, :no, :nor, :nors }
+import "macros" as { $ }
 
-no ';', ':', nor
-no ':', ';', nor
-no 'Y', 'y$', nor
+vim.g.mapleader = ","
+
+--[[ 
+  all global keybinds.
+
+  plugin specific are specified under plug/*.yue
+]]
+
+$noremap ';', ':'
+$noremap ':', ';'
+$noremap 'Y', 'y$'
 
 -- the only way to escape!
-ins 'jj', '<ESC>'
+$insert 'jj', '<ESC>'
 
 -- split switch
-no '<C-j>', '<C-w>j'
-no '<C-k>', '<C-w>k'
-no '<C-l>', '<C-w>l'
-no '<C-h>', '<C-w>h'
-
--- resize
-no '<C-K>', ':ObviousResizeUp<CR>', nors
-no '<C-J>', ':ObviousResizeDown<CR>', nors
-no '<C-H>', ':ObviousResizeLeft<CR>', nors
-no '<C-L>', ':ObviousResizeRight<CR>', nors
+$normal '<C-j>', '<C-w>j'
+$normal '<C-k>', '<C-w>k'
+$normal '<C-l>', '<C-w>l'
+$normal '<C-h>', '<C-w>h'
 
 -- arrow keys r bad mmkay
-no '<Up>', '<NOP>', nors
-no '<Down>', '<NOP>', nors
-no '<Left>', '<NOP>', nors
-no '<Right>', '<NOP>', nors
-
--- telescope
-no '<leader>p', '<cmd>Telescope find_files<CR>', nor
-no '<leader>b', '<cmd>Telescope buffers<CR>', nor
-no '<leader>g', '<cmd>Telescope live_grep<CR>', nor
+$nosilent '<Up>', '<NOP>'
+$nosilent '<Down>', '<NOP>'
+$nosilent '<Left>', '<NOP>'
+$nosilent '<Right>', '<NOP>'
 
 nil

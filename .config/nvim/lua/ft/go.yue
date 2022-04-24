@@ -1,0 +1,7 @@
+vim.api.nvim_create_autocmd { "BufNewFile", "BufRead" },
+  pattern: "*.go_gen"
+  command: "set syntax=go"
+
+vim.api.nvim_create_autocmd { "FileType" },
+  pattern: "go"
+  command: "setl ts=4 sw=4"

@@ -1,0 +1,7 @@
+export default {
+  setup: (...) ->
+    require("twilight").setup {
+      context: 15
+      treesitter: true
+    }
+}

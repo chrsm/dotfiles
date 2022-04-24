@@ -31,11 +31,18 @@ packer.startup () ->
     config: $do_cfg "paramount"
   }
 
+  -- treesitter + related
   use {
     'nvim-treesitter/nvim-treesitter',
     run: $do_run "treesitter"
   }
 
+  use {
+    'folke/twilight.nvim',
+    config: $do_cfg "twilight"
+  }
+
+  -- misc
   use 'dense-analysis/ale'
 
   -- all LSP stuff

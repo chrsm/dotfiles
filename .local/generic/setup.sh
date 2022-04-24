@@ -1,6 +1,17 @@
 #!/bin/bash
 set -e
 
+asdf_inst () {
+	local p=$1
+	local version="${2:-latest}"
+
+	asdf plugin add $p || true
+	asdf install $p $version || true
+	asdf global $p $version || true
+	# not necessary but w/e
+	asdf reshim $p $version || true
+}
+
 IS_MAC=false
 if [[ `uname` == "Darwin" ]]; then
 	IS_MAC=true
@@ -21,11 +32,7 @@ fi
 PLUGINS=(assh golang lua luaJIT openresty protoc tfsec)
 for p in "${PLUGINS[@]}"
 do
-	asdf plugin add $p || true
-	asdf install $p latest || true
-	asdf global $p latest || true
-	# not necessary but w/e
-	asdf reshim $p latest || true
+	asdf_inst $p
 done
 
-
+asdf_inst neovim nightly

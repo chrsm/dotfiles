@@ -6,4 +6,5 @@ export LUAROCKS_PATH="$(asdf where luaJIT)/bin"
 export ORIG_PATH=$PATH
 export PATH="$HOME/.asdf/shims:$LOCALBIN:$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/.config/composer/vendor/bin:$LUAROCKS_PATH:$ORIG_PATH"
 
-
+export LUA_PATH="$(luarocks path --append --lr-path);./?.lua;./?/init.lua"
+export LUA_CPATH="$(luarocks path --append --lr-cpath)"

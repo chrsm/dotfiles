@@ -1,3 +1,11 @@
+CLIP_IMPL="xsel -ib"
+
+if [[ "$IS_MAC" == "true" ]]; then
+	CLIP_IMPL="pbcopy"
+elif [[ "$IS_WSL" == "true" ]]; then
+	CLIP_IMPL="clip.exe"
+fi
+
 alias vim="nvim"
 alias wvim="GOOS=windows nvim"
 
@@ -19,3 +27,5 @@ if [[ "$IS_MAC" == "true" ]]; then
 	alias slack="open -a /Applications/Slack.app"
 fi
 
+alias gcppwd="gcloud auth print-access-token|tr -d '\n'|$CLIP_IMPL"
+alias gcplogin="gcloud auth login --update-acp"

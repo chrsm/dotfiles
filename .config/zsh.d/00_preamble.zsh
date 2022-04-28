@@ -15,3 +15,7 @@ else
 	source /opt/asdf-vm/asdf.sh
 fi
 
+export IS_WSL=false
+if [[ `uname -a` == *"microsoft"* ]]; then
+	export IS_WSL=true
+fi

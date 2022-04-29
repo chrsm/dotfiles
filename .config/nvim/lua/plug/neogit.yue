@@ -10,5 +10,5 @@ export default {
         diffview: true
     }
 
-    $nosilent '<leader>gg', '<cmd>Neogit<CR>'
+    $nosilent '<leader>g', '<cmd>Neogit<CR>'
 }

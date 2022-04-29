@@ -77,6 +77,10 @@ packer.startup () ->
 
   -- all LSP stuff
   use 'neovim/nvim-lspconfig'
+  use {
+    'williamboman/nvim-lsp-installer'
+    config: $do_cfg "lsp_installer"
+  }
   use 'nvim-lua/completion-nvim'
   use 'nvim-lua/lsp-status.nvim'
   use 'nvim-lua/diagnostic-nvim'

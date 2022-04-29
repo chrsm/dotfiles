@@ -1,0 +1,4 @@
+export default {
+  setup: (...) ->
+    require("nvim-lsp-installer").setup {}
+}

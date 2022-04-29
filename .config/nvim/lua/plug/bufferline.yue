@@ -1,0 +1,6 @@
+export default {
+  setup: (...) ->
+    import "bufferline" as bl
+
+    bl.setup {}
+}

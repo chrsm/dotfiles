@@ -11,7 +11,6 @@ packer.startup () ->
     'elihunter173/dirbuf.nvim'
     config: $do_cfg "dirbuf"
   }
-  use 'vim-airline/vim-airline'
   use 'tpope/vim-eunuch'
   use {
     'talek/obvious-resize'
@@ -26,6 +25,21 @@ packer.startup () ->
     requires: {
       { 'nvim-lua/plenary.nvim' },
     },
+  }
+
+  use {
+    "akinsho/bufferline.nvim"
+    tag: "*"
+    config: $do_cfg "bufferline"
+    requires:
+      * "kyazdani42/nvim-web-devicons"
+  }
+
+  use {
+    "nvim-lualine/lualine.nvim"
+    config: $do_cfg "lualine"
+    requires:
+      * "kyazdani42/nvim-web-devicons"
   }
 
   -- da bess colorscheme

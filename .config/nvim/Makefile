@@ -6,4 +6,4 @@ build:
 	cd lua && yue .
 
 clean:
-	cd lua && rm *.lua
+	cd lua && find . -type f -name '*.lua' -delete

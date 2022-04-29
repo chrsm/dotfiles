@@ -1,0 +1,14 @@
+import "macros" as { $ }
+
+export default {
+  setup: (...) ->
+    ng = require "neogit"
+    
+    ng.setup {
+      kind: "split"
+      integrations:
+        diffview: true
+    }
+
+    $nosilent '<leader>gg', '<cmd>Neogit<CR>'
+}

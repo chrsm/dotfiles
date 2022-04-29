@@ -1,0 +1,7 @@
+import "macros" as { $ }
+
+export default {
+  setup: (...) ->
+    import "diffview" as dv
+    dv.setup!
+}

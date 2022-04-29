@@ -16,7 +16,13 @@ packer.startup () ->
     'talek/obvious-resize'
     config: $do_cfg 'obvious_resize'
   }
-  use 'rhysd/committia.vim'
+
+  use {
+    "lukas-reineke/indent-blankline.nvim"
+    config: $do_cfg "indent"
+  }
+
+  use 'dense-analysis/ale'
   
   use 'nvim-lua/popup.nvim'
   use {
@@ -59,8 +65,11 @@ packer.startup () ->
     config: $do_cfg "twilight"
   }
 
-  -- misc
-  use 'dense-analysis/ale'
+
+
+  -- git
+  use 'f-person/git-blame.nvim'
+  use 'rhysd/committia.vim'
   use {
     "sindrets/diffview.nvim",
     config: $do_cfg "diffview",

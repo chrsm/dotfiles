@@ -9,8 +9,6 @@ fi
 alias vim="nvim"
 alias wvim="GOOS=windows nvim"
 
-alias "git-patch"="git add -p"
-
 alias gow="GOOS=windows go"
 
 alias dco="docker-compose"
@@ -29,3 +27,5 @@ fi
 
 alias gcppwd="gcloud auth print-access-token|tr -d '\n'|$CLIP_IMPL"
 alias gcplogin="gcloud auth login --update-acp"
+
+alias yue="asdf env lua yue"

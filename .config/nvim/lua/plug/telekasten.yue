@@ -1,0 +1,40 @@
+import "macros" as { $ }
+
+export default {
+  setup: (...) ->
+    import "lfs" as lfs
+
+    home = vim.fn.expand "~/notes"
+    dirs =
+      * home
+      * "#{ home }/work"
+      * "#{ home }/dev"
+      * "#{ home }/misc"
+    lfs.mkdir v for _, v in ipairs dirs
+
+    require("telekasten").setup {
+      home: home
+      take_over_home: true
+      auto_set_filetype: true
+
+      dailies:   "#{ home }/daily"
+      template_new_daily: "#{ home }/templates/daily.md"
+
+      weeklies:  "#{ home }/weekly"
+      template_new_weekly: "#{ home }/templates/weekly.md"
+
+      templates: "#{ home }/templates"
+      template_new_note: "#{ home }/templates/new_note.md"
+
+      follow_creates_nonexisting:  true
+      dailies_create_nonexisting:  true
+      weeklies_create_nonexisting: true
+    }
+
+    $noremap "<leader>zn", ":lua require('telekasten').new_note()<CR>"
+    $noremap "<leader>zf", ":lua require('telekasten').find_notes()<CR>"
+    $noremap "<leader>zg", ":lua require('telekasten').search_notes()<CR>"
+    $noremap "<leader>zz", ":lua require('telekasten').follow_link()<CR>"
+    $noremap "<leader>zt", ":lua require('telekasten').show_tags()<CR>"
+    $noremap "<leader>z", ":lua require('telekasten').panel()<CR>"
+}

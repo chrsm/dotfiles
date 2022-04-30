@@ -1,0 +1,12 @@
+import "macros" as { $ }
+
+export default {
+  setup: (...) ->
+    import "project_nvim" as prj
+    import "telescope" as ts
+
+    prj.setup {}
+    ts.load_extension "projects"
+
+    $noremap "<leader>o", "<cmd>Telescope projects<CR>"
+}

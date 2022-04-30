@@ -28,6 +28,6 @@ $nosilent '<Left>', '<NOP>'
 $nosilent '<Right>', '<NOP>'
 
 -- goodbye.jpeg
-$nosilent '<leader>bd', ':bd!<CR>'
+$nosilent '<leader>d', ':bd!<CR>'
 
 nil

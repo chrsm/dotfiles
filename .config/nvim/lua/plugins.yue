@@ -34,6 +34,12 @@ packer.startup (use) ->
       "lukas-reineke/indent-blankline.nvim"
       config: $do_cfg "indent"
     }
+    * {
+      "ahmedkhalf/project.nvim"
+      config: $do_cfg "project"
+      requires:
+        * "nvim-telescope/telescope.nvim"
+    }
 
     -- note taking
     * {

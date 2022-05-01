@@ -36,8 +36,7 @@ plugs =
 
   -- note taking
   * {
-    "chrsm/telekasten.nvim"
-    branch: "chrsm/118-bug-note-title-pattern"
+    "renerocksai/telekasten.nvim"
     config: $do_cfg "telekasten"
   }
 

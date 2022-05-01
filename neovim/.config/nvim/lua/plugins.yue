@@ -117,11 +117,18 @@ plugs =
   * "pigpigyyy/Yuescript-vim"
 
 export default {
-  setup: ->
+  setup: (needs_bootstrap) ->
     packer.startup (use) ->
       use "wbthomason/packer.nvim"
       use_rocks "luafilesystem"
 
       for _, v in ipairs plugs
         use v
+
+      if needs_bootstrap
+        vim.fn.input "bootstrapping, press any key (exit after)"
+        vim.api.nvim_create_autocmd { "User PackerCompileDone" }
+          command: "qall"
+        require("packer").install!
+        require("packer").compile!
 }

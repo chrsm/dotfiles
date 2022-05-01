@@ -1,14 +1,23 @@
+-- bootstrap packer for new machines
+needs_bootstrap = false
+with vim.fn
+  p = (.stdpath "data") .. "/site/pack/packer/start/packer.nvim"
+  if .empty(.glob p) > 0
+    needs_bootstrap = .system {
+      "git", "clone", "--depth", "1",
+      "https://github.com/wbthomason/packer.nvim", p
+    }
+
 import "plugins" as plugins
-import "settings" as settings
-import "keymaps" as keymaps
-import "nvim_lsp" as lsp
-import "ft" as ft
+plugins.setup needs_bootstrap
 
-vim._update_package_paths?!
+unless needs_bootstrap
+  import "settings" as settings
+  import "keymaps" as keymaps
+  import "nvim_lsp" as lsp
+  import "ft" as ft
 
-plugins.setup!
-settings.setup!
-keymaps.setup!
-lsp.setup!
-ft.setup!
-
+  settings.setup!
+  keymaps.setup!
+  lsp.setup!
+  ft.setup!

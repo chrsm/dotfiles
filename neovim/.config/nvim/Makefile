@@ -11,4 +11,4 @@ clean:
 	cd lua && find . -type f -name '*.lua' -delete
 
 install:
-	nvim +PackerInstall +PackerCompile +qall
+	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'

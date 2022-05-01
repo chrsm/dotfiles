@@ -1,8 +1,0 @@
-reqs =
-  * 'plugins'
-  * 'settings'
-  * 'keymaps'
-  * 'nvim_lsp'
-  * 'ft'
-
-[require r for _, r in ipairs reqs]

@@ -1,33 +1,46 @@
 import "macros" as { $ }
 
-vim.g.mapleader = ","
+mapleader = ","
 
---[[ 
-  all global keybinds.
+cfg =
+  :mapleader
 
-  plugin specific are specified under plug/*.yue
-]]
+  insert:
+    * { "jj", "<ESC>" }
 
-$noremap ';', ':'
-$noremap ':', ';'
-$noremap 'Y', 'y$'
+  normal:
+    -- easier split switches
+    * { "<C-j>", "<C-w>j" }
+    * { "<C-k>", "<C-w>k" }
+    * { "<C-l>", "<C-w>l" }
+    * { "<C-h>", "<C-w>h" }
 
--- the only way to escape!
-$insert 'jj', '<ESC>'
+  noremap:
+    -- if you use `:` don't @ me
+    * { ";", ":" }
+    * { ":", ";" }
+    * { "Y", "y$" }
 
--- split switch
-$normal '<C-j>', '<C-w>j'
-$normal '<C-k>', '<C-w>k'
-$normal '<C-l>', '<C-w>l'
-$normal '<C-h>', '<C-w>h'
+  nosilent:
+    -- arrow keys r bad mmkay
+    * { "<Up>", "<NOP>" }
+    * { "<Down>", "<NOP>" }
+    * { "<Left>", "<NOP>" }
+    * { "<Right>", "<NOP>" }
+    -- delete the current buffer, losing unsaved changes
+    * { "<leader>d", ":bd!<CR>" }
 
--- arrow keys r bad mmkay
-$nosilent '<Up>', '<NOP>'
-$nosilent '<Down>', '<NOP>'
-$nosilent '<Left>', '<NOP>'
-$nosilent '<Right>', '<NOP>'
+export default {
+  :cfg
 
--- goodbye.jpeg
-$nosilent '<leader>d', ':bd!<CR>'
+  setup: ->
+    vim.g.mapleader = cfg.mapleader
 
-nil
+    $insert v[1], v[2] for v in *cfg.insert
+    $noremap v[1], v[2] for v in *cfg.noremap
+    $normal v[1], v[2] for v in *cfg.normal
+    $nosilent v[1], v[2] for v in *cfg.nosilent
+
+    nil
+}
+

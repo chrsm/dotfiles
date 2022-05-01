@@ -1,2 +1,0 @@
-" packer
-lua require('init')

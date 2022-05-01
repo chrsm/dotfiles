@@ -1,0 +1,14 @@
+import "plugins" as plugins
+import "settings" as settings
+import "keymaps" as keymaps
+import "nvim_lsp" as lsp
+import "ft" as ft
+
+vim._update_package_paths?!
+
+plugins.setup!
+settings.setup!
+keymaps.setup!
+lsp.setup!
+ft.setup!
+

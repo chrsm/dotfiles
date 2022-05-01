@@ -1,7 +1,12 @@
+import "macros" as { $ }
+
 types =
   * "yue"
   * "go"
   * "cpp"
   * "lua"
 
-[require "ft.#{ft}" for _, ft in ipairs types]
+export default {
+  setup: ->
+    require "ft.#{ft}" for _, ft in ipairs types
+}

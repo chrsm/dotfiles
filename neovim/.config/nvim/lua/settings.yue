@@ -1,3 +1,5 @@
+import "macros" as { $ }
+
 mkdef = (tbl, default = true) ->
   for i, v in ipairs tbl
     unless type(v) == "table"
@@ -12,43 +14,44 @@ runcmds = (cmds) ->
   for _, v in ipairs cmds
     vim.cmd v
 
-setopts vim.g, mkdef
-  * { "loaded_netrwPlugin", 1 }
-  * { "loaded_netrw", 1 }
+export default {
+  setup: ->
+    setopts vim.g, mkdef
+      * { "loaded_netrwPlugin", 1 }
+      * { "loaded_netrw", 1 }
 
-setopts vim.opt, mkdef
-  * "number"
-  * "showcmd"
-  * "hidden"
-  * "lazyredraw"
-  * "showmatch"
-  * "splitbelow"
-  * "splitright"
-  * "ignorecase"
-  * "smartcase"
-  * "wrapscan"
-  * "termguicolors"
-  * { "swapfile", false }
-  * { "startofline", false }
-  * { "hlsearch", false }
-  * { "textwidth", 120 }
-  * { "cmdheight", 1 }
-  * { "pumheight", 10 }
-  * { "clipboard", "unnamedplus" }
-  * { "scrolloff", 5 }
-  * { "updatetime", 300 }
-  * { "synmaxcol", 5000 }
-  * { "mouse", "a" }
-  * { "completeopt", "menu,menuone,noselect" }
-  * { "matchtime", 2 }
-  * { "shortmess", "c" }
+    setopts vim.opt, mkdef
+      * "number"
+      * "showcmd"
+      * "hidden"
+      * "lazyredraw"
+      * "showmatch"
+      * "splitbelow"
+      * "splitright"
+      * "ignorecase"
+      * "smartcase"
+      * "wrapscan"
+      * "termguicolors"
+      * { "swapfile", false }
+      * { "startofline", false }
+      * { "hlsearch", false }
+      * { "textwidth", 120 }
+      * { "cmdheight", 1 }
+      * { "pumheight", 10 }
+      * { "clipboard", "unnamedplus" }
+      * { "scrolloff", 5 }
+      * { "updatetime", 300 }
+      * { "synmaxcol", 5000 }
+      * { "mouse", "a" }
+      * { "completeopt", "menu,menuone,noselect" }
+      * { "matchtime", 2 }
+      * { "shortmess", "c" }
 
-setopts vim.wo, mkdef
-  * { "wrap", false }
+    setopts vim.wo, mkdef
+      * { "wrap", false }
 
-cmds = runcmds
-  * "filetype plugin on"
-  * "filetype indent on"
-  * "syntax on"
-
-nil
+    runcmds
+      * "filetype plugin on"
+      * "filetype indent on"
+      * "syntax on"
+}

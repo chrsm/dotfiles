@@ -1,129 +1,127 @@
 import "macros" as { $ }
 import "packer" as packer
 
-vim._update_package_paths?!
+plugs =
+  * {
+    "nvim-treesitter/nvim-treesitter",
+    run: $do_run "treesitter"
+  }
+  * "tpope/vim-eunuch"
+  * "nvim-lua/plenary.nvim"
+  * {
+    "nvim-telescope/telescope.nvim"
+    config: $do_cfg "telescope"
+    requires:
+      * "nvim-lua/plenary.nvim"
+      * "nvim-lua/popup.nvim"
+  }
+  * {
+    "elihunter173/dirbuf.nvim"
+    config: $do_cfg "dirbuf"
+  }
+  * {
+    "talek/obvious-resize"
+    config: $do_cfg "obvious_resize"
+  }
+  * {
+    "lukas-reineke/indent-blankline.nvim"
+    config: $do_cfg "indent"
+  }
+  * {
+    "ahmedkhalf/project.nvim"
+    config: $do_cfg "project"
+    requires:
+      * "nvim-telescope/telescope.nvim"
+  }
 
-packer.startup (use) ->
-  use "wbthomason/packer.nvim"
-  use_rocks "luafilesystem"
+  -- note taking
+  * {
+    "chrsm/telekasten.nvim"
+    branch: "chrsm/118-bug-note-title-pattern"
+    config: $do_cfg "telekasten"
+  }
 
-  plugs =
-    -- agnostic/utility
-    * {
-      "nvim-treesitter/nvim-treesitter",
-      run: $do_run "treesitter"
-    }
-    * "tpope/vim-eunuch"
-    * "nvim-lua/plenary.nvim"
-    * {
-      "nvim-telescope/telescope.nvim"
-      config: $do_cfg "telescope"
-      requires:
-        * "nvim-lua/plenary.nvim"
-        * "nvim-lua/popup.nvim"
-    }
-    * {
-      "elihunter173/dirbuf.nvim"
-      config: $do_cfg "dirbuf"
-    }
-    * {
-      "talek/obvious-resize"
-      config: $do_cfg "obvious_resize"
-    }
-    * {
-      "lukas-reineke/indent-blankline.nvim"
-      config: $do_cfg "indent"
-    }
-    * {
-      "ahmedkhalf/project.nvim"
-      config: $do_cfg "project"
-      requires:
-        * "nvim-telescope/telescope.nvim"
-    }
+  -- color schemes
+  * {
+    "chrsm/vim-colors-paramount"
+    config: $do_cfg "paramount"
+  }
 
-    -- note taking
-    * {
-      "chrsm/telekasten.nvim"
-      branch: "chrsm/118-bug-note-title-pattern"
-      config: $do_cfg "telekasten"
-    }
+  -- ui
+  * "nvim-lua/popup.nvim"
+  * {
+    "akinsho/bufferline.nvim"
+    tag: "*"
+    config: $do_cfg "bufferline"
+    requires:
+      * "kyazdani42/nvim-web-devicons"
+  }
+  * {
+    "nvim-lualine/lualine.nvim"
+    config: $do_cfg "lualine"
+    requires:
+      * "kyazdani42/nvim-web-devicons"
+  }
+  * {
+    "folke/twilight.nvim",
+    config: $do_cfg "twilight"
+  }
 
-    -- color schemes
-    * {
-      "chrsm/vim-colors-paramount"
-      config: $do_cfg "paramount"
-    }
+  -- dev related, but not lang-specific
+  * "nathom/filetype.nvim"
+  * "dense-analysis/ale"
+  * "f-person/git-blame.nvim"
+  * "rhysd/committia.vim"
+  * {
+    "sindrets/diffview.nvim",
+    config: $do_cfg "diffview",
+    requires:
+      * "nvim-lua/plenary.nvim"
+  }
+  * {
+    "TimUntersberger/neogit",
+    config: $do_cfg "neogit"
+    requires:
+      * "nvim-lua/plenary.nvim"
+      * "sindrets/diffview.nvim"
+  }
 
-    -- ui
-    * "nvim-lua/popup.nvim"
-    * {
-      "akinsho/bufferline.nvim"
-      tag: "*"
-      config: $do_cfg "bufferline"
-      requires:
-        * "kyazdani42/nvim-web-devicons"
-    }
-    * {
-      "nvim-lualine/lualine.nvim"
-      config: $do_cfg "lualine"
-      requires:
-        * "kyazdani42/nvim-web-devicons"
-    }
-    * {
-      "folke/twilight.nvim",
-      config: $do_cfg "twilight"
-    }
+  -- LSP and related tooling
+  * "neovim/nvim-lspconfig"
+  * {
+    "williamboman/nvim-lsp-installer"
+    config: $do_cfg "lsp_installer"
+  }
+  * "nvim-lua/completion-nvim"
+  * "nvim-lua/lsp-status.nvim"
+  * "nvim-lua/diagnostic-nvim"
+  * "sbdchd/neoformat"
+  * {
+    "hrsh7th/nvim-cmp"
+    config: $do_cfg "cmp"
+    wants:
+      * "LuaSnip"
+    requires:
+      * "hrsh7th/cmp-nvim-lsp"
+      * "hrsh7th/cmp-buffer"
+      * "ray-x/cmp-treesitter"
+      * "ray-x/lsp_signature.nvim"
+      * {
+        "L3MON4D3/LuaSnip"
+        wants: "friendly-snippets"
+        config: $do_cfg "luasnip"
+      }
+  }
 
-    -- dev related, but not lang-specific
-    * "nathom/filetype.nvim"
-    * "dense-analysis/ale"
-    * "f-person/git-blame.nvim"
-    * "rhysd/committia.vim"
-    * {
-      "sindrets/diffview.nvim",
-      config: $do_cfg "diffview",
-      requires:
-        * "nvim-lua/plenary.nvim"
-    }
-    * {
-      "TimUntersberger/neogit",
-      config: $do_cfg "neogit"
-      requires:
-        * "nvim-lua/plenary.nvim"
-        * "sindrets/diffview.nvim"
-    }
+  -- language specific
+  * "pigpigyyy/Yuescript-vim"
 
-    -- LSP and related tooling
-    * "neovim/nvim-lspconfig"
-    * {
-      "williamboman/nvim-lsp-installer"
-      config: $do_cfg "lsp_installer"
-    }
-    * "nvim-lua/completion-nvim"
-    * "nvim-lua/lsp-status.nvim"
-    * "nvim-lua/diagnostic-nvim"
-    * "sbdchd/neoformat"
-    * {
-      "hrsh7th/nvim-cmp"
-      config: $do_cfg "cmp"
-      wants:
-        * "LuaSnip"
-      requires:
-        * "hrsh7th/cmp-nvim-lsp"
-        * "hrsh7th/cmp-buffer"
-        * "ray-x/cmp-treesitter"
-        * "ray-x/lsp_signature.nvim"
-        * {
-          "L3MON4D3/LuaSnip"
-          wants: "friendly-snippets"
-          config: $do_cfg "luasnip"
-        }
-    }
+export default {
+  setup: ->
+    packer.startup (use) ->
+      use "wbthomason/packer.nvim"
+      use_rocks "luafilesystem"
 
-    -- language specific
-    * "pigpigyyy/Yuescript-vim"
-
-  for _, v in ipairs plugs
-    use v
-
-nil
+      for _, v in ipairs plugs
+        use v
+}

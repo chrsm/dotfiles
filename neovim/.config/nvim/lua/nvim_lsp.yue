@@ -42,12 +42,11 @@ on_attach = (c, buf) ->
 
   lsp_sig.on_attach!
 
-with lsp.gopls
-  .setup {
-    capabilities: cap.update_capabilities vim.lsp.protocol.make_client_capabilities!
-    on_attach: on_attach
-    flags:
-      debounce_text_changes: 150
+golang =
+  capabilities: cap.update_capabilities vim.lsp.protocol.make_client_capabilities!
+  on_attach: on_attach
+  flags:
+    debounce_text_changes: 150
     codelens:
       generate: true
       gc_details: true
@@ -57,49 +56,20 @@ with lsp.gopls
     settings:
       gopls:
         allExperiments: true
-        analyses:
-          shadow: true
-          unreachable: true
-          unusedparams: true
-          staticcheck: true
-          composites: true
-          copylocks: true
-          errorsas: true
-          fieldalignment: true
-          httpresponse: true
-          infertypeargs: true
-          loopclosure: true
-          lostcancel: true
-          nilfunc: true
-          nilness: true
-          printf: true
-          shadow: true
-          simplifycompositelit: true
-          simplifyrange: true
-          simplifyslice: true
-          stdmethods: true
-          stringintconv: true
-          structtag: true
-          testinggoroutine: true
-          tests: true
-          unmarshal: true
-          unsafeptr: true
-          unusedresult: true
-          unusedwrite: true
-          useany: true
-  }
 
-with vim.lsp
-  n = 'textDocument/publishDiagnostics'
+export default {
+  setup: ->
+    lsp.gopls.setup golang
 
-  opts =
-    underline: true
-    virtual_text: false
-    signs: true
-    update_in_insert: true
+    with vim.lsp
+      .set_log_level "WARN"
 
-  hnd = vim.lsp.with vim.lsp.diagnostic.on_publish_diagnostics, opts
+      opts =
+        underline: true
+        virtual_text: false
+        signs: true
+        update_in_insert: true
 
-  .handlers[n] = hnd
-
-nil
+      hnd = .with .diagnostic.on_publish_diagnostics, opts
+      .handlers["textDocument/publishDiagnostics"] = hnd
+}

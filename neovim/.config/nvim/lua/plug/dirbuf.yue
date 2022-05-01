@@ -1,9 +1,12 @@
+cfg =
+  show_hidden: true
+  hash_padding: 4
+  sort_order: "default"
+  write_cmd: "DirBufSync"
+
 export default {
   setup: (...) ->
-    require("dirbuf").setup {
-      show_hidden: true
-      hash_padding: 4
-      sort_order: "default"
-      write_cmd: "DirBufSync"
-    }
+    import "dirbuf" as dirbuf
+
+    dirbuf.setup cfg
 }

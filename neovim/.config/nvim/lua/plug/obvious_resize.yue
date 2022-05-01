@@ -6,6 +6,4 @@ export default {
     $nosilent '<C-J>', ':ObviousResizeDown<CR>'
     $nosilent '<C-H>', ':ObviousResizeLeft<CR>'
     $nosilent '<C-L>', ':ObviousResizeRight<CR>'
-
-    nil
 }

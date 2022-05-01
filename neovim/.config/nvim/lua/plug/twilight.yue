@@ -1,7 +1,8 @@
+cfg =
+  context: 15
+  treesitter: true
+
 export default {
   setup: (...) ->
-    require("twilight").setup {
-      context: 15
-      treesitter: true
-    }
+    require("twilight").setup cfg
 }

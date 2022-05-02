@@ -1,10 +1,9 @@
 # oh-my-zsh shit
 export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="amuse"
-
 plugins=(git)
-
 source $ZSH/oh-my-zsh.sh
+
+source "$HOME/.config/zsh.d/amuse.zsh-theme"
 
 # asdf for local tooling
 export IS_MAC=false

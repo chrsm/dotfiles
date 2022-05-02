@@ -29,6 +29,12 @@ cfg =
     * { "<Right>", "<NOP>" }
     -- delete the current buffer, losing unsaved changes
     * { "<leader>d", ":bd!<CR>" }
+    -- launch terminal
+    * { "<leader>t", ":term" }
+
+  term:
+    * { "<ESC>", "<C-\\><C-n>" }
+    * { "jj", "<C-\\><C-n>" }
 
 export default {
   :cfg
@@ -40,6 +46,7 @@ export default {
     $noremap v[1], v[2] for v in *cfg.noremap
     $normal v[1], v[2] for v in *cfg.normal
     $nosilent v[1], v[2] for v in *cfg.nosilent
+    $term v[1], v[2] for v in *cfg.term
 
     nil
 }

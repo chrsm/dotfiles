@@ -1,0 +1,18 @@
+import "macros" as { $ }
+
+cfg =
+  border: "double"
+  auto_close: false
+
+export default {
+  setup: ->
+    import "FTerm" as fterm
+
+    fterm.setup cfg
+
+    $nosilent "<leader>t", '<CMD>lua require("FTerm").toggle()<CR>'
+
+    -- overwrite keybinds from standard setup
+    $term "<ESC>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>'
+    $term "jj", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>'
+}

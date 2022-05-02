@@ -11,6 +11,9 @@ export macro noremap = (lhs, rhs) ->
 export macro nosilent = (lhs, rhs) ->
   "vim.api.nvim_set_keymap 'n', #{lhs}, #{rhs}, {noremap: true, silent: true}"
 
+export macro term = (lhs, rhs) ->
+  "vim.api.nvim_set_keymap 't', #{lhs}, #{rhs}, {noremap: true}"
+
 --[[ buf specific macros ]]
 export macro setopt = (ctx, lhs, rhs) ->
   "vim.api.nvim_buf_set_option " ..

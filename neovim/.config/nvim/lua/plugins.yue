@@ -65,6 +65,10 @@ plugs =
     "folke/twilight.nvim",
     config: $do_cfg "twilight"
   }
+  * {
+    "numToStr/FTerm.nvim"
+    config: $do_cfg "fterm"
+  }
 
   -- dev related, but not lang-specific
   * "nathom/filetype.nvim"

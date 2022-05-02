@@ -19,6 +19,7 @@ export default {
     setopts vim.g, mkdef
       * { "loaded_netrwPlugin", 1 }
       * { "loaded_netrw", 1 }
+      * { "neovide_cursor_animation_length", 0 }
 
     setopts vim.opt, mkdef
       * "number"

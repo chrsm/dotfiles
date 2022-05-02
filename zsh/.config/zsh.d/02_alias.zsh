@@ -6,6 +6,16 @@ elif [[ "$IS_WSL" == "true" ]]; then
 	CLIP_IMPL="clip.exe"
 fi
 
+function gnvim {
+	nvim --headless --listen localhost:6666 &
+
+	if [[ "$IS_WSL" == "true" ]]; then
+		neovide.exe --remote-tcp=localhost:6666
+	else
+		neovide --remote-tcp=localhost:6666
+	fi
+}
+
 alias vim="nvim"
 alias wvim="GOOS=windows nvim"
 

@@ -1,3 +1,5 @@
 /neovim/.config/nvim/lua/**/**.lua
 /neovim/.config/nvim/plugin
 /neovim/.config/nvim/init.lua
+/notes/notes/**.md
+/notes/notes/**/**.md

@@ -1,0 +1,4 @@
+4c4
+<   url = "git://github.com/keplerproject/luasql.git",
+---
+>   url = "git+https://github.com/keplerproject/luasql.git",

@@ -38,4 +38,6 @@ fi
 alias gcppwd="gcloud auth print-access-token|tr -d '\n'|$CLIP_IMPL"
 alias gcplogin="gcloud auth login --update-acp"
 
-alias yue="asdf env lua yue"
+if [[ ! -f "$HOME/.local/bin/yue" ]]; then
+	alias yue="asdf env lua yue"
+fi

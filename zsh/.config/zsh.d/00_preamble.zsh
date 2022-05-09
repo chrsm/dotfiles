@@ -1,6 +1,6 @@
 # oh-my-zsh shit
 export ZSH=$HOME/.oh-my-zsh
-plugins=(git)
+plugins=(git asdf)
 source $ZSH/oh-my-zsh.sh
 
 source "$HOME/.config/zsh.d/amuse.zsh-theme"
@@ -10,8 +10,8 @@ export IS_MAC=false
 if [[ `uname` == "Darwin" ]]; then
 	source /usr/local/opt/asdf/libexec/asdf.sh
 	export IS_MAC=true
-else 
-	source /opt/asdf-vm/asdf.sh
+else
+	source $HOME/.asdf/asdf.sh
 fi
 
 export IS_WSL=false

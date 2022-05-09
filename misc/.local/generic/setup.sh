@@ -6,6 +6,7 @@ asdf_inst () {
 	local version="${2:-latest}"
 
 	asdf plugin add $p || true
+	asdf uninstall $p || true
 	asdf install $p $version || true
 	asdf global $p $version || true
 	# not necessary but w/e
@@ -33,10 +34,7 @@ if ! [ -x "$(command -v asdf)" ]; then
 	if [[ "$IS_MAC" == "true" ]]; then
 		brew install asdf
 	else
-		cd $HOME/.local
-		mkdir deps
-		cd deps
-		git clone https://aur.archlinux.org/asdf-vm.git && cd asdf-vm && makepkg -si
+		git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
 	fi
 fi
 

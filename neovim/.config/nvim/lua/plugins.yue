@@ -88,6 +88,10 @@ plugs =
       * "nvim-lua/plenary.nvim"
       * "sindrets/diffview.nvim"
   }
+  * {
+    "ethanholz/nvim-lastplace"
+    config: $do_cfg "lastplace"
+  }
 
   -- LSP and related tooling
   * "neovim/nvim-lspconfig"
@@ -119,11 +123,26 @@ plugs =
   -- language specific
   * "pigpigyyy/Yuescript-vim"
 
+  -- in-dev
+  * {
+    "~/src/lacuna.nvim"
+    config: ->
+      import "lacuna" as lacuna
+
+      lacuna.setup!
+  }
+
+rocks =
+  * "luafilesystem"
+  * "lsqlite3"
+  * "xmlua"
+  * "http"
+
 export default {
   setup: (needs_bootstrap) ->
     packer.startup (use) ->
       use "wbthomason/packer.nvim"
-      use_rocks "luafilesystem"
+      use_rocks v for _, v in ipairs rocks
 
       for _, v in ipairs plugs
         use v

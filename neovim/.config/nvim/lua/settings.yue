@@ -33,6 +33,7 @@ export default {
       * "smartcase"
       * "wrapscan"
       * "termguicolors"
+      * "undofile"
       * { "swapfile", false }
       * { "startofline", false }
       * { "hlsearch", false }

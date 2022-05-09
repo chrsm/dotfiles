@@ -148,6 +148,7 @@ plugs =
   }
 
 rocks =
+  * "lua-cjson"
   * "luafilesystem"
   * "lsqlite3"
   * "xmlua"

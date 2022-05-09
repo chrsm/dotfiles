@@ -11,7 +11,7 @@ cfg =
     key: "eso"
     fn: "step_over"
   step_into:
-    key: "esi"
+    key: "ess"
     fn: "step_into"
   step_out:
     key: "ese"

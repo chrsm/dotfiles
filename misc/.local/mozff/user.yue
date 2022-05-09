@@ -37,7 +37,7 @@ prefs = {
   "browser.search.geoSpecificDefaults": false,
   "javascript.use_us_english_locale": true,
 
-  -- "keyword.enabled": false,
+  "keyword.enabled": true,
 
   "browser.urlbar.trimURLs": false,
   "browser.fixup.alternate.enabled": false,

@@ -1,0 +1,92 @@
+#!/usr/bin/env -S yue -e
+--[[
+  ./user.yue > ~/.mozilla/Firefox/Profiles/$PROFILE-DIR/user.js
+               %APPDATA%\Mozilla\Firefox\Profiles\$PROFILE-DIR\user.js
+               ~/Library/Application\ Support/Firefox/Profiles/$PROFILE-DIR/user.js
+]]
+prefs = {
+  "geo.enabled": false,
+  "geo.wifi.uri": "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%",
+  "geo.wifi.logging.enabled": false,
+
+  -- why is this even a thing?
+  "dom.netinfo.disabled": true,
+  "dom.battery.enabled": false,
+  "dom.gamepad.enabled": false,
+  "dom.vr.enabled": false,
+  "dom.flyweb.enabled": false,
+  
+  "beacon.enabled": false,
+
+  "browser.send_pings": false,
+  "browser.send_pings.require_same_host": true,
+  "browser.uitour.enabled": false,
+
+  "browser.safebrowsing.enabled": true,
+  "browser.safebrowsing.phishing.enabled": true,
+  "browser.safebrowsing.malware.enabled": true,
+  "browser.safebrowsing.downloads.remote.enabled": false,
+
+  "camera.control.face_detection.enabled": false,
+  
+  "browser.search.countryCode": "US",
+  "browser.search.region": "US",
+  "browser.search.geoip.url": "",
+  "intl.accept_languages": "en-US, en",
+  "intl.locale.matchOS": false,
+  "browser.search.geoSpecificDefaults": false,
+  "javascript.use_us_english_locale": true,
+
+  "keyword.enabled": false,
+
+  "browser.urlbar.trimURLs": false,
+  "browser.fixup.alternate.enabled": false,
+  "browser.urlbar.filter.javascript": true,
+
+  "network.proxy.socks_remote_dns": true,
+  "network.manage-offline-status": false,
+  "network.dns.disablePrefetch": true,
+  "network.dns.disablePrefetchFromHTTPS": true,
+  "network.predictor.enabled": false,
+  "network.dns.blockDotOnion": true,
+  "network.prefetch-next": false,
+  "network.http.speculative-parallel-limit": 0,
+
+  "security.fileuri.strict_origin_policy": true,
+  "security.mixed_content.block_active_content": true,
+  "network.jar.open-unsafe-types": false,
+
+  "gfx.font_rendering.opentype_svg.enabled": false,
+
+  "toolkit.telemetry.enabled": false,
+  "toolkit.telemetry.unified": false,
+  "toolkit.telemetry.archive.enabled": false,
+  "experiments.enabled": false,
+  "experiments.supported": false,
+  "experiments.manifest.uri": "",
+  "network.allow-experiments": false,
+  "breakpad.reportURL": "",
+  "browser.tabs.crashReporting.sendReport": false,
+  "browser.crashReports.unsubmittedCheck.enabled": false,
+  "datareporting.healthreport.uploadEnabled": false,
+  "datareporting.healthreport.service.enabled": false,
+  "datareporting.policy.dataSubmissionEnabled": false,
+  "browser.discovery.enabled": false,
+  "app.normandy.enabled": false,
+  "app.normandy.api_url": "",
+  "extensions.shield-recipe-client.enabled": false,
+  "app.shield.optoutstudies.enabled": false,
+  "loop.longDomains": false,
+
+  "browser.pocket.enabled": false,
+  "extensions.pocket.enabled": false,
+  "browser.newtabpage.activity-stream.feeds.section.topstories": false,
+}
+
+print "/* generated from user.yue; do not edit */"
+for k, v in pairs prefs
+  if (type v) == "string"
+    v = "\"#{ v }\""
+
+  print "user_pref(\"#{ k }\", #{ v });"
+

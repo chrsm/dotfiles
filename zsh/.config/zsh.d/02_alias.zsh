@@ -41,3 +41,5 @@ alias gcplogin="gcloud auth login --update-acp"
 if [[ ! -f "$HOME/.local/bin/yue" ]]; then
 	alias yue="asdf env lua yue"
 fi
+
+alias upd-nvim="asdf uninstall neovim nightly && asdf install neovim nightly"

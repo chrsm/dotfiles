@@ -92,6 +92,16 @@ plugs =
     "ethanholz/nvim-lastplace"
     config: $do_cfg "lastplace"
   }
+  * {
+    "mfussenegger/nvim-dap"
+    config: $do_cfg "dap"
+  }
+  * {
+    "rcarriga/nvim-dap-ui"
+    config: $do_cfg "dap_ui"
+    requires:
+      * "mfussenegger/nvim-dap"
+  }
 
   -- LSP and related tooling
   * "neovim/nvim-lspconfig"
@@ -122,6 +132,11 @@ plugs =
 
   -- language specific
   * "pigpigyyy/Yuescript-vim"
+
+  * {
+    "leoluz/nvim-dap-go"
+    config: $do_cfg "dap_go"
+  }
 
   -- in-dev
   * {

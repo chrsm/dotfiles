@@ -1,0 +1,25 @@
+import "macros" as { $ }
+
+cfg =
+  breakpoint:
+    key: "eb"
+    fn: "toggle_breakpoint"
+  continue:
+    key: "ec"
+    fn: "continue"
+  step_over:
+    key: "eso"
+    fn: "step_over"
+  step_into:
+    key: "esi"
+    fn: "step_into"
+  step_out:
+    key: "ese"
+    fn: "step_out"
+
+export default {
+  setup: ->
+    for k, v in pairs cfg
+      vim.api.nvim_set_keymap "n", "<leader>#{ v.key }", \
+        "<CMD>lua require('dap').#{ v.fn }()<CR>", { noremap: true, silent: true }
+}

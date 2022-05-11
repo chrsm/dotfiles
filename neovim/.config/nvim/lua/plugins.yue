@@ -109,7 +109,6 @@ plugs =
     "williamboman/nvim-lsp-installer"
     config: $do_cfg "lsp_installer"
   }
-  * "nvim-lua/completion-nvim"
   * "nvim-lua/lsp-status.nvim"
   * "nvim-lua/diagnostic-nvim"
   * "sbdchd/neoformat"

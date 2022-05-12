@@ -1,6 +1,39 @@
+cfg =
+  highlight:
+    enable: true
+    disable: {}
+  indent:
+    enable: true
+    disable: {}
+  ensure_installed:
+    * "lua"
+    * "json"
+    * "c"
+    * "cpp"
+    * "go"
+    * "gomod"
+    * "gowork"
+    * "php"
+    * "regex"
+    * "vim"
+    * "yaml"
+    * "make"
+    * "jsonc"
+    * "json5"
+    * "javascript"
+    * "html"
+    * "http"
+    * "dockerfile"
+    * "bash"
+    * "zig"
+    * "markdown"
+
 export default {
-  setup: () -> nil
-  run: () ->
+  setup: ->
+    import "nvim-treesitter.configs" as ts
+
+    ts.setup cfg
+  run: ->
     vim.cmd [[
       :TSUpdate
     ]]

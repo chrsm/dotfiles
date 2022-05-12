@@ -2,6 +2,6 @@ export default {
   setup: (...) ->
     vim.cmd [[ 
       set background=dark
-      colo paramount
+      colo paramount-ng
     ]]
 }

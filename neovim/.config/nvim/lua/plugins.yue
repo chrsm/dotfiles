@@ -5,6 +5,7 @@ plugs =
   * {
     "nvim-treesitter/nvim-treesitter",
     run: $do_run "treesitter"
+    config: $do_cfg "treesitter"
   }
   * "tpope/vim-eunuch"
   * "nvim-lua/plenary.nvim"
@@ -42,8 +43,10 @@ plugs =
 
   -- color schemes
   * {
-    "chrsm/vim-colors-paramount"
+    "chrsm/paramount-ng.nvim"
     config: $do_cfg "paramount"
+    requires:
+      * "rktjmp/lush.nvim"
   }
 
   -- ui

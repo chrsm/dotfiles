@@ -105,6 +105,10 @@ plugs =
     requires:
       * "mfussenegger/nvim-dap"
   }
+  * {
+    "hkupty/iron.nvim"
+    config: $do_cfg "iron"
+  }
 
   -- LSP and related tooling
   * "neovim/nvim-lspconfig"

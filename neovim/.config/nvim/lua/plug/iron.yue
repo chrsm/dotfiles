@@ -1,0 +1,32 @@
+import "macros" as { $ }
+
+cfg =
+  -- memory_management: "tab"
+  visibility: "single"
+  buflisted: false
+  repl_open_cmd: "topleft vertical 35 split"
+
+repls =
+  yue:
+    yue:
+      command: { "yue" }
+
+export default {
+  setup: ->
+    import "iron" as iron
+
+    iron.core.set_config cfg
+    iron.core.add_repl_definitions repls
+
+    vim.api.nvim_set_keymap "n", "<leader>rp", \
+      ":lua require(\"plug.iron\").iron_open_repl(vim.bo.filetype)<CR>", \
+      { noremap: true, silent: true }
+
+    $nosilent "<leader>rl", "<Plug>(iron-send-line)<CR>"
+    $nosilent "<leader>rr", "<Plug>(iron-repeat-cmd)<CR>"
+    $nosilent "<leader>rq", "<Plug>(iron-exit)<CR>"
+
+  iron_open_repl: (ft) ->
+    print "iron #{ ft }"
+    vim.cmd ":IronRepl #{ ft }"
+}

@@ -12,3 +12,4 @@ clean:
 
 install:
 	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+	nvim --headless -c 'autocmd User PackerCompileDone quitall' -c 'PackerCompile'

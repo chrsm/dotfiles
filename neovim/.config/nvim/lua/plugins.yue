@@ -119,6 +119,7 @@ plugs =
   * "nvim-lua/lsp-status.nvim"
   * "nvim-lua/diagnostic-nvim"
   * "sbdchd/neoformat"
+  * "glepnir/lspsaga.nvim"
   * {
     "hrsh7th/nvim-cmp"
     config: $do_cfg "cmp"

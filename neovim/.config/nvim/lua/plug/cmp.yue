@@ -7,7 +7,7 @@ cfg =
     * name: 'buffer'
 
 export default {
-  setup: (...) ->
+  config: ->
     import "cmp" as cmp
 
     -- cmp is available, set up mappings here

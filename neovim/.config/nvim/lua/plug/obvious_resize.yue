@@ -1,7 +1,7 @@
 import "macros" as { $ }
 
 export default {
-  setup: (...) ->
+  config: ->
     $nosilent '<C-K>', ':ObviousResizeUp<CR>'
     $nosilent '<C-J>', ':ObviousResizeDown<CR>'
     $nosilent '<C-H>', ':ObviousResizeLeft<CR>'

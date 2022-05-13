@@ -11,7 +11,7 @@ repls =
       command: { "yue" }
 
 export default {
-  setup: ->
+  config: ->
     import "iron" as iron
 
     -- can't do this one by default, unfortunately

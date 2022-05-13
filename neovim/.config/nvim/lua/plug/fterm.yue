@@ -5,7 +5,7 @@ cfg =
   auto_close: false
 
 export default {
-  setup: ->
+  config: ->
     import "FTerm" as fterm
 
     fterm.setup cfg

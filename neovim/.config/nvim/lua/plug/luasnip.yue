@@ -3,7 +3,7 @@ cfg =
   updateevents: "TextChanged,TextChangedI"
 
 export default {
-  setup: (...) ->
+  config: ->
     import "luasnip" as luasnip
 
     luasnip.config.set_config cfg

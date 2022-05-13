@@ -1,7 +1,7 @@
 import "macros" as { $ }
 
 export default {
-  setup: (...) ->
+  config: ->
     import "project_nvim" as prj
     import "telescope" as ts
 

@@ -13,6 +13,6 @@ cfg =
   open_folds: true
 
 export default {
-  setup: ->
+  config: ->
     require("nvim-lastplace").setup cfg
 }

@@ -1,5 +1,5 @@
 export default {
-  setup: (...) ->
+  config: ->
     vim.cmd [[ 
       set background=dark
       colo paramount-ng

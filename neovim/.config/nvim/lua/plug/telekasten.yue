@@ -19,7 +19,7 @@ cfg =
   weeklies_create_nonexisting: true
 
 export default {
-  setup: (...) ->
+  config: ->
     import "lfs" as lfs
 
     dirs =

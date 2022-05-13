@@ -29,7 +29,7 @@ cfg =
     * "markdown"
 
 export default {
-  setup: ->
+  config: ->
     import "nvim-treesitter.configs" as ts
 
     ts.setup cfg

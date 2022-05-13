@@ -11,7 +11,7 @@ cfg =
       * { id: "watches", size: 0.25 }
 
 export default {
-  setup: ->
+  config: ->
     import "dap" as dap
     import "dapui" as ui
 

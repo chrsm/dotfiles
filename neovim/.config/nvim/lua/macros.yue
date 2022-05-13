@@ -25,6 +25,6 @@ export macro setkey = (ctx, lhs, rhs, cmd, opts = {}) ->
 
 --[[ cfg macros ]]
 export macro do_cfg = (plug) ->
-  "(...) -> require(\"plug.\" .. #{ plug }).setup ..."
+  "(...) -> require(\"plug.\" .. #{ plug }).config ..."
 export macro do_run = (plug) ->
   "(...) -> require(\"plug.\" .. #{ plug }).run ..."

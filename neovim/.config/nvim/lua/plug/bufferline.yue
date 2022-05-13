@@ -1,5 +1,5 @@
 export default {
-  setup: (...) ->
+  config: ->
     import "bufferline" as bl
 
     bl.setup {}

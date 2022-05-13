@@ -18,7 +18,7 @@ cfg =
     fn: "step_out"
 
 export default {
-  setup: ->
+  config: ->
     for k, v in pairs cfg
       vim.api.nvim_set_keymap "n", "<leader>#{ v.key }", \
         "<CMD>lua require('dap').#{ v.fn }()<CR>", { noremap: true, silent: true }

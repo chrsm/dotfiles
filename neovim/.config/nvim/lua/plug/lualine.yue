@@ -3,7 +3,7 @@ cfg =
     theme: "horizon"
 
 export default {
-  setup: (...) ->
+  config: ->
     import "lualine" as ll
 
     ll.setup cfg

@@ -3,6 +3,6 @@ cfg =
   treesitter: true
 
 export default {
-  setup: (...) ->
+  config: ->
     require("twilight").setup cfg
 }

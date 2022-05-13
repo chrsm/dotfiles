@@ -5,7 +5,7 @@ cfg =
   write_cmd: "DirBufSync"
 
 export default {
-  setup: (...) ->
+  config: (...) ->
     import "dirbuf" as dirbuf
 
     dirbuf.setup cfg

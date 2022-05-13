@@ -1,7 +1,7 @@
 import "macros" as { $ }
 
 export default {
-  setup: (...) ->
+  config: ->
     $noremap '<leader>p', '<cmd>Telescope find_files<CR>'
     $noremap '<leader>b', '<cmd>Telescope buffers<CR>'
     $noremap '<leader>f', '<cmd>Telescope live_grep<CR>'

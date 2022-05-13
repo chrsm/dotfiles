@@ -2,7 +2,6 @@ import "macros" as { $ }
 
 cfg =
   -- memory_management: "tab"
-  visibility: "single"
   buflisted: false
   repl_open_cmd: "topleft vertical 35 split"
 
@@ -15,6 +14,9 @@ export default {
   setup: ->
     import "iron" as iron
 
+    -- can't do this one by default, unfortunately
+    cfg.visibility = require("iron.visibility").single
+
     iron.core.set_config cfg
     iron.core.add_repl_definitions repls
 
@@ -22,11 +24,30 @@ export default {
       ":lua require(\"plug.iron\").iron_open_repl(vim.bo.filetype)<CR>", \
       { noremap: true, silent: true }
 
+    vim.api.nvim_set_keymap "n", "<leader>rq", \
+      ":lua require(\"plug.iron\").iron_close(vim.bo.filetype)<CR>", \
+      { noremap: true, silent: true }
+
     $nosilent "<leader>rl", "<Plug>(iron-send-line)<CR>"
     $nosilent "<leader>rr", "<Plug>(iron-repeat-cmd)<CR>"
-    $nosilent "<leader>rq", "<Plug>(iron-exit)<CR>"
 
   iron_open_repl: (ft) ->
-    print "iron #{ ft }"
     vim.cmd ":IronRepl #{ ft }"
+
+  --[[
+    <Plug>(iron-exit) sends just an \04, exiting the process.
+    You can restart the repl by running `:lua require("iron").core.repl_restart()`.
+
+    IMO, just exiting the process without closing the repl isn't desired.
+    I'd rather just _close_ the repl and open a new one whenever I'm ready to.
+  ]]
+  iron_close: (ft) ->
+    import "iron" as iron
+
+    mem, _ = iron.ll.ensure_repl_exists ft
+    unless mem
+      return
+
+    iron.core.focus_on ft
+    vim.cmd ":bd!"
 }

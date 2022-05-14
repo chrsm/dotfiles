@@ -53,7 +53,6 @@ plugs =
   * "nvim-lua/popup.nvim"
   * {
     "akinsho/bufferline.nvim"
-    tag: "*"
     config: $do_cfg "bufferline"
     requires:
       * "kyazdani42/nvim-web-devicons"

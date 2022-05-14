@@ -3,3 +3,4 @@
 /neovim/.config/nvim/init.lua
 /notes/notes/**.md
 /notes/notes/**/**.md
+*secrets*

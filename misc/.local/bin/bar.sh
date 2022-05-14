@@ -7,5 +7,5 @@ killall -q polybar
 while pgrep -x polybar >/dev/null; do sleep 1; done
 
 # need one polybar per monitor, qq
-MONITOR=HDMI-A-1 polybar -r main_bar &
-MONITOR=DVI-D-0 polybar -r main_bar &
+MONITOR=HDMI-0 polybar -r main_bar &
+MONITOR=DP-2 polybar -r main_bar &

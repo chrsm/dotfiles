@@ -1,0 +1,19 @@
+cfg =
+  bind: true
+  use_lspsaga: true
+  floating_window: true
+  floating_window_above_cur_line: true
+  doc_lines: 10
+  fix_pos: true
+  hint_enable: true
+  --hi_parameter: "Search"
+  hi_parameter: "LspSignatureActiveParameter"
+  handler_opts:
+    border: "rounded"
+
+export default {
+  config: ->
+    import "lsp_signature" as sig
+
+    sig.setup cfg
+}

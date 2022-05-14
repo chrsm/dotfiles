@@ -4,8 +4,6 @@ import "lsp_signature" as lsp_sig
 import "cmp_nvim_lsp" as cap
 import "lspsaga" as lsp_saga
 
---($do_cfg "cmp")!
-
 lsp_saga.init_lsp_saga
   use_saga_diagnostic_sign: false
   code_action_icon: ""
@@ -47,15 +45,7 @@ on_attach = (c, buf) ->
 
   vim.api.nvim_exec fmtcaps, false
 
-  lsp_sig.on_attach {
-    bind: true
-    use_lspsaga: true
-    floating_window: true
-    fix_pos: true
-    hint_enable: true
-    hi_parameter: "Search"
-    handler_opts: { "double" }
-  }
+  lsp_sig.on_attach!
 
 golang =
   capabilities: cap.update_capabilities vim.lsp.protocol.make_client_capabilities!

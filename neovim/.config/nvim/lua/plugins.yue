@@ -128,7 +128,10 @@ plugs =
       * "hrsh7th/cmp-nvim-lsp"
       * "hrsh7th/cmp-buffer"
       * "ray-x/cmp-treesitter"
-      * "ray-x/lsp_signature.nvim"
+      * {
+        "ray-x/lsp_signature.nvim"
+        config: $do_cfg "lsp_sig"
+      }
       * {
         "L3MON4D3/LuaSnip"
         wants: "friendly-snippets"

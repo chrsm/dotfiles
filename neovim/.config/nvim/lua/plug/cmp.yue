@@ -3,8 +3,8 @@ cfg =
     expand: (args) ->
       require("luasnip").lsp_expand args.body
   sources:
-    * name: 'nvim_lsp'
-    * name: 'buffer'
+    * name: "nvim_lsp"
+    * name: "buffer"
 
 export default {
   config: ->
@@ -12,16 +12,16 @@ export default {
 
     -- cmp is available, set up mappings here
     cfg.mapping =
-      '<C-d>': cmp.mapping.scroll_docs -4
-      '<C-f>': cmp.mapping.scroll_docs 4
-      '<C-Space>': cmp.mapping.complete!
-      '<Tab>': cmp.mapping cmp.mapping.select_next_item!, { 'i', 's' }
-      '<C-e>': cmp.mapping.close!
-      '<CR>': cmp.mapping.confirm
+      "<C-d>": cmp.mapping.scroll_docs -4
+      "<C-f>": cmp.mapping.scroll_docs 4
+      "<C-Space>": cmp.mapping.complete!
+      "<Tab>": cmp.mapping cmp.mapping.select_next_item!, { "i", "s" }
+      "<C-e>": cmp.mapping.close!
+      "<CR>": cmp.mapping.confirm
         select: true
         behavior: cmp.ConfirmBehavior.Replace
-      '<Up>': cmp.mapping cmp.mapping.select_prev_item!, { 'i', 's' }
-      '<Down>': cmp.mapping cmp.mapping.select_next_item!, { 'i', 's' }
+      "<Up>": cmp.mapping cmp.mapping.select_prev_item!, { "i", "s" }
+      "<Down>": cmp.mapping cmp.mapping.select_next_item!, { "i", "s" }
 
     cmp.setup cfg
 }

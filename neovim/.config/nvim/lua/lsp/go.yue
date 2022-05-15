@@ -1,0 +1,21 @@
+go =
+  make: (on_attach) ->
+    import "cmp_nvim_lsp" as cap
+
+    {
+      capabilities: cap.update_capabilities vim.lsp.protocol.make_client_capabilities!
+      on_attach: on_attach
+      flags:
+        debounce_text_changes: 150
+        codelens:
+          generate: true
+          gc_details: true
+          vendor: true
+        semanticTokens: true
+        experimentalWorkspaceModule: true
+        settings:
+          gopls:
+            allExperiments: true
+    }
+
+export default go

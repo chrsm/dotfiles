@@ -1,4 +1,7 @@
+cfg =
+  automatic_installation: true
+
 export default {
   config: ->
-    require("nvim-lsp-installer").setup {}
+    require("nvim-lsp-installer").setup cfg
 }

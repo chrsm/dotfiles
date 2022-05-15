@@ -1,12 +1,4 @@
 import "macros" as { $ }
-import "lspconfig" as lsp
-import "lsp_signature" as lsp_sig
-import "cmp_nvim_lsp" as cap
-import "lspsaga" as lsp_saga
-
-lsp_saga.init_lsp_saga
-  use_saga_diagnostic_sign: false
-  code_action_icon: ""
 
 on_attach = (c, buf) ->
   $setopt buf, 'omnifunc', 'v:lua.vim.lsp.omnifunc'
@@ -45,26 +37,24 @@ on_attach = (c, buf) ->
 
   vim.api.nvim_exec fmtcaps, false
 
-  lsp_sig.on_attach!
-
-golang =
-  capabilities: cap.update_capabilities vim.lsp.protocol.make_client_capabilities!
-  on_attach: on_attach
-  flags:
-    debounce_text_changes: 150
-    codelens:
-      generate: true
-      gc_details: true
-      vendor: true
-    semanticTokens: true
-    experimentalWorkspaceModule: true
-    settings:
-      gopls:
-        allExperiments: true
+  (require "lsp_signature").on_attach!
 
 export default {
   setup: ->
-    lsp.gopls.setup golang
+    import "lspconfig" as lsp
+    import "cmp_nvim_lsp" as cap
+    import "lspsaga" as lsp_saga
+
+    lsp_saga.init_lsp_saga
+      use_saga_diagnostic_sign: false
+      code_action_icon: ""
+
+    import "lsp.go" as lsp_go
+    import "lsp.lua" as lsp_lua
+
+    lsp.gopls.setup lsp_go.make on_attach
+    lsp.sumneko_lua.setup lsp_lua.make on_attach
+    --print vim.inspect lsp_lua.make on_attach
 
     with vim.lsp
       .set_log_level "WARN"

@@ -132,10 +132,11 @@ plugs =
   }
 
   -- LSP and related tooling
-  * "neovim/nvim-lspconfig"
   * {
     "williamboman/nvim-lsp-installer"
     config: $do_cfg "lsp_installer"
+    requires:
+      * "neovim/nvim-lspconfig"
   }
   * "nvim-lua/lsp-status.nvim"
   * "nvim-lua/diagnostic-nvim"

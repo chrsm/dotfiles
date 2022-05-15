@@ -14,7 +14,7 @@ plugins.setup needs_bootstrap
 unless needs_bootstrap
   import "settings" as settings
   import "keymaps" as keymaps
-  import "nvim_lsp" as lsp
+  import "lsp" as lsp
   import "ft" as ft
 
   settings.setup!

@@ -1,0 +1,7 @@
+#!/bin/env bash
+
+if ! [ -f "$HOME/.local/lls/bin/lua-language-server" ]; then
+	bash "$HOME/.local/generic/lls.sh" 2>&1 > /dev/null
+fi
+
+exec "$HOME/.local/lls/bin/lua-language-server" "$@"

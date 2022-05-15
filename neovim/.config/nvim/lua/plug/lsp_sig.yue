@@ -1,6 +1,5 @@
 cfg =
   bind: true
-  use_lspsaga: true
   floating_window: true
   floating_window_above_cur_line: true
   doc_lines: 10

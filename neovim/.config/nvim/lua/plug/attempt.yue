@@ -1,0 +1,54 @@
+import "macros" as { $ }
+
+support =
+  * {
+    "lua",
+    ->
+      "local inspect = require(\"inspect\")\n"
+    "w | luafile %"
+  }
+  * {
+    "go"
+    ->
+      ""
+  }
+  * {
+    "yue"
+    ->
+      "import p from yue\n" ..
+      "import \"inspect\" as inspect\n"
+    "w | !yue -e %"
+  }
+  * {
+    "sh"
+    ->
+      "#!/bin/env bash\n"
+    "w !bash"
+  }
+
+cfg =
+  autosave: true
+  list_buffers: true
+  ext_options: {}
+  initial_content: {}
+  run: {}
+
+for v in *support
+  { lang, init, run } = v
+
+  cfg.ext_options[] = lang
+  cfg.initial_content[lang] = init
+  cfg.run[lang] = run if run
+
+export default {
+  config: ->
+    import "attempt" as at
+    import "telescope" as ts
+
+    at.setup cfg
+    ts.load_extension "attempt"
+
+    $nosilent "<leader>an", ":lua require(\"attempt\").new_select()<CR>"
+    $nosilent "<leader>al", ":Telescope attempt<CR>"
+    $nosilent "<leader>ar", ":lua require(\"attempt\").run()<CR>"
+}

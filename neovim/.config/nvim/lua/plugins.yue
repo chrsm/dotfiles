@@ -17,6 +17,12 @@ plugs =
       * "nvim-lua/popup.nvim"
   }
   * {
+    "nvim-telescope/telescope-ui-select.nvim"
+    config: $do_cfg "telescope_ui_select"
+    requires:
+      "nvim-telescope/telescope.nvim"
+  }
+  * {
     "elihunter173/dirbuf.nvim"
     config: $do_cfg "dirbuf"
   }
@@ -105,8 +111,24 @@ plugs =
       * "mfussenegger/nvim-dap"
   }
   * {
+    "theHamsta/nvim-dap-virtual-text"
+    config: $do_cfg "dap_vtext"
+    requires:
+      * "mfussenegger/nvim-dap"
+  }
+  * {
     "hkupty/iron.nvim"
     config: $do_cfg "iron"
+  }
+  * {
+    --"m-demare/attempt.nvim"
+    -- temp until fix is merged
+    "chrsm/attempt.nvim"
+    branch: "chrsm/1-ts-extension-fixes"
+    config: $do_cfg "attempt"
+    requires:
+      * "nvim-telescope/telescope.nvim"
+      * "nvim-telescope/telescope-ui-select.nvim"
   }
 
   -- LSP and related tooling

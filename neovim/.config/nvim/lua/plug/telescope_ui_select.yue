@@ -1,0 +1,6 @@
+export default {
+  config: ->
+    import "telescope" as ts
+
+    ts.load_extension "ui-select"
+}

@@ -121,10 +121,7 @@ plugs =
     config: $do_cfg "iron"
   }
   * {
-    --"m-demare/attempt.nvim"
-    -- temp until fix is merged
-    "chrsm/attempt.nvim"
-    branch: "chrsm/1-ts-extension-fixes"
+    "m-demare/attempt.nvim"
     config: $do_cfg "attempt"
     requires:
       * "nvim-telescope/telescope.nvim"

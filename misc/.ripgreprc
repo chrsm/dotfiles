@@ -1,1 +1,2 @@
---glob=!vendor/*
+--glob=!vendor/* 
+--glob=!**/templates/*

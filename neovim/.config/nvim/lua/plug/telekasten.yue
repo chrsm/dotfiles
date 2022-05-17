@@ -18,6 +18,11 @@ cfg =
   dailies_create_nonexisting:  true
   weeklies_create_nonexisting: true
 
+  subdirs_in_links: true
+
+  command_palette_theme: "dropdown"
+  show_tags_theme: "dropdown"
+
 export default {
   config: ->
     import "lfs" as lfs

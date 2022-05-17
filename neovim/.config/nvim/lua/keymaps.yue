@@ -28,7 +28,7 @@ cfg =
     * { "<Left>", "<NOP>" }
     * { "<Right>", "<NOP>" }
     -- delete the current buffer, losing unsaved changes
-    * { "<leader>d", ":bd!<CR>" }
+    -- * { "<leader>d", ":bd!<CR>" }
     -- launch terminal
     * { "<leader>t", ":term" }
 

@@ -40,6 +40,10 @@ plugs =
     requires:
       * "nvim-telescope/telescope.nvim"
   }
+  * { -- layout preserving bdelete
+    "famiu/bufdelete.nvim"
+    config: $do_cfg "bufdelete"
+  }
 
   -- note taking
   * {

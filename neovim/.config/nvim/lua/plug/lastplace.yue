@@ -14,5 +14,7 @@ cfg =
 
 export default {
   config: ->
-    require("nvim-lastplace").setup cfg
+    import "nvim-lastplace" as lp
+
+    lp.setup cfg
 }

@@ -14,5 +14,4 @@ export default {
         * "<CMD>Telescope projects<CR>"
         * "List git projects"
     }, { mode: "n", prefix: "<leader>", noremap: true }
-    --$noremap "<leader>o", "<cmd>Telescope projects<CR>"
 }

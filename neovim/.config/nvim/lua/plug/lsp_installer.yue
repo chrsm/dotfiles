@@ -3,5 +3,7 @@ cfg =
 
 export default {
   config: ->
-    require("nvim-lsp-installer").setup cfg
+    import "nvim-lsp-installer" as installer
+
+    installer.setup cfg
 }

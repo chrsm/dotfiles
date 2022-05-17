@@ -7,5 +7,7 @@ cfg =
 
 export default {
   config: ->
-    require("indent_blankline").setup cfg
+    import "indent_blankline" as indent
+
+    indent.setup cfg
 }

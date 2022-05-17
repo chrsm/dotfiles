@@ -15,7 +15,4 @@ export default {
         * "<CMD>Telescope live_grep<CR>"
         * "Search file contents"
     }, { mode: "n", prefix: "<leader>", noremap: true }
-    --[[$noremap '<leader>p', '<cmd>Telescope find_files<CR>'
-    $noremap '<leader>b', '<cmd>Telescope buffers<CR>'
-    $noremap '<leader>f', '<cmd>Telescope live_grep<CR>']]
 }

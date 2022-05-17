@@ -44,11 +44,11 @@ export default {
   config: ->
     import "attempt" as at
     import "telescope" as ts
+    import "which-key" as wk
 
     at.setup cfg
     ts.load_extension "attempt"
 
-    import "which-key" as wk
     wk.register {
       name: "attempt"
       n:

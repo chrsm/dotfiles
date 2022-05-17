@@ -20,16 +20,34 @@ export default {
     iron.core.set_config cfg
     iron.core.add_repl_definitions repls
 
-    vim.api.nvim_set_keymap "n", "<leader>rp", \
-      ":lua require(\"plug.iron\").iron_open_repl(vim.bo.filetype)<CR>", \
-      { noremap: true, silent: true }
+    import "which-key" as wk
 
-    vim.api.nvim_set_keymap "n", "<leader>rq", \
+    wk.register {
+      name: "repl (iron)"
+      p:
+        * ":lua require('plug.iron').iron_open_repl(vim.bo.filetype)<CR>"
+        * "Open repl for the current filetype"
+      q:
+        * ":lua require(\"plug.iron\").iron_close(vim.bo.filetype)<CR>"
+        * "Close repl for current filetype"
+      l:
+        * "<Plug>(iron-send-line)<CR>"
+        * "Send current line to repl"
+      r:
+        * "<Plug>(iron-repeat-cmd)<CR>"
+        * "Repeat previous repl command"
+    }, { mode: "n", prefix: "<leader>r", noremap: true, silent: true }
+
+    --[[vim.api.nvim_set_keymap "n", "<leader>rp", \
+      ":lua require(\"plug.iron\").iron_open_repl(vim.bo.filetype)<CR>", \
+      { noremap: true, silent: true }]]
+
+    --[[vim.api.nvim_set_keymap "n", "<leader>rq", \
       ":lua require(\"plug.iron\").iron_close(vim.bo.filetype)<CR>", \
       { noremap: true, silent: true }
 
     $nosilent "<leader>rl", "<Plug>(iron-send-line)<CR>"
-    $nosilent "<leader>rr", "<Plug>(iron-repeat-cmd)<CR>"
+    $nosilent "<leader>rr", "<Plug>(iron-repeat-cmd)<CR>"]]
 
   iron_open_repl: (ft) ->
     vim.cmd ":IronRepl #{ ft }"
@@ -49,5 +67,5 @@ export default {
       return
 
     iron.core.focus_on ft
-    vim.cmd ":bd!"
+    vim.cmd ":Bdelete!"
 }

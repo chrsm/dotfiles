@@ -7,9 +7,16 @@ cfg =
 
 export default {
   config: ->
-    ng = require "neogit"
+    import "neogit" as ng
+    import "which-key" as wk
     
     ng.setup cfg
 
-    $nosilent '<leader>g', '<cmd>Neogit<CR>'
+    wk.register {
+      name: "neogit"
+      g:
+        * "<CMD>Neogit<CR>"
+        * "Open neogit"
+    }, { mode: "n", prefix: "<leader>", noremap: true, silent: true }
+    --$nosilent '<leader>g', '<cmd>Neogit<CR>'
 }

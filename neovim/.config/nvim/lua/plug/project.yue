@@ -4,9 +4,15 @@ export default {
   config: ->
     import "project_nvim" as prj
     import "telescope" as ts
+    import "which-key" as wk
 
     prj.setup {}
     ts.load_extension "projects"
 
-    $noremap "<leader>o", "<cmd>Telescope projects<CR>"
+    wk.register {
+      o:
+        * "<CMD>Telescope projects<CR>"
+        * "List git projects"
+    }, { mode: "n", prefix: "<leader>", noremap: true }
+    --$noremap "<leader>o", "<cmd>Telescope projects<CR>"
 }

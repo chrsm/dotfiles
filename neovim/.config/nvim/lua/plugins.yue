@@ -44,6 +44,13 @@ plugs =
     "famiu/bufdelete.nvim"
     config: $do_cfg "bufdelete"
   }
+  * {
+    "folke/which-key.nvim"
+    config: ->
+      import "which-key" as wk
+
+      wk.setup {}
+  }
 
   -- note taking
   * {

@@ -26,6 +26,8 @@ cfg =
 export default {
   config: ->
     import "lfs" as lfs
+    import "telekasten" as tk
+    import "which-key" as wk
 
     dirs =
       * cfg.home
@@ -34,12 +36,32 @@ export default {
       * "#{ cfg.home }/misc"
     lfs.mkdir v for _, v in ipairs dirs
 
-    require("telekasten").setup cfg
+    tk.setup cfg
 
-    $noremap "<leader>zn", ":lua require('telekasten').new_note()<CR>"
+    wk.register {
+      n:
+        * ":lua require('telekasten').new_note()<CR>"
+        * "Create new note"
+      f:
+        * ":lua require('telekasten').find_notes()<CR>"
+        * "List all notes"
+      g:
+        * ":lua require('telekasten').search_notes()<CR>"
+        * "Search notes"
+      h:
+        * ":lua require('telekasten').follow_link()<CR>"
+        * "Follow link"
+      t:
+        * ":lua require('telekasten').show_tags()<CR>"
+        * "Show note tags"
+      z:
+        * ":lua require('telekasten').panel()<CR>"
+        * "Show telekasten panel"
+    }, { mode: "n", prefix: "<leader>z", noremap: true }
+    --[[$noremap "<leader>zn", ":lua require('telekasten').new_note()<CR>"
     $noremap "<leader>zf", ":lua require('telekasten').find_notes()<CR>"
     $noremap "<leader>zg", ":lua require('telekasten').search_notes()<CR>"
     $noremap "<leader>zz", ":lua require('telekasten').follow_link()<CR>"
     $noremap "<leader>zt", ":lua require('telekasten').show_tags()<CR>"
-    $noremap "<leader>z", ":lua require('telekasten').panel()<CR>"
+    $noremap "<leader>z", ":lua require('telekasten').panel()<CR>"]]
 }

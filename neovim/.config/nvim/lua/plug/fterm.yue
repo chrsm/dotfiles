@@ -10,9 +10,23 @@ export default {
 
     fterm.setup cfg
 
-    $nosilent "<leader>t", '<CMD>lua require("FTerm").toggle()<CR>'
+    import "which-key" as wk
+    wk.register {
+      "<leader>t":
+        * "<CMD>lua require('FTerm').toggle()<CR>"
+        * "Open terminal"
+    }, { mode: "n", noremap: true, silent: true }
+    -- $nosilent "<leader>t", '<CMD>lua require("FTerm").toggle()<CR>'
 
     -- overwrite keybinds from standard setup
-    $term "<ESC>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>'
-    $term "jj", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>'
+    wk.register {
+      "<ESC>":
+        * '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>'
+        * "Exit terminal"
+      "jj":
+        * '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>'
+        * "Exit terminal"
+    }, { mode: "t", noremap: true, silent: true }
+    --$term "<ESC>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>'
+    --$term "jj", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>'
 }

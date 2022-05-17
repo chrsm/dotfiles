@@ -48,7 +48,17 @@ export default {
     at.setup cfg
     ts.load_extension "attempt"
 
-    $nosilent "<leader>an", ":lua require(\"attempt\").new_select()<CR>"
-    $nosilent "<leader>al", ":Telescope attempt<CR>"
-    $nosilent "<leader>ar", ":lua require(\"attempt\").run()<CR>"
+    import "which-key" as wk
+    wk.register {
+      name: "attempt"
+      n:
+        * ":lua require('attempt').new_select()<CR>"
+        * "Open new scratch file"
+      l:
+        * ":Telescope attempt<CR>"
+        * "List scratch files"
+      r:
+        * ":lua require('attempt').run()<CR>"
+        * "Run current scratch file"
+    }, { mode: "n", prefix: "<leader>a", noremap: true, silent: true }
 }

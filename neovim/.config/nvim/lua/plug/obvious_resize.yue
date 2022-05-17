@@ -2,8 +2,20 @@ import "macros" as { $ }
 
 export default {
   config: ->
-    $nosilent '<C-K>', ':ObviousResizeUp<CR>'
+    import "which-key" as wk
+
+    wk.register {
+      ["<C-K>"]:
+        * ":ObviousResizeUp<CR>"
+      ["<C-J>"]:
+        * ":ObviousResizeDown<CR>"
+      ["<C-H>"]:
+        * ":ObviousResizeLeft<CR>"
+      ["<C-L>"]:
+        * ":ObviousResizeRight<CR>"
+    }, { mode: "n", noremap: true, silent: true }
+    --[[$nosilent '<C-K>', ':ObviousResizeUp<CR>'
     $nosilent '<C-J>', ':ObviousResizeDown<CR>'
     $nosilent '<C-H>', ':ObviousResizeLeft<CR>'
-    $nosilent '<C-L>', ':ObviousResizeRight<CR>'
+    $nosilent '<C-L>', ':ObviousResizeRight<CR>']]
 }

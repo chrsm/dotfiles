@@ -2,24 +2,38 @@ import "macros" as { $ }
 
 cfg =
   breakpoint:
-    key: "eb"
+    key: "b"
     fn: "toggle_breakpoint"
+    desc: "Toggle breakpoint"
   continue:
-    key: "ec"
+    key: "c"
     fn: "continue"
+    desc: "Continue"
   step_over:
-    key: "eso"
+    key: "so"
     fn: "step_over"
+    desc: "Step over"
   step_into:
-    key: "ess"
+    key: "ss"
     fn: "step_into"
+    desc: "Step into"
   step_out:
-    key: "ese"
+    key: "se"
     fn: "step_out"
+    desc: "Step out"
 
 export default {
   config: ->
+    import "which-key" as wk
+
+    opt = { mode: "n", prefix: "<leader>e", noremap: true, silent: true }
+    map =
+      name: "debugging"
+
     for k, v in pairs cfg
-      vim.api.nvim_set_keymap "n", "<leader>#{ v.key }", \
-        "<CMD>lua require('dap').#{ v.fn }()<CR>", { noremap: true, silent: true }
+      map[v.key] =
+        * "<CMD>lua require('dap').#{ v.fn }()<CR>"
+        * v.desc
+
+    wk.register map, opt
 }

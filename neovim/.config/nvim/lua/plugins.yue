@@ -169,6 +169,7 @@ plugs =
         wants: "friendly-snippets"
         config: $do_cfg "luasnip"
       }
+      * "onsails/lspkind.nvim"
   }
 
   -- language specific

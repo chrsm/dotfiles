@@ -130,6 +130,7 @@ plugs =
   * {
     "hkupty/iron.nvim"
     config: $do_cfg "iron"
+    commit: "bc9c596d6a97955f0306d2abcc10d9c35bbe2f5b"
   }
   * {
     "m-demare/attempt.nvim"

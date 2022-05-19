@@ -1,6 +1,8 @@
 # oh-my-zsh shit
 export ZSH=$HOME/.oh-my-zsh
-plugins=(git asdf)
+export ZSH_TMUX_AUTOSTART_ONCE=true
+export ZSH_TMUX_UNICODE=true
+plugins=(git asdf tmux)
 source $ZSH/oh-my-zsh.sh
 
 source "$HOME/.config/zsh.d/amuse.zsh-theme"

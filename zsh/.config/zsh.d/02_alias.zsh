@@ -19,6 +19,14 @@ function gnvim {
 alias vim="nvim"
 alias wvim="GOOS=windows nvim"
 
+function note {
+	(
+		cd $HOME/notes
+		vim +Telekasten
+	)
+}
+alias notes=note
+
 alias gow="GOOS=windows go"
 
 alias dco="docker-compose"

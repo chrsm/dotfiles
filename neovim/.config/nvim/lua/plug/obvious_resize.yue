@@ -2,16 +2,23 @@ import "macros" as { $ }
 
 export default {
   config: ->
-    import "which-key" as wk
+    --[[import "which-key" as wk
 
     wk.register {
-      ["<C-K>"]:
+      name: "resize"
+      "<C-K>":
         * ":ObviousResizeUp<CR>"
-      ["<C-J>"]:
+      "<C-J>":
         * ":ObviousResizeDown<CR>"
-      ["<C-H>"]:
+      "<C-H>":
         * ":ObviousResizeLeft<CR>"
-      ["<C-L>"]:
+      "<C-L>":
         * ":ObviousResizeRight<CR>"
-    }, { mode: "n", noremap: true, silent: true }
+    }, { mode: "n", noremap: true, silent: true }]]
+
+    -- these maps don't work with which-key?
+    $nosilent '<C-K>', ':ObviousResizeUp<CR>'
+    $nosilent '<C-J>', ':ObviousResizeDown<CR>'
+    $nosilent '<C-H>', ':ObviousResizeLeft<CR>'
+    $nosilent '<C-L>', ':ObviousResizeRight<CR>'
 }

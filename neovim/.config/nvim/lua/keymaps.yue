@@ -8,12 +8,7 @@ cfg =
   insert:
     * { "jj", "<ESC>" }
 
-  normal:
-    -- easier split switches
-    * { "<C-j>", "<C-w>j" }
-    * { "<C-k>", "<C-w>k" }
-    * { "<C-l>", "<C-w>l" }
-    * { "<C-h>", "<C-w>h" }
+  normal: {}
 
   noremap:
     -- if you use `:` don't @ me

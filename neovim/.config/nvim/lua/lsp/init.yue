@@ -1,5 +1,10 @@
 import "macros" as { $ }
 
+servers =
+  go: "gopls"
+  lua: "sumneko_lua"
+  php: "phpactor"
+
 on_attach = (c, buf) ->
   $setopt buf, 'omnifunc', 'v:lua.vim.lsp.omnifunc'
   
@@ -49,12 +54,10 @@ export default {
       use_saga_diagnostic_sign: false
       code_action_icon: ""
 
-    import "lsp.go" as lsp_go
-    import "lsp.lua" as lsp_lua
-
-    lsp.gopls.setup lsp_go.make on_attach
-    lsp.sumneko_lua.setup lsp_lua.make on_attach
-    --print vim.inspect lsp_lua.make on_attach
+    for k, v in pairs servers
+      on_attach
+        |> require("lsp.#{ k }").make
+        |> lsp[v].setup
 
     with vim.lsp
       .set_log_level "WARN"

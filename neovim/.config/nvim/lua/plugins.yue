@@ -180,21 +180,11 @@ plugs =
     config: $do_cfg "dap_go"
   }
 
-  -- in-dev
-  * {
-    "~/src/lacuna.nvim"
-    config: ->
-      import "lacuna" as lacuna
-
-      lacuna.setup!
-  }
-
 rocks =
   * "lua-cjson"
   * "luafilesystem"
   * "lsqlite3"
   * "xmlua"
-  * "http"
 
 export default {
   setup: (needs_bootstrap) ->

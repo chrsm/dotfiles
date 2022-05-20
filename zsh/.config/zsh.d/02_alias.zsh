@@ -27,7 +27,7 @@ function note {
 }
 alias notes=note
 
-alias gow="GOOS=windows go"
+alias wgo="GOOS=windows go"
 
 alias dco="docker-compose"
 

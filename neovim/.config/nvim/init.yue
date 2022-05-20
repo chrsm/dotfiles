@@ -1,6 +1,9 @@
 -- bootstrap packer for new machines
 needs_bootstrap = false
 with vim.fn
+  if .has "mac"
+    .setenv "MACOSX_DEPLOYMENT_TARGET", "10.15"
+
   p = (.stdpath "data") .. "/site/pack/packer/start/packer.nvim"
   if .empty(.glob p) > 0
     needs_bootstrap = .system {

@@ -22,7 +22,8 @@ alias wvim="GOOS=windows nvim"
 function note {
 	(
 		cd $HOME/notes
-		vim +Telekasten
+		vim -c "Telekasten show_calendar" -c "lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<c-w>', true, false, true) .. 'h', 'n', true); "
+		# -c "Telekasten"
 	)
 }
 alias notes=note

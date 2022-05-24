@@ -23,6 +23,12 @@ cfg =
   command_palette_theme: "dropdown"
   show_tags_theme: "dropdown"
 
+  plug_in_to_calendar: true
+  calendar_opts:
+    weeknm: 1
+    calendar_monday: 0
+    calendar_mark: "left-fit"
+
 export default {
   config: ->
     import "lfs" as lfs
@@ -49,7 +55,7 @@ export default {
       g:
         * ":lua require('telekasten').search_notes()<CR>"
         * "Search notes"
-      h:
+      l:
         * ":lua require('telekasten').follow_link()<CR>"
         * "Follow link"
       t:

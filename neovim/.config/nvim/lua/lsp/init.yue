@@ -19,7 +19,14 @@ on_attach = (c, buf) ->
   -- $setkey('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
   if c.server_capabilities.documentFormattingProvider
-    $setkey buf, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts
+    $setkey buf, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.format({ async = false })<CR>', opts
+
+    nvim.api.exec [[
+      augroup ls_buf_fmt
+            autocmd!
+            autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false })
+        augroup END
+      ]], false
   else
     $setkey buf, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts
 
@@ -31,12 +38,11 @@ on_attach = (c, buf) ->
 
   if c.server_capabilities.documentHighlightProvider
     fmtcaps = [[
-        augroup ls_document_highlight
+        augroup ls_buf_dochi
             autocmd!
             autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
             autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
             autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-            autocmd BufWritePre <buffer> lua vim.lsp.buf.format(nil, 5000)
         augroup END
       ]]
 

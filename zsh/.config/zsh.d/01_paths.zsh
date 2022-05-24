@@ -14,4 +14,4 @@ else
 	export LUA_CPATH="$(luarocks --lua-dir=/usr/local/opt/luajit path --append --lr-cpath)"
 fi
 
-export PATH="$LOCALBIN:$GOROOT/bin:$GOPATH/bin:$HOME/.cargo/bin:$LUAROCKS_PATH$ORIG_PATH"
+export PATH="$LOCALBIN:$GOPATH/bin:$HOME/.cargo/bin:$LUAROCKS_PATH$ORIG_PATH"

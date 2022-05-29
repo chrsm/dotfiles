@@ -13,6 +13,7 @@ fi
 
 # oh-my-zsh shit
 export ZSH=$HOME/.oh-my-zsh
+export ZSH_TMUX_AUTOSTART=true
 export ZSH_TMUX_AUTOSTART_ONCE=true
 export ZSH_TMUX_UNICODE=true
 

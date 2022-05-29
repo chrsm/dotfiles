@@ -1,7 +1,12 @@
 #!/bin/env bash
+set -e
 
-if ! [ -f "$HOME/.local/lls/bin/lua-language-server" ]; then
-	bash "$HOME/.local/generic/lls.sh" 2>&1 > /dev/null
+if [ -f "$HOME/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server" ]; then
+	exec "$HOME/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server" "$@"
+else
+	if ! [ -f "$HOME/.local/lls/bin/lua-language-server" ]; then
+		bash "$HOME/.local/generic/lls.sh" 2>&1 > /dev/null
+	fi
+
+	exec "$HOME/.local/lls/bin/lua-language-server" "$@"
 fi
-
-exec "$HOME/.local/lls/bin/lua-language-server" "$@"

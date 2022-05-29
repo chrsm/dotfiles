@@ -145,7 +145,6 @@ plugs =
   -- LSP and related tooling
   * {
     "williamboman/nvim-lsp-installer"
-    config: $do_cfg "lsp_installer"
     requires:
       * "neovim/nvim-lspconfig"
   }
@@ -187,6 +186,7 @@ rocks =
   * "luafilesystem"
   * "lsqlite3"
   * "xmlua"
+  * "http"
 
 export default {
   setup: (needs_bootstrap) ->

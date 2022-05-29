@@ -1,9 +1,0 @@
-cfg =
-  automatic_installation: true
-
-export default {
-  config: ->
-    import "nvim-lsp-installer" as installer
-
-    installer.setup cfg
-}

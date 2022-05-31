@@ -26,6 +26,7 @@ cfg =
     -- * { "<leader>d", ":bd!<CR>" }
     -- launch terminal
     * { "<leader>t", ":term" }
+    * { "vb", "<C-v>"}
 
   term:
     * { "<ESC>", "<C-\\><C-n>" }

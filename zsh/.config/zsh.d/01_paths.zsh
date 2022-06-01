@@ -14,4 +14,8 @@ else
 	export LUA_CPATH="$(luarocks --lua-dir=/usr/local/opt/luajit path --append --lr-cpath)"
 fi
 
-export PATH="$LOCALBIN:$GOPATH/bin:$HOME/.cargo/bin:$LUAROCKS_PATH$ORIG_PATH"
+if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then
+	export COMPOSER_PATH="$HOME/.config/composer/vendor/bin:"
+fi
+
+export PATH="$LOCALBIN:$GOPATH/bin:$HOME/.cargo/bin:$LUAROCKS_PATH$COMPOSER_PATH$ORIG_PATH"

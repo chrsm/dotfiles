@@ -4,84 +4,155 @@
                %APPDATA%\Mozilla\Firefox\Profiles\$PROFILE-DIR\user.js
                ~/Library/Application\ Support/Firefox/Profiles/$PROFILE-DIR/user.js
 ]]
-prefs = {
-  "geo.enabled": false,
-  "geo.wifi.uri": "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%",
-  "geo.wifi.logging.enabled": false,
+prefs =
+  "geo.enabled": false
+  "geo.wifi.uri": "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%"
+  "geo.wifi.logging.enabled": false
 
   -- why is this even a thing?
-  "dom.netinfo.disabled": true,
-  "dom.battery.enabled": false,
-  "dom.gamepad.enabled": false,
-  "dom.vr.enabled": false,
-  "dom.flyweb.enabled": false,
-  
-  "beacon.enabled": false,
+  "dom.netinfo.disabled": true
+  "dom.battery.enabled": false
+  "dom.gamepad.enabled": false
+  "dom.vr.enabled": false
+  "dom.flyweb.enabled": false
 
-  "browser.send_pings": false,
-  "browser.send_pings.require_same_host": true,
-  "browser.uitour.enabled": false,
+  "beacon.enabled": false
 
-  "browser.safebrowsing.enabled": true,
-  "browser.safebrowsing.phishing.enabled": true,
-  "browser.safebrowsing.malware.enabled": true,
-  "browser.safebrowsing.downloads.remote.enabled": false,
+  "browser.send_pings": false
+  "browser.send_pings.require_same_host": true
+  "browser.uitour.enabled": false
 
-  "camera.control.face_detection.enabled": false,
-  
-  "browser.search.countryCode": "US",
-  "browser.search.region": "US",
-  "browser.search.geoip.url": "",
-  "intl.accept_languages": "en-US, en",
-  "intl.locale.matchOS": false,
-  "browser.search.geoSpecificDefaults": false,
-  "javascript.use_us_english_locale": true,
+  "browser.safebrowsing.enabled": true
+  "browser.safebrowsing.phishing.enabled": true
+  "browser.safebrowsing.malware.enabled": true
+  "browser.safebrowsing.downloads.remote.enabled": false
 
-  "keyword.enabled": true,
+  "camera.control.face_detection.enabled": false
 
-  "browser.urlbar.trimURLs": false,
-  "browser.fixup.alternate.enabled": false,
-  "browser.urlbar.filter.javascript": true,
+  "browser.search.countryCode": "US"
+  "browser.search.region": "US"
+  "browser.search.geoip.url": ""
+  "intl.accept_languages": "en-US, en"
+  "intl.locale.matchOS": false
+  "browser.search.geoSpecificDefaults": false
+  "javascript.use_us_english_locale": true
 
-  "network.proxy.socks_remote_dns": true,
-  "network.manage-offline-status": false,
-  "network.dns.disablePrefetch": true,
-  "network.dns.disablePrefetchFromHTTPS": true,
-  "network.predictor.enabled": false,
-  "network.dns.blockDotOnion": true,
-  "network.prefetch-next": false,
-  "network.http.speculative-parallel-limit": 0,
+  "keyword.enabled": true
 
-  "security.fileuri.strict_origin_policy": true,
-  "security.mixed_content.block_active_content": true,
-  "network.jar.open-unsafe-types": false,
+  "browser.urlbar.trimURLs": false
+  "browser.fixup.alternate.enabled": false
+  "browser.urlbar.filter.javascript": true
 
-  "gfx.font_rendering.opentype_svg.enabled": false,
+  "network.proxy.socks_remote_dns": true
+  "network.manage-offline-status": false
+  "network.dns.disablePrefetch": true
+  "network.dns.disablePrefetchFromHTTPS": true
+  "network.predictor.enabled": false
+  "network.dns.blockDotOnion": true
+  "network.prefetch-next": false
+  "network.http.speculative-parallel-limit": 0
 
-  "toolkit.telemetry.enabled": false,
-  "toolkit.telemetry.unified": false,
-  "toolkit.telemetry.archive.enabled": false,
-  "experiments.enabled": false,
-  "experiments.supported": false,
-  "experiments.manifest.uri": "",
-  "network.allow-experiments": false,
-  "breakpad.reportURL": "",
-  "browser.tabs.crashReporting.sendReport": false,
-  "browser.crashReports.unsubmittedCheck.enabled": false,
-  "datareporting.healthreport.uploadEnabled": false,
-  "datareporting.healthreport.service.enabled": false,
-  "datareporting.policy.dataSubmissionEnabled": false,
-  "browser.discovery.enabled": false,
-  "app.normandy.enabled": false,
-  "app.normandy.api_url": "",
-  "extensions.shield-recipe-client.enabled": false,
-  "app.shield.optoutstudies.enabled": false,
-  "loop.longDomains": false,
+  "security.fileuri.strict_origin_policy": true
+  "security.mixed_content.block_active_content": true
+  "network.jar.open-unsafe-types": false
 
-  "browser.pocket.enabled": false,
-  "extensions.pocket.enabled": false,
-  "browser.newtabpage.activity-stream.feeds.section.topstories": false,
-}
+  "gfx.font_rendering.opentype_svg.enabled": false
+
+  "toolkit.telemetry.enabled": false
+  "toolkit.telemetry.unified": false
+  "toolkit.telemetry.archive.enabled": false
+  "experiments.enabled": false
+  "experiments.supported": false
+  "experiments.manifest.uri": ""
+  "network.allow-experiments": false
+  "breakpad.reportURL": ""
+  "browser.tabs.crashReporting.sendReport": false
+  "browser.crashReports.unsubmittedCheck.enabled": false
+  "datareporting.healthreport.uploadEnabled": false
+  "datareporting.healthreport.service.enabled": false
+  "datareporting.policy.dataSubmissionEnabled": false
+  "browser.discovery.enabled": false
+  "app.normandy.enabled": false
+  "app.normandy.api_url": ""
+  "extensions.shield-recipe-client.enabled": false
+  "app.shield.optoutstudies.enabled": false
+  "loop.longDomains": false
+
+  "browser.pocket.enabled": false
+  "extensions.pocket.enabled": false
+  "browser.newtabpage.activity-stream.feeds.section.topstories": false
+
+  -- from arken
+  "geo.provider.network.url": "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%"
+  "geo.provider.ms-windows-location": false
+  "geo.provider.use_corelocation": false
+  "geo.provider.use_gspd": false
+  "browser.region.network.url": ""
+  "browser.region.update.enabled": false
+
+  "extensions.getAddons.showPane": false
+  "extensions.htmlaboutaddons.recommendations.enabled": false
+  "browser.discovery.enabled": false
+
+  "toolkit.telemetry.server": "data:,"
+  "toolkit.telemetry.archive.enabled": false
+  "toolkit.telemetry.newProfilePing.enabled": false
+  "toolkit.telemetry.shutdownPingSender.enabled": false
+  "toolkit.telemetry.updatePing.enabled": false
+  "toolkit.telemetry.bhrPing.enabled": false
+  "toolkit.telemetry.firstShutdownPing.enabled": false
+  "toolkit.telemetry.coverage.opt-out": true
+  "toolkit.coverage.opt-out": true
+  "toolkit.coverage.endpoint.base": ""
+  "browser.ping-centre.telemetry": false
+
+  "network.connectivity-service.enabled": false
+  "captivedetect.canonicalURL": ""
+  "network.captive-portal-service.enabled": false
+
+  "network.predictor.enable-prefetch": false
+  "browser.places.speculativeConnect.enabled": false
+
+  "network.dns.disableIPv6": true
+  "network.file.disable_unc_paths": true
+  "network.gio.supported-protocols": ""
+
+  "toolkit.winRegisterApplicationRestart": false
+
+  "security.ssl.require_safe_negotiation": true
+  "security.tls.enable_0rtt_data": false
+  "security.OCSP.enabled": 1
+  "security.OCSP.require": true
+  "security.pki.sha1_enforcement_level": 1
+  "security.family_safety.mode": 0
+  "security.cert_pinning.enforcement_level": 2
+  "security.remote_settings.crlite_filters.enabled": true
+  "security.pki.crlite_mode": 2
+
+  "security.mixed_content.block_display_content": true
+  "dom.security.https_only_mode": true
+  "dom.security.https_only_mode_send_http_background_request": false
+
+  "security.ssl.treat_unsafe_negotiation_as_broken": true
+  "browser.ssl_override_behavior": 1
+  "browser.xul.error_pages.expert_bad_cert": true
+
+  "dom.disable_window_move_resize": true
+  "dom.popup_allowed_events": "click dblclick mousedown pointerdown"
+
+  "browser.helperApps.deleteTempFileOnExit": true
+  "browser.pagethumbnails.capturing_disabled": true
+  "browser.uitour.url": ""
+
+  "network.IDN_show_punycode": true
+
+  "pdfjs.enableScripting": false
+
+  "network.protocol-handler.external.ms-windows-store": false
+
+  "permissions.delegation.enabled": false
+
+  "privacy.partition.serviceWorkers": true
 
 print "/* generated from user.yue; do not edit */"
 for k, v in pairs prefs

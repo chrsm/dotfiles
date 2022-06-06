@@ -1,40 +1,26 @@
-[include]
-	path = ~/.gitconfig.local
-
-[color]
-	ui = auto
-
 [alias]
 	st = status
 	addp = add -p
 	redate = rebase --commiter-date-is-author-date
 
-[interactive]
-	diffFilter = delta --color-only --features=interactive
+[color]
+	ui = auto
 
-[delta]
-	features = decorations
-
-[delta "interactive"]
-	keep-plus-minus-markers = false
-
-[delta "decorations"]
-	commit-decoration-style = blue ol
-	commit-style = raw
-	file-style = omit
-	hunk-header-decoration-style = blue box
-	hunk-header-file-style = red
-	hunk-header-line-number-style = "#067a00"
-	hunk-header-style = file line-number syntax
-	
-[push]
-	default = tracking
+[commit]
+	gpgsign = true
+	template = ~/.local/commit_template
 
 [core]
 	excludesfile = ~/.gitignore
 	pager = delta
 	autocrlf = input
 	eol = native
+
+[diff]
+	colorMoved = default
+
+[fetch]
+	prune = true
 
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
@@ -48,15 +34,39 @@
 [init]
 	defaultBranch = master
 
-[fetch]
-	prune = true
+[interactive]
+	diffFilter = delta --color-only --features=interactive
 
-[commit]
-	gpgsign = true
-	template = ~/.local/commit_template
+[merge]
+	conflictstyle = diff3
+
+[push]
+	default = tracking
 
 [url "git@github.com:"]
 	insteadOf = https://github.com
 
 [url "git@gitlab.com:"]
 	insteadOf = https://gitlab.com
+
+# local overrides
+[include]
+	path = ~/.gitconfig.local
+
+# non-core stuff
+[delta]
+	features = decorations
+	navigate = true
+	line-numbers = true
+
+[delta "decorations"]
+	commit-decoration-style = blue ol
+	commit-style = raw
+	file-style = omit
+	hunk-header-decoration-style = blue box
+	hunk-header-file-style = red
+	hunk-header-line-number-style = "#067a00"
+	hunk-header-style = file line-number syntax
+
+[delta "interactive"]
+	keep-plus-minus-markers = false

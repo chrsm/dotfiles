@@ -19,12 +19,12 @@ on_attach = (c, buf) ->
   -- $setkey('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
   if c.server_capabilities.documentFormattingProvider
-    $setkey buf, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.format({ async = false })<CR>', opts
+    $setkey buf, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting({ async = false })<CR>', opts
 
     vim.cmd [[
       augroup ls_buf_fmt
             autocmd!
-            autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false })
+            autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting({ async = false })
         augroup END
       ]]
   else

@@ -48,7 +48,7 @@ fi
 # no alias needed for nix
 
 alias gcppwd="gcloud auth print-access-token|tr -d '\n'|$CLIP_IMPL"
-alias gcplogin="gcloud auth login --update-acp"
+alias gcplogin="gcloud auth login --update-adc"
 
 if [[ ! -f "$HOME/.local/bin/yue" ]]; then
 	alias yue="asdf env lua yue"

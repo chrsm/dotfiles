@@ -17,5 +17,5 @@ export default {
       g:
         * "<CMD>Neogit<CR>"
         * "Open neogit"
-    }, { mode: "n", prefix: "<leader>", noremap: true, silent: true }
+    }, { mode: "n", prefix: "<leader>g", noremap: true, silent: true }
 }

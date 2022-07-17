@@ -91,6 +91,33 @@ plugs =
     config: $do_cfg "fterm"
   }
 
+  -- wip
+  * {
+    "~/src/nvim-buf"
+    requires:
+      * "nvim-lua/plenary.nvim"
+    config: -> require("buf").setup!
+  }
+  * {
+    "~/src/impulse.nvim"
+    requires:
+      * "MunifTanjim/nui.nvim"
+    config: ->
+      require("impulse").setup {
+        open_in_browser: "/mnt/c/Program Files/Mozilla Firefox/firefox.exe"
+      }
+
+      import "which-key" as wk
+      wk.register {
+        "s":
+          * ":lua require('impulse').menu_search()<CR>"
+          * "impulse.nvim: search menu"
+        "l":
+          * ":lua require('impulse').follow_link()<CR>"
+          * "impulse.nvim: follow link"
+      }, { mode: "n", prefix: "<leader>pf", noremap: true }
+  }
+
   -- dev related, but not lang-specific
   * "nathom/filetype.nvim"
   * "dense-analysis/ale"
@@ -108,6 +135,13 @@ plugs =
     requires:
       * "nvim-lua/plenary.nvim"
       * "sindrets/diffview.nvim"
+  }
+  * {
+    "ThePrimeagen/git-worktree.nvim"
+    config: $do_cfg "worktree"
+    requires:
+      * "nvim-lua/plenary.nvim"
+      * "nvim-telescope/telescope.nvim"
   }
   * {
     "ethanholz/nvim-lastplace"

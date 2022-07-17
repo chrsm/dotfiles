@@ -5,6 +5,7 @@ types =
   * "go"
   * "cpp"
   * "lua"
+  * "proto"
 
 export default {
   setup: ->

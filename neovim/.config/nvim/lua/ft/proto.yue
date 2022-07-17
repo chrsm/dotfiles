@@ -1,0 +1,7 @@
+vim.api.nvim_create_autocmd { "BufNewFile", "BufRead" },
+  pattern: "proto"
+  command: "set syntax=proto"
+
+vim.api.nvim_create_autocmd { "FileType" },
+  pattern: "proto"
+  command: "setl ts=2 sw=2 expandtab"

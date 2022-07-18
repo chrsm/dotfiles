@@ -10,8 +10,8 @@ if [[ "$IS_MAC" == "false" ]]; then
 	export LUA_CPATH="$(luarocks path --append --lr-cpath)"
 else
 	# macs suck
-	export LUA_PATH="$(luarocks --lua-dir=/usr/local/opt/luajit path --append --lr-path);./?.lua;./?/init.lua"
-	export LUA_CPATH="$(luarocks --lua-dir=/usr/local/opt/luajit path --append --lr-cpath)"
+	export LUA_PATH="$(luarocks path --append --lr-path);./?.lua;./?/init.lua"
+	export LUA_CPATH="$(luarocks path --append --lr-cpath)"
 fi
 
 if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then

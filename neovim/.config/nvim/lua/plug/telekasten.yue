@@ -31,7 +31,6 @@ cfg =
 
 export default {
   config: ->
-    import "lfs" as lfs
     import "telekasten" as tk
     import "which-key" as wk
 
@@ -40,7 +39,9 @@ export default {
       * "#{ cfg.home }/work"
       * "#{ cfg.home }/dev"
       * "#{ cfg.home }/misc"
-    lfs.mkdir v for _, v in ipairs dirs
+    unless os.getenv "IS_MAC"
+      import "lfs" as lfs
+      lfs.mkdir v for _, v in ipairs dirs
 
     tk.setup cfg
 

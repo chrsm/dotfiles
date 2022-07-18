@@ -29,7 +29,7 @@
 	clean = git-lfs clean -- %f
 
 [gpg]
-	program = gpg2
+	program = gpg
 
 [init]
 	defaultBranch = master

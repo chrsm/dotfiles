@@ -2,7 +2,7 @@
 set -e
 
 # list of all currently used asdf plugins
-PLUGINS=(assh golang lua luaJIT openresty protoc tfsec delta bitwarden)
+PLUGINS=(assh golang lua tfsec delta bitwarden)
 PLUGINS_NIGHTLY=(neovim)
 
 asdf_inst () {

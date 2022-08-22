@@ -120,7 +120,6 @@ plugs =
 
   -- dev related, but not lang-specific
   * "nathom/filetype.nvim"
-  * "dense-analysis/ale"
   * "f-person/git-blame.nvim"
   * "rhysd/committia.vim"
   * {
@@ -177,14 +176,33 @@ plugs =
   }
 
   -- LSP and related tooling
+  * "williamboman/mason.nvim"
   * {
-    "williamboman/nvim-lsp-installer"
+    "williamboman/mason-lspconfig.nvim"
     requires:
+      * "williamboman/mason.nvim"
       * "neovim/nvim-lspconfig"
+    config: ->
+      (require "mason").setup!
+      (require "mason-lspconfig").setup!
   }
+  * {
+    "mfussenegger/nvim-lint"
+    config: ->
+      import "lint" as lint
+
+      lint.linters_by_ft = {
+        go:
+          * "golangcilint"
+      }
+
+      vim.api.nvim_create_autocmd { "BufWritePost" },
+        callback: ->
+          lint.try_lint!
+  }
+  * "mhartington/formatter.nvim"
   * "nvim-lua/lsp-status.nvim"
   * "nvim-lua/diagnostic-nvim"
-  * "sbdchd/neoformat"
   * "glepnir/lspsaga.nvim"
   * {
     "hrsh7th/nvim-cmp"

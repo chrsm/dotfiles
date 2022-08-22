@@ -3,6 +3,16 @@ import "macros" as { $ }
 export default {
   config: ->
     import "which-key" as wk
+    import "telescope" as ts
+
+    ts.setup
+      extensions: {
+        ["ui-select"]: {
+          (require "telescope.themes").get_dropdown {}
+        }
+      }
+
+    ts.load_extension "ui-select"
 
     wk.register {
       p:

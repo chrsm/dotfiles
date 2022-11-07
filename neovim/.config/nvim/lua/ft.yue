@@ -6,6 +6,7 @@ types =
   * "cpp"
   * "lua"
   * "proto"
+  * "php"
 
 export default {
   setup: ->

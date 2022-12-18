@@ -10,10 +10,12 @@ function gnvim {
 	nvim --headless --listen localhost:6666 &
 
 	if [[ "$IS_WSL" == "true" ]]; then
-		neovide.exe --remote-tcp=localhost:6666
+		neovide.exe --remote-tcp=localhost:6666 2>&1 > /dev/null &
 	else
-		neovide --remote-tcp=localhost:6666
+		neovide --remote-tcp=localhost:6666 2>&1 > /dev/null &
 	fi
+
+	disown
 }
 
 alias vim="nvim"

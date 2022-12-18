@@ -22,5 +22,5 @@ unless needs_bootstrap
 
   settings.setup!
   keymaps.setup!
-  lsp.setup!
   ft.setup!
+  lsp.setup!

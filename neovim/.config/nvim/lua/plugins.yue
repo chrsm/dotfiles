@@ -92,7 +92,7 @@ plugs =
   }
 
   -- wip
-  * {
+  --[[* {
     "~/src/nvim-buf"
     requires:
       * "nvim-lua/plenary.nvim"
@@ -116,7 +116,7 @@ plugs =
           * ":lua require('impulse').follow_link()<CR>"
           * "impulse.nvim: follow link"
       }, { mode: "n", prefix: "<leader>pf", noremap: true }
-  }
+  }]]
 
   -- dev related, but not lang-specific
   * "nathom/filetype.nvim"
@@ -187,6 +187,21 @@ plugs =
       (require "mason-lspconfig").setup!
   }
   * {
+    "VonHeikemen/lsp-zero.nvim"
+    requires:
+      * 'neovim/nvim-lspconfig'
+      * 'williamboman/mason.nvim'
+      * 'williamboman/mason-lspconfig.nvim'
+      * 'hrsh7th/nvim-cmp'
+      * 'hrsh7th/cmp-buffer'
+      * 'hrsh7th/cmp-path'
+      * 'saadparwaiz1/cmp_luasnip'
+      * 'hrsh7th/cmp-nvim-lsp'
+      * 'hrsh7th/cmp-nvim-lua'
+      * 'L3MON4D3/LuaSnip'
+      * 'rafamadriz/friendly-snippets'
+  }
+  * {
     "mfussenegger/nvim-lint"
     config: ->
       import "lint" as lint
@@ -231,6 +246,10 @@ plugs =
   * {
     "leoluz/nvim-dap-go"
     config: $do_cfg "dap_go"
+  }
+
+  * {
+    "vim-crystal/vim-crystal"
   }
 
 rocks =

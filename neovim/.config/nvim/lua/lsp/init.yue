@@ -1,78 +1,9 @@
 import "macros" as { $ }
 
-servers =
-  go: "gopls"
-  lua: "sumneko_lua"
-  php: "phpactor"
-
-on_attach = (c, buf) ->
-  $setopt buf, 'omnifunc', 'v:lua.vim.lsp.omnifunc'
-  
-  opts =
-    noremap: true
-    silent: true
-
-  $setkey buf, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts
-  $setkey buf, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts
-
-  -- TODO: import more? don't really use any of those..
-  -- $setkey('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-
-  if c.server_capabilities.documentFormattingProvider
-    $setkey buf, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.format({ async = false })<CR>', opts
-
-    vim.cmd [[
-      augroup ls_buf_fmt
-            autocmd!
-            autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false })
-        augroup END
-      ]]
-  else
-    $setkey buf, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts
-
-  fmtcaps = [[
-      autocmd!
-        autocmd BufWritePre * Neoformat
-      augroup END
-  ]]
-
-  if c.server_capabilities.documentHighlightProvider
-    fmtcaps = [[
-        augroup ls_buf_dochi
-            autocmd!
-            autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
-            autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-            autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        augroup END
-      ]]
-
-  vim.api.nvim_exec fmtcaps, false
-
-  (require "lsp_signature").on_attach!
-
 export default {
   setup: ->
-    import "lspconfig" as lsp
-    import "cmp_nvim_lsp" as cap
-    import "lspsaga" as lsp_saga
+    import 'lsp-zero' as lsp
 
-    lsp_saga.init_lsp_saga
-      code_action_icon: ""
-
-    for k, v in pairs servers
-      on_attach
-        |> require("lsp.#{ k }").make
-        |> lsp[v].setup
-
-    with vim.lsp
-      .set_log_level "WARN"
-
-      opts =
-        underline: true
-        virtual_text: false
-        signs: true
-        update_in_insert: true
-
-      hnd = .with .diagnostic.on_publish_diagnostics, opts
-      .handlers["textDocument/publishDiagnostics"] = hnd
+    lsp.preset 'recommended'
+    lsp.setup!
 }

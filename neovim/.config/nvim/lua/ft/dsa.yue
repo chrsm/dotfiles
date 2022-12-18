@@ -1,0 +1,8 @@
+vim.api.nvim_create_autocmd { "BufNewFile", "BufRead" },
+  pattern: "dsa"
+  command: "set syntax=javascript"
+
+vim.api.nvim_create_autocmd { "FileType" },
+  pattern: "dsa"
+  command: "setl ts=2 sw=2 expandtab"
+

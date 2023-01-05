@@ -61,11 +61,25 @@ plugs =
   }
 
   -- color schemes
-  * {
+  --[[* {
     "chrsm/paramount-ng.nvim"
-    config: $do_cfg "paramount"
+    --config: $do_cfg "paramount"
     requires:
       * "rktjmp/lush.nvim"
+  }]]
+  * {
+    "jesseleite/nvim-noirbuddy"
+    config: ->
+      import "noirbuddy" as nb
+
+      nb.setup
+        preset: "minimal"
+        colors:
+          background: "#262626"
+          primary: "#a790d5"
+
+    requires:
+      * { "tjdevries/colorbuddy.nvim", branch: "dev" }
   }
 
   -- ui
@@ -89,6 +103,13 @@ plugs =
   * {
     "numToStr/FTerm.nvim"
     config: $do_cfg "fterm"
+  }
+  * {
+    "shortcuts/no-neck-pain.nvim"
+    config: ->
+      import "no-neck-pain" as nnp
+
+      nnp.setup!
   }
 
   -- wip
@@ -120,7 +141,6 @@ plugs =
 
   -- dev related, but not lang-specific
   * "nathom/filetype.nvim"
-  * "f-person/git-blame.nvim"
   * "rhysd/committia.vim"
   * {
     "sindrets/diffview.nvim",
@@ -238,6 +258,15 @@ plugs =
         config: $do_cfg "luasnip"
       }
       * "onsails/lspkind.nvim"
+  }
+  * {
+    "folke/trouble.nvim"
+    config: ->
+      import "trouble" as t
+      t.setup!
+
+      vim.diagnostic.config
+        virtual_text: true
   }
 
   -- language specific

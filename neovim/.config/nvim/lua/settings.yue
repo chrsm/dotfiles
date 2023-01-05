@@ -55,5 +55,9 @@ export default {
     runcmds
       * "filetype plugin on"
       * "filetype indent on"
+
       * "syntax on"
+
+    vim.diagnostic.config
+      virtual_text: true
 }

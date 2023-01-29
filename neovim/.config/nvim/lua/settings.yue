@@ -48,6 +48,7 @@ export default {
       * { "completeopt", "menu,menuone,noselect" }
       * { "matchtime", 2 }
       * { "shortmess", "c" }
+      * { "signcolumn", "yes" }
 
     setopts vim.wo, mkdef
       * { "wrap", false }
@@ -60,4 +61,15 @@ export default {
 
     vim.diagnostic.config
       virtual_text: true
+
+    if (vim.fn.has 'wsl') == 1
+      vim.g.clipboard =
+        name: 'win32yank-wsl'
+        copy:
+          ['+']: 'win32yank.exe -i --crlf'
+          ['-']: 'win32yank.exe -i --crlf'
+        paste:
+          ['+']: 'win32yank.exe -o --lf'
+          ['-']: 'win32yank.exe -o --lf'
+        cache_enabled: 0
 }

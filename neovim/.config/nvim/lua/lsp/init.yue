@@ -1,9 +1,26 @@
 import "macros" as { $ }
 
+format = (buf) ->
+  vim.api.nvim_clear_autocmds 
+    group: fmtgrp
+    buffer: buf
+
+  vim.api.nvim_create_autocmd 'BufWritePre',
+    group: fmtgrp,
+    buffer: buf,
+    callback: ->
+      vim.lsp.buf.format!
+
 export default {
   setup: ->
     import 'lsp-zero' as lsp
 
     lsp.preset 'recommended'
+
+    fmtgrp = vim.api.nvim_create_augroup 'LspFormatting', {}
+    lsp.on_attach (c, b) ->
+      if c.server_capabilities.documentFormattingProvider
+        format b
+
     lsp.setup!
 }

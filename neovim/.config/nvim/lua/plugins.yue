@@ -206,6 +206,7 @@ plugs =
       (require "mason").setup!
       (require "mason-lspconfig").setup!
   }
+  * 'jay-babu/mason-nvim-dap.nvim'
   * {
     "VonHeikemen/lsp-zero.nvim"
     requires:

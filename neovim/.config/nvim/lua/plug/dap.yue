@@ -25,6 +25,8 @@ cfg =
 export default {
   config: ->
     import "which-key" as wk
+    import 'dap' as dap
+    import 'mason-nvim-dap' as mvdap
 
     opt = { mode: "n", prefix: "<leader>e", noremap: true, silent: true }
     map =
@@ -34,6 +36,54 @@ export default {
       map[v.key] =
         * "<CMD>lua require('dap').#{ v.fn }()<CR>"
         * v.desc
+
+    mvdap.setup
+      automatic_setup: true
+    mvdap.setup_handlers {
+      (source_name) ->
+        import 'mason-nvim-dap.automatic_setup' as setup
+        setup source_name
+      codelldb: (source_name) ->
+        dap.configurations.cpp = {}
+        dap.configurations.cpp[1] =
+          name: 'Launch'
+          type: 'lldb'
+          request: 'launch'
+          program: ->
+            vim.fn.input 'path to exec: ', "#{ vim.fn.getcwd! }/", 'file'
+          cwd: '${workspaceFolder}'
+          stopOnEntry: false
+          args: {}
+          env: ->
+            vars = {}
+            for k, v in pairs vim.fn.environ!
+              table.insert vars, (string.format '%s=%s', k, v)
+
+            vars
+    }
+
+    dap.adapters.lldb =
+      name: 'lldb'
+      command: '/usr/bin/lldb-vscode'
+      type: 'executable'
+
+    --[[dap.adapters.executable =
+      type: 'executable'
+      command: "#{ vim.fn.stdpath 'data' }/mason/bin/codelldb"
+      name: 'lldb1'
+      host: '127.0.0.1'
+      port: 13000
+    dap.adapters.codelldb =
+      name: 'codelldb server'
+      type: 'server'
+      port: '${port}'
+      executable:
+        command: "#{ vim.fn.stdpath 'data' }/mason/bin/codelldb"
+        args: { --port', '${port}' }
+    ]]
+
+    dap.configurations.c = dap.configurations.cpp
+    dap.configurations.rust = dap.configurations.cpp
 
     wk.register map, opt
 }

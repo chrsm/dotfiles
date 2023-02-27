@@ -11,6 +11,10 @@ format = (buf) ->
     callback: ->
       vim.lsp.buf.format!
 
+fmt =
+  clangd: true
+  --clangd: false
+
 export default {
   setup: ->
     import 'lsp-zero' as lsp
@@ -19,6 +23,9 @@ export default {
 
     fmtgrp = vim.api.nvim_create_augroup 'LspFormatting', {}
     lsp.on_attach (c, b) ->
+      if fmt[c.name] != nil and fmt[c.name] == false
+        return
+
       if c.server_capabilities.documentFormattingProvider
         format b
 

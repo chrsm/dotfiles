@@ -39,28 +39,28 @@ export default {
 
     mvdap.setup
       automatic_setup: true
-    mvdap.setup_handlers {
-      (source_name) ->
-        import 'mason-nvim-dap.automatic_setup' as setup
-        setup source_name
-      codelldb: (source_name) ->
-        dap.configurations.cpp = {}
-        dap.configurations.cpp[1] =
-          name: 'Launch'
-          type: 'lldb'
-          request: 'launch'
-          program: ->
-            vim.fn.input 'path to exec: ', "#{ vim.fn.getcwd! }/", 'file'
-          cwd: '${workspaceFolder}'
-          stopOnEntry: false
-          args: {}
-          env: ->
-            vars = {}
-            for k, v in pairs vim.fn.environ!
-              table.insert vars, (string.format '%s=%s', k, v)
+      handlers: {
+        (source_name) ->
+          import 'mason-nvim-dap.automatic_setup' as setup
+          setup source_name
+        codelldb: (source_name) ->
+          dap.configurations.cpp = {}
+          dap.configurations.cpp[1] =
+            name: 'Launch'
+            type: 'lldb'
+            request: 'launch'
+            program: ->
+              vim.fn.input 'path to exec: ', "#{ vim.fn.getcwd! }/", 'file'
+            cwd: '${workspaceFolder}'
+            stopOnEntry: false
+            args: {}
+            env: ->
+              vars = {}
+              for k, v in pairs vim.fn.environ!
+                table.insert vars, (string.format '%s=%s', k, v)
 
-            vars
-    }
+              vars
+      }
 
     dap.adapters.lldb =
       name: 'lldb'

@@ -1,5 +1,4 @@
 import "macros" as { $ }
-import "packer" as packer
 
 plugs =
   * {
@@ -12,14 +11,14 @@ plugs =
   * {
     "nvim-telescope/telescope.nvim"
     config: $do_cfg "telescope"
-    requires:
+    dependencies:
       * "nvim-lua/plenary.nvim"
       * "nvim-lua/popup.nvim"
   }
   * {
     "nvim-telescope/telescope-ui-select.nvim"
     config: $do_cfg "telescope_ui_select"
-    requires:
+    dependencies:
       "nvim-telescope/telescope.nvim"
   }
   * {
@@ -37,7 +36,7 @@ plugs =
   * {
     "ahmedkhalf/project.nvim"
     config: $do_cfg "project"
-    requires:
+    dependencies:
       * "nvim-telescope/telescope.nvim"
   }
   * { -- layout preserving bdelete
@@ -56,17 +55,11 @@ plugs =
   * {
     "renerocksai/telekasten.nvim"
     config: $do_cfg "telekasten"
-    requires:
+    dependencies:
       * "renerocksai/calendar-vim"
   }
 
   -- color schemes
-  --[[* {
-    "chrsm/paramount-ng.nvim"
-    --config: $do_cfg "paramount"
-    requires:
-      * "rktjmp/lush.nvim"
-  }]]
   * {
     "jesseleite/nvim-noirbuddy"
     config: ->
@@ -78,7 +71,7 @@ plugs =
           background: "#262626"
           primary: "#a790d5"
 
-    requires:
+    dependencies:
       * { "tjdevries/colorbuddy.nvim", branch: "dev" }
   }
 
@@ -87,13 +80,13 @@ plugs =
   * {
     "akinsho/bufferline.nvim"
     config: $do_cfg "bufferline"
-    requires:
+    dependencies:
       * "kyazdani42/nvim-web-devicons"
   }
   * {
     "nvim-lualine/lualine.nvim"
     config: $do_cfg "lualine"
-    requires:
+    dependencies:
       * "kyazdani42/nvim-web-devicons"
   }
   * {
@@ -115,13 +108,13 @@ plugs =
   -- wip
   --[[* {
     "~/src/nvim-buf"
-    requires:
+    dependencies:
       * "nvim-lua/plenary.nvim"
     config: -> require("buf").setup!
   }
   * {
     "~/src/impulse.nvim"
-    requires:
+    dependencies:
       * "MunifTanjim/nui.nvim"
     config: ->
       require("impulse").setup {
@@ -145,20 +138,20 @@ plugs =
   * {
     "sindrets/diffview.nvim",
     config: $do_cfg "diffview",
-    requires:
+    dependencies:
       * "nvim-lua/plenary.nvim"
   }
   * {
     "TimUntersberger/neogit",
     config: $do_cfg "neogit"
-    requires:
+    dependencies:
       * "nvim-lua/plenary.nvim"
       * "sindrets/diffview.nvim"
   }
   * {
     "ThePrimeagen/git-worktree.nvim"
     config: $do_cfg "worktree"
-    requires:
+    dependencies:
       * "nvim-lua/plenary.nvim"
       * "nvim-telescope/telescope.nvim"
   }
@@ -173,24 +166,19 @@ plugs =
   * {
     "rcarriga/nvim-dap-ui"
     config: $do_cfg "dap_ui"
-    requires:
+    dependencies:
       * "mfussenegger/nvim-dap"
   }
   * {
     "theHamsta/nvim-dap-virtual-text"
     config: $do_cfg "dap_vtext"
-    requires:
+    dependencies:
       * "mfussenegger/nvim-dap"
-  }
-  * {
-    "hkupty/iron.nvim"
-    config: $do_cfg "iron"
-    commit: "bc9c596d6a97955f0306d2abcc10d9c35bbe2f5b"
   }
   * {
     "m-demare/attempt.nvim"
     config: $do_cfg "attempt"
-    requires:
+    dependencies:
       * "nvim-telescope/telescope.nvim"
       * "nvim-telescope/telescope-ui-select.nvim"
   }
@@ -199,7 +187,7 @@ plugs =
   * "williamboman/mason.nvim"
   * {
     "williamboman/mason-lspconfig.nvim"
-    requires:
+    dependencies:
       * "williamboman/mason.nvim"
       * "neovim/nvim-lspconfig"
     config: ->
@@ -209,7 +197,7 @@ plugs =
   * 'jay-babu/mason-nvim-dap.nvim'
   * {
     "VonHeikemen/lsp-zero.nvim"
-    requires:
+    dependencies:
       * 'neovim/nvim-lspconfig'
       * 'williamboman/mason.nvim'
       * 'williamboman/mason-lspconfig.nvim'
@@ -245,7 +233,7 @@ plugs =
     config: $do_cfg "cmp"
     wants:
       * "LuaSnip"
-    requires:
+    dependencies:
       * "hrsh7th/cmp-nvim-lsp"
       * "hrsh7th/cmp-buffer"
       * "ray-x/cmp-treesitter"
@@ -290,8 +278,12 @@ rocks =
   * "http"
 
 export default {
-  setup: (needs_bootstrap) ->
-    packer.startup (use) ->
+  setup: () ->
+    import 'lazy' as lazy
+
+    lazy.setup plugs, {}
+
+--[[    packer.startup (use) ->
       use "wbthomason/packer.nvim"
       use_rocks v for _, v in ipairs rocks
 
@@ -304,4 +296,5 @@ export default {
           command: "qall"
         require("packer").install!
         require("packer").compile!
+        ]]
 }

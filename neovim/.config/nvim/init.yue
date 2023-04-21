@@ -1,15 +1,10 @@
--- bootstrap packer for new machines
-needs_bootstrap = false
-with vim.fn
-  if .has "mac"
-    .setenv "MACOSX_DEPLOYMENT_TARGET", "10.15"
+if vim.fn.has "mac"
+  vim.fn.setenv "MACOSX_DEPLOYMENT_TARGET", "10.15"
 
-  p = (.stdpath "data") .. "/site/pack/packer/start/packer.nvim"
-  if .empty(.glob p) > 0
-    needs_bootstrap = .system {
-      "git", "clone", "--depth", "1",
-      "https://github.com/wbthomason/packer.nvim", p
-    }
+lazypath = "#{ vim.fn.stdpath "data" }/lazy/lazy.nvim"
+unless vim.loop.fs_stat lazypath
+  vim.fn.system { "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath }
+vim.opt.rtp\prepend lazypath
 
 import "plugins" as plugins
 plugins.setup needs_bootstrap

@@ -133,7 +133,6 @@ plugs =
   }]]
 
   -- dev related, but not lang-specific
-  * "nathom/filetype.nvim"
   * "rhysd/committia.vim"
   * {
     "sindrets/diffview.nvim",
@@ -282,19 +281,4 @@ export default {
     import 'lazy' as lazy
 
     lazy.setup plugs, {}
-
---[[    packer.startup (use) ->
-      use "wbthomason/packer.nvim"
-      use_rocks v for _, v in ipairs rocks
-
-      for _, v in ipairs plugs
-        use v
-
-      if needs_bootstrap
-        vim.fn.input "bootstrapping, press any key (exit after)"
-        vim.api.nvim_create_autocmd { "User PackerCompileDone" }
-          command: "qall"
-        require("packer").install!
-        require("packer").compile!
-        ]]
 }

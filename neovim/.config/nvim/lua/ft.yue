@@ -9,6 +9,7 @@ types =
   * "php"
   * "dsa"
   * "crystal"
+  * "terraform"
 
 export default {
   setup: ->

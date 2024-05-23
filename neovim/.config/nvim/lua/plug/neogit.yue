@@ -4,6 +4,8 @@ cfg =
   kind: "split"
   integrations:
     diffview: true
+  commit_editor:
+    kind: 'split'
 
 export default {
   config: ->

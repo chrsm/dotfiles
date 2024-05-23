@@ -50,6 +50,10 @@ plugs =
 
       wk.setup {}
   }
+  * {
+    "L3MON4D3/LuaSnip"
+    version: "v2.*"
+  }
 
   -- note taking
   * {
@@ -104,33 +108,17 @@ plugs =
 
       nnp.setup!
   }
-
-  -- wip
-  --[[* {
-    "~/src/nvim-buf"
-    dependencies:
-      * "nvim-lua/plenary.nvim"
-    config: -> require("buf").setup!
-  }
   * {
-    "~/src/impulse.nvim"
-    dependencies:
-      * "MunifTanjim/nui.nvim"
+    'RaafatTurki/hex.nvim'
     config: ->
-      require("impulse").setup {
-        open_in_browser: "/mnt/c/Program Files/Mozilla Firefox/firefox.exe"
-      }
+      import 'hex' as hex
+      hex.setup!
+  }
 
-      import "which-key" as wk
-      wk.register {
-        "s":
-          * ":lua require('impulse').menu_search()<CR>"
-          * "impulse.nvim: search menu"
-        "l":
-          * ":lua require('impulse').follow_link()<CR>"
-          * "impulse.nvim: follow link"
-      }, { mode: "n", prefix: "<leader>pf", noremap: true }
-  }]]
+  * {
+    dir: "~/src/impulse.nvim"
+    config: $do_cfg 'impulse'
+  }
 
   -- dev related, but not lang-specific
   * "rhysd/committia.vim"
@@ -167,6 +155,7 @@ plugs =
     config: $do_cfg "dap_ui"
     dependencies:
       * "mfussenegger/nvim-dap"
+      * "nvim-neotest/nvim-nio"
   }
   * {
     "theHamsta/nvim-dap-virtual-text"
@@ -196,6 +185,7 @@ plugs =
   * 'jay-babu/mason-nvim-dap.nvim'
   * {
     "VonHeikemen/lsp-zero.nvim"
+    branch: 'v3.x'
     dependencies:
       * 'neovim/nvim-lspconfig'
       * 'williamboman/mason.nvim'
@@ -259,25 +249,17 @@ plugs =
 
   -- language specific
   * "pigpigyyy/Yuescript-vim"
-
   * {
     "leoluz/nvim-dap-go"
     config: $do_cfg "dap_go"
   }
-
   * {
     "vim-crystal/vim-crystal"
   }
-
-rocks =
-  * "lua-cjson"
-  * "luafilesystem"
-  * "lsqlite3"
-  * "xmlua"
-  * "http"
+  * 'chaimleib/vim-renpy'
 
 export default {
-  setup: () ->
+  setup: ->
     import 'lazy' as lazy
 
     lazy.setup plugs, {}

@@ -1,6 +1,8 @@
+cfg = {}
+
 export default {
   config: (...) ->
     import "diffview" as dv
 
-    dv.setup {}
+    dv.setup cfg
 }

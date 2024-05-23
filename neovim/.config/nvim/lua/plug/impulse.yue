@@ -1,0 +1,33 @@
+import 'macros' as { $ }
+
+browser =
+  Linux: '/usr/bin/firefox'
+  OSX: '/Applications/Firefox.app'
+  Windows: 'C:/Program Files/Mozilla Firefox/firefox.exe'
+  Windows_WSL: '/mnt/c/Program Files/Mozilla Firefox/firefox.exe'
+
+export default {
+  config: ->
+    import 'impulse' as im
+    import 'ffi' as ffi
+    import 'which-key' as wk
+
+    os = ffi.os
+    if os == 'Linux'
+      job = vim.system { 'uname', '-a' }, { text: true }
+      ret = job\wait!
+      os = 'Windows_WSL' if ret.stdout\match '-WSL2'
+
+    im.setup {
+      open_in_browser: browser[os]
+    }
+
+    wk.register {
+      s:
+        * ":lua require('impulse').menu_search()<CR>"
+        * 'impulse.nvim: search menu'
+      l:
+        * ":lua require('impulse').follow_link()<CR>"
+        * 'impulse.nvim: follow link'
+    }, { mode: 'n', prefix: '<leader>pf', noremap: true }
+}

@@ -1,33 +1,96 @@
 import "macros" as { $ }
 
-format = (buf) ->
-  vim.api.nvim_clear_autocmds 
-    group: fmtgrp
-    buffer: buf
+per_lang =
+  gopls:
+    inlay: true
 
-  vim.api.nvim_create_autocmd 'BufWritePre',
-    group: fmtgrp,
-    buffer: buf,
-    callback: ->
-      vim.lsp.buf.format!
+handlers =
+  * (name) ->
+    import 'lspconfig' as lsp_c
+    lsp_c[name].setup {}
+  gopls: (->
+    import 'lsp-zero' as lsp_z
+    import 'lspconfig' as lsp_c
 
-fmt =
-  clangd: true
-  --clangd: false
+    lsp_c.gopls.setup
+      settings:
+        -- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md,
+        -- https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
+        -- only enable or configure non-defaults
+        gopls:
+          analyses:
+            fieldalignment: true
+            shadow: true
+            unusedvariable: true
+            useany: true
+          codelenses:
+            generate: false
+            gc_details: true
+            regenerate_cgo: true
+            run_govulncheck: true
+            tidy: true
+            upgrade_dependency: true
+            vendor: true
+          hints:
+            assignVariableTypes: false
+            compositeLiteralFields: false
+            compositeLiteralTypes: false
+            constantValues: true
+            functionTypeParameters: false
+            parameterNames: false
+            rangeVariableTypes: false
+  )
+
+
+keyb = (cmd, desc) ->
+  unless (cmd\sub -(#cmd)) == ')'
+    cmd ..= '()'
+
+  { "<cmd>lua #{ cmd }<cr>", desc }
 
 export default {
   setup: ->
-    import 'lsp-zero' as lsp
+    import 'lsp-zero' as lsp_z
+    import 'mason' as mason
+    import 'mason-lspconfig' as lsp_m
+    import 'which-key' as wk
 
-    lsp.preset 'recommended'
+    vim.lsp.inlay_hint.enable!
+    fmt_g = vim.api.nvim_create_augroup 'LspFormatting', {}
 
-    fmtgrp = vim.api.nvim_create_augroup 'LspFormatting', {}
-    lsp.on_attach (c, b) ->
-      if fmt[c.name] != nil and fmt[c.name] == false
-        return
+    lsp_z.on_attach (c, bufnr) ->
+      keyb_opts =
+        mode: 'n'
+        noremap: true
+        silent: true
+        buffer: bufnr
 
       if c.server_capabilities.documentFormattingProvider
-        format b
+        vim.api.nvim_create_autocmd 'BufWritePre',
+          group: fmt_g
+          buffer: bufnr
+          callback: ->
+            vim.lsp.buf.format!
 
-    lsp.setup!
+      wk.register {
+        K: keyb 'vim.lsp.buf.hover', 'hover documentation'
+        g:
+          d: keyb 'vim.lsp.buf.definition', 'go to definition'
+          D: keyb 'vim.lsp.buf.declaration', 'go to declaration'
+          i: keyb 'vim.lsp.buf.implementation', 'go to implementation'
+          o: keyb 'vim.lsp.buf.type_definition', 'go to typedef'
+          r: keyb 'vim.lsp.buf.references', 'list references'
+          s: keyb 'vim.lsp.buf.signature_help', 'show function signature'
+      }, keyb_opts
+
+      nil
+
+    lsp_z.set_sign_icons
+      error: '✘',
+      warn: '▲',
+      hint: '⚑',
+      info: '»'
+
+    mason.setup!
+    lsp_m.setup { :handlers }
 }

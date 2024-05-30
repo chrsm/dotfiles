@@ -1,11 +1,11 @@
 import "macros" as { $ }
 
 cfg =
-  kind: "split"
+  -- kind: 'split'
   integrations:
     diffview: true
-  commit_editor:
-    kind: 'split'
+  -- commit_editor:
+  --   kind: 'split'
 
 export default {
   config: ->

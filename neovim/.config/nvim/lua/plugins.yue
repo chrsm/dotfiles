@@ -33,12 +33,6 @@ plugs =
     "lukas-reineke/indent-blankline.nvim"
     config: $do_cfg "indent"
   }
-  * {
-    "ahmedkhalf/project.nvim"
-    config: $do_cfg "project"
-    dependencies:
-      * "nvim-telescope/telescope.nvim"
-  }
   * { -- layout preserving bdelete
     "famiu/bufdelete.nvim"
     config: $do_cfg "bufdelete"
@@ -136,13 +130,6 @@ plugs =
       * "sindrets/diffview.nvim"
   }
   * {
-    "ThePrimeagen/git-worktree.nvim"
-    config: $do_cfg "worktree"
-    dependencies:
-      * "nvim-lua/plenary.nvim"
-      * "nvim-telescope/telescope.nvim"
-  }
-  * {
     "ethanholz/nvim-lastplace"
     config: $do_cfg "lastplace"
   }
@@ -163,13 +150,6 @@ plugs =
     dependencies:
       * "mfussenegger/nvim-dap"
   }
-  * {
-    "m-demare/attempt.nvim"
-    config: $do_cfg "attempt"
-    dependencies:
-      * "nvim-telescope/telescope.nvim"
-      * "nvim-telescope/telescope-ui-select.nvim"
-  }
 
   -- LSP and related tooling
   * "williamboman/mason.nvim"
@@ -178,9 +158,6 @@ plugs =
     dependencies:
       * "williamboman/mason.nvim"
       * "neovim/nvim-lspconfig"
-    config: ->
-      (require "mason").setup!
-      (require "mason-lspconfig").setup!
   }
   * 'jay-babu/mason-nvim-dap.nvim'
   * {

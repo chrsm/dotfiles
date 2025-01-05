@@ -4,9 +4,10 @@ export default {
   config: ->
     import "which-key" as wk
     
-    wk.register {
-      d:
-        * ":lua require('bufdelete').bufdelete(0, true)<CR>"
-        * "Delete current buffer"
-    }, { mode: "n", prefix: "<leader>", noremap: true, silent: true }
+    wk.add {
+      { 
+        '<leader>d', ":lua require('bufdelete').bufdelete(0, true)<CR>",
+        desc: "Delete current buffer", remap: false,
+      }
+    }
 }

@@ -29,6 +29,13 @@ cfg =
     calendar_monday: 0
     calendar_mark: "left-fit"
 
+keyb = (key, cmd, desc) ->
+  {
+    "<leader>z#{ key }", cmd,
+    group: 'telekasten',
+    desc: desc, remap: false,
+  }
+
 export default {
   config: ->
     import "telekasten" as tk
@@ -45,25 +52,12 @@ export default {
 
     tk.setup cfg
 
-    wk.register {
-      name: "telekasten"
-      n:
-        * ":lua require('telekasten').new_note()<CR>"
-        * "Create new note"
-      f:
-        * ":lua require('telekasten').find_notes()<CR>"
-        * "List all notes"
-      g:
-        * ":lua require('telekasten').search_notes()<CR>"
-        * "Search notes"
-      l:
-        * ":lua require('telekasten').follow_link()<CR>"
-        * "Follow link"
-      t:
-        * ":lua require('telekasten').show_tags()<CR>"
-        * "Show note tags"
-      z:
-        * ":lua require('telekasten').panel()<CR>"
-        * "Show telekasten panel"
-    }, { mode: "n", prefix: "<leader>z", noremap: true }
+    wk.add {
+      keyb 'n', ":lua require('telekasten').new_note()<CR>", 'Create new note'
+      keyb 'f', ":lua require('telekasten').find_notes()<CR>", 'List all notes'
+      keyb 'g', ":lua require('telekasten').search_notes()<CR>", 'Search notes'
+      keyb 'l', ":lua require('telekasten').follow_link()<CR>", 'Follow link'
+      keyb 't', ":lua require('telekasten').show_tags()<CR>", 'Show note tags'
+      keyb 'z', ":lua require('telekasten').panel()<CR>", 'Show telekasten panel'
+    }
 }

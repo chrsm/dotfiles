@@ -19,7 +19,6 @@ handlers =
         -- only enable or configure non-defaults
         gopls:
           analyses:
-            fieldalignment: true
             shadow: true
             unusedvariable: true
             useany: true
@@ -40,13 +39,24 @@ handlers =
             parameterNames: false
             rangeVariableTypes: false
   )
+  --[[bufls: (->
+    import 'lspconfig' as lsp_c
+
+    lsp_c.bufls.setup {}
+  )]]
+  clangd: (->
+    import 'lspconfig' as lsp_c
+
+    lsp_c.clangd.setup
+      filetypes: { 'c', 'cpp', 'objc', 'cuda' }
+  )
 
 
-keyb = (cmd, desc) ->
+keyb = (key, cmd, desc) ->
   unless (cmd\sub -(#cmd)) == ')'
     cmd ..= '()'
 
-  { "<cmd>lua #{ cmd }<cr>", desc }
+  { key, "<cmd>lua #{ cmd }<cr>", desc: desc, remap: false }
 
 export default {
   setup: ->
@@ -72,15 +82,14 @@ export default {
           callback: ->
             vim.lsp.buf.format!
 
-      wk.register {
-        K: keyb 'vim.lsp.buf.hover', 'hover documentation'
-        g:
-          d: keyb 'vim.lsp.buf.definition', 'go to definition'
-          D: keyb 'vim.lsp.buf.declaration', 'go to declaration'
-          i: keyb 'vim.lsp.buf.implementation', 'go to implementation'
-          o: keyb 'vim.lsp.buf.type_definition', 'go to typedef'
-          r: keyb 'vim.lsp.buf.references', 'list references'
-          s: keyb 'vim.lsp.buf.signature_help', 'show function signature'
+      wk.add {
+        keyb 'K', 'vim.lsp.buf.hover', 'hover documentation'
+        keyb 'gd', 'vim.lsp.buf.definition', 'go to definition'
+        keyb 'gD', 'vim.lsp.buf.declaration', 'go to declaration'
+        keyb 'gi', 'vim.lsp.buf.implementation', 'go to implementation'
+        keyb 'go', 'vim.lsp.buf.type_definition', 'go to typedef'
+        keyb 'gr', 'vim.lsp.buf.references', 'list references'
+        keyb 'gs', 'vim.lsp.buf.signature_help', 'show function signature'
       }, keyb_opts
 
       nil

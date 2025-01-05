@@ -12,22 +12,21 @@ export default {
     import 'ffi' as ffi
     import 'which-key' as wk
 
-    os = ffi.os
-    if os == 'Linux'
-      job = vim.system { 'uname', '-a' }, { text: true }
-      ret = job\wait!
-      os = 'Windows_WSL' if ret.stdout\match '-WSL2'
+    if (vim.fn.has 'wsl') == 1
+      os = 'Windows_WSL'
 
     im.setup {
       open_in_browser: browser[os]
     }
 
-    wk.register {
-      s:
-        * ":lua require('impulse').menu_search()<CR>"
-        * 'impulse.nvim: search menu'
-      l:
-        * ":lua require('impulse').follow_link()<CR>"
-        * 'impulse.nvim: follow link'
-    }, { mode: 'n', prefix: '<leader>pf', noremap: true }
+    wk.add {
+      {
+        '<leader>pfs', ":lua require('impulse').menu_search()<CR>",
+        desc: 'impulse.nvim: search menu',
+      }
+      {
+        '<leader>pfl', ":lua require('impulse').follow_link()<CR>",
+        desc: 'impulse.nvim: follow link',
+      }
+    }
 }

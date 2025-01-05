@@ -11,19 +11,24 @@ export default {
 
     fterm.setup cfg
 
-    wk.register {
-      "<leader>t":
-        * "<CMD>lua require('FTerm').toggle()<CR>"
-        * "Open terminal"
-    }, { mode: "n", noremap: true, silent: true }
+    wk.add {
+      {
+        '<leader>t', "<CMD>lua require('FTerm').toggle()<CR>",
+        desc: "Open terminal", remap: false,
+      }
+    }
 
     -- overwrite keybinds from standard setup
-    wk.register {
-      "<ESC>":
-        * '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>'
-        * "Exit terminal"
-      "jj":
-        * '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>'
-        * "Exit terminal"
-    }, { mode: "t", noremap: true, silent: true }
+    wk.add {
+      {
+        '<ESC>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>',
+        mode: 't',
+        desc: "Exit terminal", remap: false,
+      }
+      {
+        'jj', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>',
+        mode: 't',
+        desc: "Exit terminal", remap: false,
+      }
+    }
 }

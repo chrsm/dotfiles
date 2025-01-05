@@ -14,10 +14,10 @@ export default {
     
     ng.setup cfg
 
-    wk.register {
-      name: "neogit"
-      g:
-        * "<CMD>Neogit<CR>"
-        * "Open neogit"
-    }, { mode: "n", prefix: "<leader>g", noremap: true, silent: true }
+    wk.add {
+      {
+        '<leader>gg', '<CMD>Neogit<CR>'
+        desc: 'Open neogit'
+      }
+    }
 }

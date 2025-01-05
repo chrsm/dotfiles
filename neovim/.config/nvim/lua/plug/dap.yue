@@ -30,12 +30,13 @@ export default {
 
     opt = { mode: "n", prefix: "<leader>e", noremap: true, silent: true }
     map =
-      name: "debugging"
+      group: "debugging"
 
     for k, v in pairs cfg
-      map[v.key] =
-        * "<CMD>lua require('dap').#{ v.fn }()<CR>"
-        * v.desc
+      map[] = { 
+        v.key, "<CMD>lua require('dap').#{ v.fn }()<CR>",
+        desc: v.desc
+      }
 
     mvdap.setup
       automatic_setup: true
@@ -85,5 +86,5 @@ export default {
     dap.configurations.c = dap.configurations.cpp
     dap.configurations.rust = dap.configurations.cpp
 
-    wk.register map, opt
+    wk.add map, opt
 }

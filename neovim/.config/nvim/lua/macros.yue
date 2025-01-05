@@ -28,3 +28,4 @@ export macro do_cfg = (plug) ->
   "(...) -> require(\"plug.\" .. #{ plug }).config ..."
 export macro do_run = (plug) ->
   "(...) -> require(\"plug.\" .. #{ plug }).run ..."
+

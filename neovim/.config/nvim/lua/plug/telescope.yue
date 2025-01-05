@@ -1,28 +1,31 @@
-import "macros" as { $ }
+import 'macros' as { $ }
 
 export default {
   config: ->
-    import "which-key" as wk
-    import "telescope" as ts
+    import 'which-key' as wk
+    import 'telescope' as ts
 
     ts.setup
       extensions: {
-        ["ui-select"]: {
-          (require "telescope.themes").get_dropdown {}
+        ['ui-select']: {
+          (require 'telescope.themes').get_dropdown {}
         }
       }
 
-    ts.load_extension "ui-select"
+    ts.load_extension 'ui-select'
 
-    wk.register {
-      p:
-        * "<CMD>Telescope find_files<CR>"
-        * "Search file names"
-      b:
-        * "<CMD>Telescope buffers<CR>"
-        * "Search buffers"
-      f:
-        * "<CMD>Telescope live_grep<CR>"
-        * "Search file contents"
-    }, { mode: "n", prefix: "<leader>", noremap: true }
+    wk.add {
+      {
+        '<leader>p', '<CMD>Telescope find_files<CR>',
+        desc: 'Search file names', remap: false,
+      }
+      {
+        '<leader>b', '<CMD>Telescope buffers<CR>',
+        desc: 'Search buffers', remap: false,
+      }
+      {
+        '<leader>f', '<CMD>Telescope live_grep<CR>',
+        desc: 'Search file contents', remap: false,
+      }
+    }
 }

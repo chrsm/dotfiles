@@ -1,15 +1,16 @@
 .PHONY: all
 
+NVIM = nvim --headless
+
 all: build
 
 build:
-	yue init.yue
-	cd lua && yue .
+	yue init.yue -l
+	cd lua && yue -l .
 
 clean:
 	rm init.lua
 	cd lua && find . -type f -name '*.lua' -delete
 
 install:
-	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-	nvim --headless -c 'autocmd User PackerCompileDone quitall' -c 'PackerCompile'
+	$(NVIM) -c 'Lazy install' -c 'quitall'

@@ -34,7 +34,7 @@ export default {
 
     for k, v in pairs cfg
       map[] = { 
-        v.key, "<CMD>lua require('dap').#{ v.fn }()<CR>",
+        "<leader>e#{ v.key }", "<CMD>lua require('dap').#{ v.fn }()<CR>",
         desc: v.desc
       }
 

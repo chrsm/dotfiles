@@ -12,6 +12,7 @@ if [[ `uname -a` == *"microsoft"* ]]; then
 fi
 
 # oh-my-zsh shit
+zstyle ':omz:update' mode disabled
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_TMUX_AUTOSTART=true
 export ZSH_TMUX_AUTOSTART_ONCE=true

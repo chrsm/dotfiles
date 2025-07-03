@@ -11,7 +11,7 @@
 	template = ~/.local/commit_template
 
 [core]
-	excludesfile = ~/.gitignore
+	excludesFile = ~/.gitignore
 	pager = delta
 	autocrlf = input
 	eol = native

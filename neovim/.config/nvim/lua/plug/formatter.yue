@@ -1,0 +1,26 @@
+import 'macros' as { $ }
+
+cfg =
+  logging: true
+  log_level: vim.log.levels.WARN
+
+  filetype:
+    yue: {
+      (() ->
+        import 'formatter.filetypes.any'
+        any.remove_trailing_whitespace
+      )!
+    }
+
+export default {
+  config: ->
+    import 'formatter' as fmt
+    import 'formatter.util'
+
+    fmt.setup cfg
+
+    vim.api.nvim_create_augroup '__formatter__', { clear: true }
+    vim.api.nvim_create_autocmd 'BufWritePost',
+      group: '__formatter__'
+      command: ':FormatWrite'
+}

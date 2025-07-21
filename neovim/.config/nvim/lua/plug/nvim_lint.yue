@@ -1,0 +1,64 @@
+cfg =
+  a: 'b'
+
+export default {
+  config: ->
+      import 'lint'
+
+      lint.linters.yuecheck =
+        cmd: 'yuecheck'
+        stdin: true
+        append_fname: true
+        args:
+          * '--stdin'
+          * '--json'
+        ignore_exitcode: true
+        env: nil
+        parser: (output, bufnr, cwd) ->
+          if output == '' or output == '{}'
+            return {}
+
+          typ2sev = (typ) ->
+            switch typ
+              when 'INFO'
+                vim.diagnostic.severity.INFO
+              when 'WARN'
+                vim.diagnostic.severity.WARN
+              when 'ERROR'
+                vim.diagnostic.severity.ERROR
+              when 'HINT'
+                vim.diagnostic.severity.HINT
+              else
+                error 'unknown lint error type #{ typ }'
+
+          issues = vim.json.decode output
+          unless issues
+            error 'yuecheck failed: output #{ issues }'
+          fname = vim.api.nvim_buf_get_name bufnr
+          fname_abs = vim.fn.fnamemodify fname, ':p'
+          fname_norm = vim.fs.normalize fname_abs
+
+          diag = {}
+          for v in *issues
+            diag[] =
+              lnum: math.max (v.line - 1), 0
+              col: math.max (v.col - 1), 0
+              end_lnum: math.max (v.line - 1), 0
+              end_col: math.max (v.col - 1), 0
+              severity: typ2sev v.type
+              source: 'yuecheck'
+              message: v.message
+
+          diag
+
+      lint.linters_by_ft = {
+        go:
+          * 'golangcilint'
+        yue:
+          * 'yuecheck'
+      }
+
+      vim.api.nvim_create_autocmd { 'BufNewFile', 'BufRead', 'BufWritePost', 'FileType' },
+        callback: ->
+          lint.try_lint!
+}

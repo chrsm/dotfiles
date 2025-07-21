@@ -1,23 +1,23 @@
-import "macros" as { $ }
+import 'macros' as { $ }
 
 cfg =
   layouts:
     size: 40
-    position: "right"
+    position: 'right'
     elements:
-      * id: "scopes", size: 0.25, position: "right"
-      * id: "breakpoints", size: 0.25, position: "right"
-      * id: "stacks", size: 0.25, position: "right"
-      * id: "watches", size: 0.25, position: "right"
-      * id: "repl", size: 0.25, position: "bottom"
+      * id: 'scopes', size: 0.25, position: 'right'
+      * id: 'breakpoints', size: 0.25, position: 'right'
+      * id: 'stacks', size: 0.25, position: 'right'
+      * id: 'watches', size: 0.25, position: 'right'
+      * id: 'repl', size: 0.25, position: 'bottom'
 
 export default {
   config: ->
-    import "dap" as dap
-    import "dapui" as ui
+    import 'dap'
+    import 'dapui' as ui
 
     ui.setup cfg
 
-    dap.listeners.after.event_initialized["dapui_config"] = ->
+    dap.listeners.after.event_initialized['dapui_config'] = ->
       ui.open!
 }

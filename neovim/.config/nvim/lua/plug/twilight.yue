@@ -4,5 +4,5 @@ cfg =
 
 export default {
   config: ->
-    require("twilight").setup cfg
+    require('twilight').setup cfg
 }

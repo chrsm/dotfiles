@@ -2,7 +2,7 @@ cfg = {}
 
 export default {
   config: (...) ->
-    import "diffview" as dv
+    import 'diffview' as dv
 
     dv.setup cfg
 }

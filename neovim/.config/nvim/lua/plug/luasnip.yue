@@ -1,13 +1,13 @@
 cfg =
   history: false
-  updateevents: "TextChanged,TextChangedI"
+  updateevents: 'TextChanged,TextChangedI'
 
 export default {
   config: ->
-    import "luasnip" as luasnip
+    import 'luasnip' as luasnip
 
     luasnip.config.set_config cfg
 
-    with require "luasnip/loaders/from_vscode"
+    with require 'luasnip/loaders/from_vscode'
       .load!
 }

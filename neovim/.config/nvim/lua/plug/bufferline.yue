@@ -1,6 +1,6 @@
 export default {
   config: ->
-    import "bufferline" as bl
+    import 'bufferline' as bl
 
     bl.setup {}
 }

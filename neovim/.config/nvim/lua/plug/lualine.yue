@@ -1,10 +1,10 @@
 cfg =
   options:
-    theme: "horizon"
+    theme: 'horizon'
 
 export default {
   config: ->
-    import "lualine" as ll
+    import 'lualine' as ll
 
     ll.setup cfg
 }

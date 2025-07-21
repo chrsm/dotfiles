@@ -1,13 +1,13 @@
-import "macros" as { $ }
+import 'macros' as { $ }
 
 export default {
   config: ->
-    import "which-key" as wk
+    import 'which-key' as wk
     
     wk.add {
       { 
         '<leader>d', ":lua require('bufdelete').bufdelete(0, true)<CR>",
-        desc: "Delete current buffer", remap: false,
+        desc: 'Delete current buffer', remap: false,
       }
     }
 }

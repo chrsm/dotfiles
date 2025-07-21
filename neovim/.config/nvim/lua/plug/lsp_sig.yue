@@ -5,14 +5,14 @@ cfg =
   doc_lines: 10
   fix_pos: true
   hint_enable: true
-  --hi_parameter: "Search"
-  hi_parameter: "LspSignatureActiveParameter"
+  --hi_parameter: 'Search'
+  hi_parameter: 'LspSignatureActiveParameter'
   handler_opts:
-    border: "rounded"
+    border: 'rounded'
 
 export default {
   config: ->
-    import "lsp_signature" as sig
+    import 'lsp_signature' as sig
 
     sig.setup cfg
 }

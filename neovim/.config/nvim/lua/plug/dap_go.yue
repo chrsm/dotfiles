@@ -1,8 +1,8 @@
-import "macros" as { $ }
+import 'macros' as { $ }
 
 export default {
   config: ->
-    import "dap-go" as dap
+    import 'dap-go' as dap
 
     dap.setup {}
 }

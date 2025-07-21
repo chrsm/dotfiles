@@ -9,14 +9,14 @@ browser =
 export default {
   config: ->
     import 'impulse' as im
-    import 'ffi' as ffi
+    import 'ffi'
     import 'which-key' as wk
 
     if (vim.fn.has 'wsl') == 1
-      os = 'Windows_WSL'
+      plat = 'Windows_WSL'
 
     im.setup {
-      open_in_browser: browser[os]
+      open_in_browser: browser[plat]
     }
 
     wk.add {

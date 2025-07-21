@@ -1,20 +1,20 @@
-import "macros" as { $ }
+import 'macros' as { $ }
 
 cfg =
   lastplace_ignore_buftype:
-    * "quickfix"
-    * "nofile"
-    * "help"
+    * 'quickfix'
+    * 'nofile'
+    * 'help'
   ignore_filetype:
-    * "gitcommit"
-    * "gitrebase"
-    * "svn"
-    * "hgcommit"
+    * 'gitcommit'
+    * 'gitrebase'
+    * 'svn'
+    * 'hgcommit'
   open_folds: true
 
 export default {
   config: ->
-    import "nvim-lastplace" as lp
+    import 'nvim-lastplace' as lp
 
     lp.setup cfg
 }

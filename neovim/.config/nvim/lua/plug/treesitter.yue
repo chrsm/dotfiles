@@ -6,31 +6,31 @@ cfg =
     enable: true
     disable: {}
   ensure_installed:
-    * "lua"
-    * "json"
-    * "c"
-    * "cpp"
-    * "go"
-    * "gomod"
-    * "gowork"
-    * "php"
-    * "regex"
-    * "vim"
-    * "yaml"
-    * "make"
-    * "jsonc"
-    * "json5"
-    * "javascript"
-    * "html"
-    * "http"
-    * "dockerfile"
-    * "bash"
-    * "zig"
-    * "markdown"
+    * 'lua'
+    * 'json'
+    * 'c'
+    * 'cpp'
+    * 'go'
+    * 'gomod'
+    * 'gowork'
+    * 'php'
+    * 'regex'
+    * 'vim'
+    * 'yaml'
+    * 'make'
+    * 'jsonc'
+    * 'json5'
+    * 'javascript'
+    * 'html'
+    * 'http'
+    * 'dockerfile'
+    * 'bash'
+    * 'zig'
+    * 'markdown'
 
 export default {
   config: ->
-    import "nvim-treesitter.configs" as ts
+    import 'nvim-treesitter.configs' as ts
 
     ts.setup cfg
   run: ->

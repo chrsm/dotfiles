@@ -1,8 +1,8 @@
-import "macros" as { $ }
+import 'macros' as { $ }
 
 mkdef = (tbl, default = true) ->
   for i, v in ipairs tbl
-    unless type(v) == "table"
+    unless type(v) == 'table'
       tbl[i] = { v, default }
   tbl
 
@@ -17,47 +17,47 @@ runcmds = (cmds) ->
 export default {
   setup: ->
     setopts vim.g, mkdef
-      * { "loaded_netrwPlugin", 1 }
-      * { "loaded_netrw", 1 }
-      * { "neovide_cursor_animation_length", 0 }
+      * { 'loaded_netrwPlugin', 1 }
+      * { 'loaded_netrw', 1 }
+      * { 'neovide_cursor_animation_length', 0 }
 
     setopts vim.opt, mkdef
-      * "number"
-      * "showcmd"
-      * "hidden"
-      * "lazyredraw"
-      * "showmatch"
-      * "splitbelow"
-      * "splitright"
-      * "ignorecase"
-      * "smartcase"
-      * "wrapscan"
-      * "termguicolors"
-      * "undofile"
-      * { "swapfile", false }
-      * { "startofline", false }
-      * { "hlsearch", false }
-      * { "textwidth", 120 }
-      * { "cmdheight", 1 }
-      * { "pumheight", 10 }
-      * { "clipboard", "unnamedplus" }
-      * { "scrolloff", 5 }
-      * { "updatetime", 300 }
-      * { "synmaxcol", 5000 }
-      * { "mouse", "a" }
-      * { "completeopt", "menu,menuone,noselect" }
-      * { "matchtime", 2 }
-      * { "shortmess", "c" }
-      * { "signcolumn", "yes" }
+      * 'number'
+      * 'showcmd'
+      * 'hidden'
+      * 'lazyredraw'
+      * 'showmatch'
+      * 'splitbelow'
+      * 'splitright'
+      * 'ignorecase'
+      * 'smartcase'
+      * 'wrapscan'
+      * 'termguicolors'
+      * 'undofile'
+      * { 'swapfile', false }
+      * { 'startofline', false }
+      * { 'hlsearch', false }
+      * { 'textwidth', 120 }
+      * { 'cmdheight', 1 }
+      * { 'pumheight', 10 }
+      * { 'clipboard', 'unnamedplus' }
+      * { 'scrolloff', 5 }
+      * { 'updatetime', 300 }
+      * { 'synmaxcol', 5000 }
+      * { 'mouse', 'a' }
+      * { 'completeopt', 'menu,menuone,noselect' }
+      * { 'matchtime', 2 }
+      * { 'shortmess', 'c' }
+      * { 'signcolumn', 'yes' }
 
     setopts vim.wo, mkdef
-      * { "wrap", false }
+      * { 'wrap', false }
 
     runcmds
-      * "filetype plugin on"
-      * "filetype indent on"
+      * 'filetype plugin on'
+      * 'filetype indent on'
 
-      * "syntax on"
+      * 'syntax on'
 
     vim.diagnostic.config
       virtual_text: true

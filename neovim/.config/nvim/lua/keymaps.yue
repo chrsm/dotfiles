@@ -1,36 +1,36 @@
-import "macros" as { $ }
+import 'macros' as { $ }
 
-mapleader = ","
+mapleader = ','
 
 cfg =
   :mapleader
 
   insert:
-    * { "jj", "<ESC>" }
+    * { 'jj', '<ESC>' }
 
   normal: {}
 
   noremap:
     -- if you use `:` don't @ me
-    * { ";", ":" }
-    * { ":", ";" }
-    * { "Y", "y$" }
+    * { ';', ':' }
+    * { ':', ';' }
+    * { 'Y', 'y$' }
 
   nosilent:
     -- arrow keys r bad mmkay
-    * { "<Up>", "<NOP>" }
-    * { "<Down>", "<NOP>" }
-    * { "<Left>", "<NOP>" }
-    * { "<Right>", "<NOP>" }
+    * { '<Up>', '<NOP>' }
+    * { '<Down>', '<NOP>' }
+    * { '<Left>', '<NOP>' }
+    * { '<Right>', '<NOP>' }
     -- delete the current buffer, losing unsaved changes
-    -- * { "<leader>d", ":bd!<CR>" }
+    -- * { '<leader>d', ':bd!<CR>' }
     -- launch terminal
-    * { "<leader>t", ":term" }
-    * { "vb", "<C-v>"}
+    * { '<leader>t', ':term' }
+    * { 'vb', '<C-v>'}
 
   term:
-    * { "<ESC>", "<C-\\><C-n>" }
-    * { "jj", "<C-\\><C-n>" }
+    * { '<ESC>', "<C-\\><C-n>" }
+    * { 'jj', "<C-\\><C-n>" }
 
 export default {
   :cfg

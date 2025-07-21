@@ -1,6 +1,6 @@
 export default {
   config: ->
-    import "nvim-dap-virtual-text" as dvt
+    import 'nvim-dap-virtual-text' as dvt
 
     dvt.setup { commented: true }
 }

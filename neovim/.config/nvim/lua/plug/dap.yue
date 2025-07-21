@@ -1,40 +1,40 @@
-import "macros" as { $ }
+import 'macros' as { $ }
 
 cfg =
   breakpoint:
-    key: "b"
-    fn: "toggle_breakpoint"
-    desc: "Toggle breakpoint"
+    key: 'b'
+    fn: 'toggle_breakpoint'
+    desc: 'Toggle breakpoint'
   continue:
-    key: "c"
-    fn: "continue"
-    desc: "Continue"
+    key: 'c'
+    fn: 'continue'
+    desc: 'Continue'
   step_over:
-    key: "so"
-    fn: "step_over"
-    desc: "Step over"
+    key: 'so'
+    fn: 'step_over'
+    desc: 'Step over'
   step_into:
-    key: "ss"
-    fn: "step_into"
-    desc: "Step into"
+    key: 'ss'
+    fn: 'step_into'
+    desc: 'Step into'
   step_out:
-    key: "se"
-    fn: "step_out"
-    desc: "Step out"
+    key: 'se'
+    fn: 'step_out'
+    desc: 'Step out'
 
 export default {
   config: ->
-    import "which-key" as wk
-    import 'dap' as dap
+    import 'which-key' as wk
+    import 'dap'
     import 'mason-nvim-dap' as mvdap
 
-    opt = { mode: "n", prefix: "<leader>e", noremap: true, silent: true }
+    opt = { mode: 'n', prefix: '<leader>e', noremap: true, silent: true }
     map =
-      group: "debugging"
+      group: 'debugging'
 
     for k, v in pairs cfg
       map[] = { 
-        "<leader>e#{ v.key }", "<CMD>lua require('dap').#{ v.fn }()<CR>",
+        '<leader>e#{ v.key }', "<CMD>lua require('dap').#{ v.fn }()<CR>",
         desc: v.desc
       }
 
@@ -68,9 +68,10 @@ export default {
       command: '/usr/bin/lldb-vscode'
       type: 'executable'
 
-    --[[dap.adapters.executable =
+    --[[
+    dap.adapters.executable =
       type: 'executable'
-      command: "#{ vim.fn.stdpath 'data' }/mason/bin/codelldb"
+      command: '#{ vim.fn.stdpath 'data' }/mason/bin/codelldb'
       name: 'lldb1'
       host: '127.0.0.1'
       port: 13000
@@ -79,7 +80,7 @@ export default {
       type: 'server'
       port: '${port}'
       executable:
-        command: "#{ vim.fn.stdpath 'data' }/mason/bin/codelldb"
+        command: '#{ vim.fn.stdpath 'data' }/mason/bin/codelldb'
         args: { --port', '${port}' }
     ]]
 

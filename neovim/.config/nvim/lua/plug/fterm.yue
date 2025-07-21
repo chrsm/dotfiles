@@ -1,34 +1,34 @@
-import "macros" as { $ }
+import 'macros' as { $ }
 
 cfg =
-  border: "double"
+  border: 'double'
   auto_close: false
 
 export default {
   config: ->
-    import "FTerm" as fterm
-    import "which-key" as wk
+    import 'FTerm' as fterm
+    import 'which-key' as wk
 
     fterm.setup cfg
 
     wk.add {
       {
         '<leader>t', "<CMD>lua require('FTerm').toggle()<CR>",
-        desc: "Open terminal", remap: false,
+        desc: 'Open terminal', remap: false,
       }
     }
 
     -- overwrite keybinds from standard setup
     wk.add {
       {
-        '<ESC>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>',
+        '<ESC>', "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>",
         mode: 't',
-        desc: "Exit terminal", remap: false,
+        desc: 'Exit terminal', remap: false,
       }
       {
-        'jj', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>',
+        'jj', "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>",
         mode: 't',
-        desc: "Exit terminal", remap: false,
+        desc: 'Exit terminal', remap: false,
       }
     }
 }

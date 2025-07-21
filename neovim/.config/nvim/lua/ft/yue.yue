@@ -1,8 +1,8 @@
-vim.api.nvim_create_autocmd { "BufNewFile", "BufRead" },
-  pattern: "yue"
-  command: "set syntax=yue"
+vim.api.nvim_create_autocmd { 'BufNewFile', 'BufRead' },
+  pattern: 'yue'
+  command: 'set syntax=yue'
 
-vim.api.nvim_create_autocmd { "FileType" },
-  pattern: "yue"
-  command: "setl ts=2 sw=2 expandtab"
+vim.api.nvim_create_autocmd { 'FileType' },
+  pattern: 'yue'
+  command: 'setl ts=2 sw=2 expandtab'
 

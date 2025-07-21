@@ -1,8 +1,8 @@
-vim.api.nvim_create_autocmd { "BufNewFile", "BufRead" },
-  pattern: "tf"
-  command: "set syntax=tf"
+vim.api.nvim_create_autocmd { 'BufNewFile', 'BufRead' },
+  pattern: 'tf'
+  command: 'set syntax=tf'
 
-vim.api.nvim_create_autocmd { "FileType" },
-  pattern: "tf"
-  command: "setl ts=2 sw=2 expandtab"
+vim.api.nvim_create_autocmd { 'FileType' },
+  pattern: 'tf'
+  command: 'setl ts=2 sw=2 expandtab'
 

@@ -1,8 +1,8 @@
-vim.api.nvim_create_autocmd { "BufNewFile", "BufRead" },
-  pattern: "cr"
-  command: "set syntax=crystal filetype=crystal"
+vim.api.nvim_create_autocmd { 'BufNewFile', 'BufRead' },
+  pattern: 'cr'
+  command: 'set syntax=crystal filetype=crystal'
 
-vim.api.nvim_create_autocmd { "FileType" },
-  pattern: "cr"
-  command: "setl ts=2 sw=2 expandtab"
+vim.api.nvim_create_autocmd { 'FileType' },
+  pattern: 'cr'
+  command: 'setl ts=2 sw=2 expandtab'
 

@@ -1,167 +1,167 @@
-import "macros" as { $ }
+import 'macros' as { $ }
 
 plugs =
   * {
-    "nvim-treesitter/nvim-treesitter",
-    run: $do_run "treesitter"
-    config: $do_cfg "treesitter"
+    'nvim-treesitter/nvim-treesitter',
+    run: $do_run 'treesitter'
+    config: $do_cfg 'treesitter'
   }
-  * "tpope/vim-eunuch"
-  * "nvim-lua/plenary.nvim"
+  * 'tpope/vim-eunuch'
+  * 'nvim-lua/plenary.nvim'
   * {
-    "nvim-telescope/telescope.nvim"
-    config: $do_cfg "telescope"
+    'nvim-telescope/telescope.nvim'
+    config: $do_cfg 'telescope'
     dependencies:
-      * "nvim-lua/plenary.nvim"
-      * "nvim-lua/popup.nvim"
+      * 'nvim-lua/plenary.nvim'
+      * 'nvim-lua/popup.nvim'
   }
   * {
-    "nvim-telescope/telescope-ui-select.nvim"
-    config: $do_cfg "telescope_ui_select"
+    'nvim-telescope/telescope-ui-select.nvim'
+    config: $do_cfg 'telescope_ui_select'
     dependencies:
-      "nvim-telescope/telescope.nvim"
+      'nvim-telescope/telescope.nvim'
   }
   * {
-    "elihunter173/dirbuf.nvim"
-    config: $do_cfg "dirbuf"
+    'elihunter173/dirbuf.nvim'
+    config: $do_cfg 'dirbuf'
   }
   * {
-    "talek/obvious-resize"
-    config: $do_cfg "obvious_resize"
+    'talek/obvious-resize'
+    config: $do_cfg 'obvious_resize'
   }
   * {
-    "lukas-reineke/indent-blankline.nvim"
-    config: $do_cfg "indent"
+    'lukas-reineke/indent-blankline.nvim'
+    config: $do_cfg 'indent'
   }
   * { -- layout preserving bdelete
-    "famiu/bufdelete.nvim"
-    config: $do_cfg "bufdelete"
+    'famiu/bufdelete.nvim'
+    config: $do_cfg 'bufdelete'
   }
   * {
-    "folke/which-key.nvim"
+    'folke/which-key.nvim'
     config: ->
-      import "which-key" as wk
+      import 'which-key' as wk
 
       wk.setup {}
   }
   * {
-    "L3MON4D3/LuaSnip"
-    version: "v2.*"
+    'L3MON4D3/LuaSnip'
+    version: 'v2.*'
   }
 
   -- note taking
   * {
-    "renerocksai/telekasten.nvim"
-    config: $do_cfg "telekasten"
+    'renerocksai/telekasten.nvim'
+    config: $do_cfg 'telekasten'
     dependencies:
-      * "renerocksai/calendar-vim"
+      * 'renerocksai/calendar-vim'
   }
 
   -- color schemes
   * {
-    "jesseleite/nvim-noirbuddy"
+    'jesseleite/nvim-noirbuddy'
     config: ->
-      import "noirbuddy" as nb
+      import 'noirbuddy' as nb
 
       nb.setup
-        preset: "minimal"
+        preset: 'minimal'
         colors:
-          background: "#262626"
-          primary: "#a790d5"
+          background: '#262626'
+          primary: '#a790d5'
 
     dependencies:
-      * { "tjdevries/colorbuddy.nvim", branch: "dev" }
+      * { 'tjdevries/colorbuddy.nvim', branch: 'dev' }
   }
 
   -- ui
-  * "nvim-lua/popup.nvim"
+  * 'nvim-lua/popup.nvim'
   * {
-    "akinsho/bufferline.nvim"
-    config: $do_cfg "bufferline"
+    'akinsho/bufferline.nvim'
+    config: $do_cfg 'bufferline'
     dependencies:
-      * "kyazdani42/nvim-web-devicons"
+      * 'kyazdani42/nvim-web-devicons'
   }
   * {
-    "nvim-lualine/lualine.nvim"
-    config: $do_cfg "lualine"
+    'nvim-lualine/lualine.nvim'
+    config: $do_cfg 'lualine'
     dependencies:
-      * "kyazdani42/nvim-web-devicons"
+      * 'kyazdani42/nvim-web-devicons'
   }
   * {
-    "folke/twilight.nvim",
-    config: $do_cfg "twilight"
+    'folke/twilight.nvim',
+    config: $do_cfg 'twilight'
   }
   * {
-    "numToStr/FTerm.nvim"
-    config: $do_cfg "fterm"
+    'numToStr/FTerm.nvim'
+    config: $do_cfg 'fterm'
   }
   * {
-    "shortcuts/no-neck-pain.nvim"
+    'shortcuts/no-neck-pain.nvim'
     config: ->
-      import "no-neck-pain" as nnp
+      import 'no-neck-pain' as nnp
 
       nnp.setup!
   }
   * {
     'RaafatTurki/hex.nvim'
     config: ->
-      import 'hex' as hex
+      import 'hex'
       hex.setup!
   }
 
   * {
-    dir: "~/src/impulse.nvim"
+    dir: '~/src/impulse.nvim'
     config: $do_cfg 'impulse'
   }
 
   -- dev related, but not lang-specific
-  * "rhysd/committia.vim"
+  * 'rhysd/committia.vim'
   * {
-    "sindrets/diffview.nvim",
-    config: $do_cfg "diffview",
+    'sindrets/diffview.nvim',
+    config: $do_cfg 'diffview',
     dependencies:
-      * "nvim-lua/plenary.nvim"
+      * 'nvim-lua/plenary.nvim'
   }
   * {
-    "TimUntersberger/neogit",
-    config: $do_cfg "neogit"
+    'TimUntersberger/neogit',
+    config: $do_cfg 'neogit'
     dependencies:
-      * "nvim-lua/plenary.nvim"
-      * "sindrets/diffview.nvim"
+      * 'nvim-lua/plenary.nvim'
+      * 'sindrets/diffview.nvim'
   }
   * {
-    "ethanholz/nvim-lastplace"
-    config: $do_cfg "lastplace"
+    'ethanholz/nvim-lastplace'
+    config: $do_cfg 'lastplace'
   }
   * {
-    "mfussenegger/nvim-dap"
-    config: $do_cfg "dap"
+    'mfussenegger/nvim-dap'
+    config: $do_cfg 'dap'
   }
   * {
-    "rcarriga/nvim-dap-ui"
-    config: $do_cfg "dap_ui"
+    'rcarriga/nvim-dap-ui'
+    config: $do_cfg 'dap_ui'
     dependencies:
-      * "mfussenegger/nvim-dap"
-      * "nvim-neotest/nvim-nio"
+      * 'mfussenegger/nvim-dap'
+      * 'nvim-neotest/nvim-nio'
   }
   * {
-    "theHamsta/nvim-dap-virtual-text"
-    config: $do_cfg "dap_vtext"
+    'theHamsta/nvim-dap-virtual-text'
+    config: $do_cfg 'dap_vtext'
     dependencies:
-      * "mfussenegger/nvim-dap"
+      * 'mfussenegger/nvim-dap'
   }
 
   -- LSP and related tooling
-  * "williamboman/mason.nvim"
+  * 'williamboman/mason.nvim'
   * {
-    "williamboman/mason-lspconfig.nvim"
+    'williamboman/mason-lspconfig.nvim'
     dependencies:
-      * "williamboman/mason.nvim"
-      * "neovim/nvim-lspconfig"
+      * 'williamboman/mason.nvim'
+      * 'neovim/nvim-lspconfig'
   }
   * 'jay-babu/mason-nvim-dap.nvim'
   * {
-    "VonHeikemen/lsp-zero.nvim"
+    'VonHeikemen/lsp-zero.nvim'
     branch: 'v3.x'
     dependencies:
       * 'neovim/nvim-lspconfig'
@@ -177,47 +177,40 @@ plugs =
       * 'rafamadriz/friendly-snippets'
   }
   * {
-    "mfussenegger/nvim-lint"
-    config: ->
-      import "lint" as lint
-
-      lint.linters_by_ft = {
-        go:
-          * "golangcilint"
-      }
-
-      vim.api.nvim_create_autocmd { "BufWritePost" },
-        callback: ->
-          lint.try_lint!
+    'mfussenegger/nvim-lint'
+    config: $do_cfg 'nvim_lint'
   }
-  * "mhartington/formatter.nvim"
-  * "nvim-lua/lsp-status.nvim"
-  * "nvim-lua/diagnostic-nvim"
-  * "glepnir/lspsaga.nvim"
   * {
-    "hrsh7th/nvim-cmp"
-    config: $do_cfg "cmp"
+    'mhartington/formatter.nvim'
+      config: $do_cfg 'formatter'
+  }
+  * 'nvim-lua/lsp-status.nvim'
+  * 'nvim-lua/diagnostic-nvim'
+  * 'glepnir/lspsaga.nvim'
+  * {
+    'hrsh7th/nvim-cmp'
+    config: $do_cfg 'cmp'
     wants:
-      * "LuaSnip"
+      * 'LuaSnip'
     dependencies:
-      * "hrsh7th/cmp-nvim-lsp"
-      * "hrsh7th/cmp-buffer"
-      * "ray-x/cmp-treesitter"
+      * 'hrsh7th/cmp-nvim-lsp'
+      * 'hrsh7th/cmp-buffer'
+      * 'ray-x/cmp-treesitter'
       * {
-        "ray-x/lsp_signature.nvim"
-        config: $do_cfg "lsp_sig"
+        'ray-x/lsp_signature.nvim'
+        config: $do_cfg 'lsp_sig'
       }
       * {
-        "L3MON4D3/LuaSnip"
-        wants: "friendly-snippets"
-        config: $do_cfg "luasnip"
+        'L3MON4D3/LuaSnip'
+        wants: 'friendly-snippets'
+        config: $do_cfg 'luasnip'
       }
-      * "onsails/lspkind.nvim"
+      * 'onsails/lspkind.nvim'
   }
   * {
-    "folke/trouble.nvim"
+    'folke/trouble.nvim'
     config: ->
-      import "trouble" as t
+      import 'trouble' as t
       t.setup!
 
       vim.diagnostic.config
@@ -225,19 +218,19 @@ plugs =
   }
 
   -- language specific
-  * "pigpigyyy/Yuescript-vim"
+  * 'pigpigyyy/Yuescript-vim'
   * {
-    "leoluz/nvim-dap-go"
-    config: $do_cfg "dap_go"
+    'leoluz/nvim-dap-go'
+    config: $do_cfg 'dap_go'
   }
   * {
-    "vim-crystal/vim-crystal"
+    'vim-crystal/vim-crystal'
   }
   * 'chaimleib/vim-renpy'
 
 export default {
   setup: ->
-    import 'lazy' as lazy
+    import 'lazy'
 
     lazy.setup plugs, {}
 }

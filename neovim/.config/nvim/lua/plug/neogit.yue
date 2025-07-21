@@ -1,4 +1,4 @@
-import "macros" as { $ }
+import 'macros' as { $ }
 
 cfg =
   -- kind: 'split'
@@ -9,8 +9,8 @@ cfg =
 
 export default {
   config: ->
-    import "neogit" as ng
-    import "which-key" as wk
+    import 'neogit' as ng
+    import 'which-key' as wk
     
     ng.setup cfg
 

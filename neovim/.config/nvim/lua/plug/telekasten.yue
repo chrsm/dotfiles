@@ -1,6 +1,6 @@
-import "macros" as { $ }
+import 'macros' as { $ }
 
-home = vim.fn.expand "~/notes"
+home = vim.fn.expand '~/notes'
 cfg =
   :home
 
@@ -20,14 +20,14 @@ cfg =
 
   subdirs_in_links: true
 
-  command_palette_theme: "dropdown"
-  show_tags_theme: "dropdown"
+  command_palette_theme: 'dropdown'
+  show_tags_theme: 'dropdown'
 
   plug_in_to_calendar: true
   calendar_opts:
     weeknm: 1
     calendar_monday: 0
-    calendar_mark: "left-fit"
+    calendar_mark: 'left-fit'
 
 keyb = (key, cmd, desc) ->
   {
@@ -38,16 +38,16 @@ keyb = (key, cmd, desc) ->
 
 export default {
   config: ->
-    import "telekasten" as tk
-    import "which-key" as wk
+    import 'telekasten' as tk
+    import 'which-key' as wk
 
     dirs =
       * cfg.home
       * "#{ cfg.home }/work"
       * "#{ cfg.home }/dev"
       * "#{ cfg.home }/misc"
-    unless os.getenv "IS_MAC"
-      import "lfs" as lfs
+    unless vim.fn.has 'macunix'
+      import 'lfs'
       lfs.mkdir v for _, v in ipairs dirs
 
     tk.setup cfg

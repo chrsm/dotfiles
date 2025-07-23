@@ -2,6 +2,7 @@
 	st = status
 	addp = add -p
 	redate = rebase --commiter-date-is-author-date
+	rbranch = !zsh -c 'git_rbranch.sh'
 
 [color]
 	ui = auto

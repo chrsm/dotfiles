@@ -1,62 +1,117 @@
-cfg =
-  a: 'b'
+severities =
+  -- yue
+  HINT:  vim.diagnostic.severity.HINT
+  INFO:  vim.diagnostic.severity.INFO
+  ERROR: vim.diagnostic.severity.ERROR
+  WARN:  vim.diagnostic.severity.WARN
+  -- glcl
+  error:      vim.diagnostic.severity.ERROR
+  warning:    vim.diagnostic.severity.WARN
+  refactor:   vim.diagnostic.severity.INFO
+  convention: vim.diagnostic.severity.HINT
+
+parsers =
+  yue: (output, bufnr, cwd) ->
+    if output == '' or output == '{}'
+      return {}
+
+    dec = vim.json.decode output
+    unless dec
+      error "yuecheck failed: output #{ output }"
+
+    fname = vim.api.nvim_buf_get_name bufnr
+    fname_abs = vim.fn.fnamemodify fname, ':p'
+    fname_norm = vim.fs.normalize fname_abs
+
+    issues = {}
+    for v in *dec
+      issues[] =
+        lnum: math.max (v.line - 1), 0
+        col: math.max (v.col - 1), 0
+        end_lnum: math.max (v.line - 1), 0
+        end_col: math.max (v.col - 1), 0
+        severity: severities[v.type]
+        source: 'yuecheck'
+        message: v.message
+    issues
+
+  glci: (output, bufnr, cwd) ->
+    unless #output > 0
+      return {}
+
+    dec = vim.json.decode output
+    unless dec['Issues'] and (type dec['Issues'] != 'userdata')
+      error "got output=#{ type dec } and #{ type dec['Issues'] }"
+
+    curfile = vim.api.nvim_buf_get_name bufnr
+    curfile_abs = vim.fn.fnamemodify curfile, ':p'
+    curfile_norm = vim.fs.normalize curfile_abs
+
+    issues = {}
+    for nit, v in ipairs dec['Issues']
+      lintedfile = "#{ cwd }/#{ v.Pos.Filename }"
+      lintedfile_abs = vim.fn.fnamemodify lintedfile, ':p'
+      lintedfile_norm = vim.fs.normalize lintedfile_abs
+
+      unless curfile_norm == v.Pos.Filename or curfile_norm == lintedfile_norm
+        continue
+
+      issues[] =
+        lnum: math.max (v.Pos.Line - 1), 0
+        col: math.max (v.Pos.Column - 1), 0
+        end_lnum: math.max (v.Pos.Line - 1), 0
+        end_col: math.max (v.Pos.Column - 1), 0
+        severity: severities[v.Severity]
+        source: v.FromLinter
+        message: v.Text
+    issues
+
+linters =
+  yue:
+    cmd: 'yuecheck'
+    stdin: true
+    append_fname: true
+    args:
+      * '--stdin'
+      * '--json'
+    ignore_exitcode: true
+    env: nil
+    parser: parsers.yue
+  glci:
+    cmd: 'golangci-lint'
+    append_fname: false
+    stream: 'stdout'
+    args:
+      * 'run'
+      -- force use of user cfg; can double check with per-repo config if it's more
+      -- strict for whatever reason
+      * '--config=~/.golangci.yml'
+      * '--output.json.path=stdout'
+      * '--output.text.path='
+      * '--output.tab.path='
+      * '--output.html.path='
+      * '--output.checkstyle.path='
+      * '--output.code-climate.path='
+      * '--output.junit-xml.path='
+      * '--output.teamcity.path='
+      * '--output.sarif.path='
+      * '--issues-exit-code=0'
+      * '--show-stats=false'
+      * '--path-mode=abs'
+      * -> vim.fn.fnamemodify (vim.api.nvim_buf_get_name 0), ':h'
+    parser: parsers.glci
 
 export default {
   config: ->
       import 'lint'
 
-      lint.linters.yuecheck =
-        cmd: 'yuecheck'
-        stdin: true
-        append_fname: true
-        args:
-          * '--stdin'
-          * '--json'
-        ignore_exitcode: true
-        env: nil
-        parser: (output, bufnr, cwd) ->
-          if output == '' or output == '{}'
-            return {}
-
-          typ2sev = (typ) ->
-            switch typ
-              when 'INFO'
-                vim.diagnostic.severity.INFO
-              when 'WARN'
-                vim.diagnostic.severity.WARN
-              when 'ERROR'
-                vim.diagnostic.severity.ERROR
-              when 'HINT'
-                vim.diagnostic.severity.HINT
-              else
-                error 'unknown lint error type #{ typ }'
-
-          issues = vim.json.decode output
-          unless issues
-            error 'yuecheck failed: output #{ issues }'
-          fname = vim.api.nvim_buf_get_name bufnr
-          fname_abs = vim.fn.fnamemodify fname, ':p'
-          fname_norm = vim.fs.normalize fname_abs
-
-          diag = {}
-          for v in *issues
-            diag[] =
-              lnum: math.max (v.line - 1), 0
-              col: math.max (v.col - 1), 0
-              end_lnum: math.max (v.line - 1), 0
-              end_col: math.max (v.col - 1), 0
-              severity: typ2sev v.type
-              source: 'yuecheck'
-              message: v.message
-
-          diag
-
-      lint.linters_by_ft = {
+      lint.linters.golangci_cust = linters.glci
+      lint.linters.yuecheck = linters.yue
+      lint.linters_by_ft =
         go:
-          * 'golangcilint'
+          * 'golangci_cust'
         yue:
           * 'yuecheck'
-      }
 
       vim.api.nvim_create_autocmd { 'BufNewFile', 'BufRead', 'BufWritePost', 'FileType' },
         callback: ->

@@ -316,6 +316,10 @@ export default {
         keyb 'go', 'vim.lsp.buf.type_definition', 'go to typedef'
         keyb 'gr', 'vim.lsp.buf.references', 'list references'
         keyb 'gs', 'vim.lsp.buf.signature_help', 'show function signature'
+
+        keyb 'glc', 'vim.lsp.buf.code_action', 'code actions for symbol'
+        keyb 'gli', 'vim.lsp.buf.incoming_calls', 'references/uses of symbol'
+        keyb 'glo', 'vim.lsp.buf.outgoing_calls', 'outgoing calls from fn'
       }, keyb_opts
 
       nil

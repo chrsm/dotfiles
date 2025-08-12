@@ -14,11 +14,4 @@ types =
 export default {
   setup: ->
     require "ft.#{ft}" for ft in *types -- yuecheck:ignore
-
-    vim.api.nvim_create_autocmd { 'BufNewFile', 'BufRead' },
-      pattern: '.yuecheck'
-      command: 'set syn=yue ft=yue'
-    vim.api.nvim_create_autocmd { 'FileType' },
-      pattern: '.yuecheck'
-      command: 'setl ts=2 sw=2 expandtab'
 }

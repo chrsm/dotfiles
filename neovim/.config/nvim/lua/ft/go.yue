@@ -4,4 +4,4 @@ vim.api.nvim_create_autocmd { 'BufNewFile', 'BufRead' },
 
 vim.api.nvim_create_autocmd { 'FileType' },
   pattern: 'go'
-  command: 'setl ts=4 sw=4'
+  command: 'setl ts=2 sw=2 sts=2'

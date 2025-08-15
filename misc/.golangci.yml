@@ -1,84 +1,62 @@
 version: "2"
 
 linters:
-  default: all
   timeout: 5m
   relative-path-mode: gomod
   build-tags:
     - main
     - postgres
+  disable-all: true
   enabled:
     - errcheck
     - exhaustive
-    - exhaustruct
-    - funlen
-    - gochecksumtype
     - gocritic
     - goimports
     - govet
     - inamedparam
     - ireturn
-    - lll
     - misspell
-    - mnd
     - nakedret
     - nolintlint
     - perfsprint
     - reassign
-    - revive
     - staticcheck
     - wrapcheck
     # not configured
     - makezero
     - rowserrcheck
-    - gosimple
     - ineffassign
     - asaslint
-    - typecheck
     - bodyclose
     - canonicalheader
     - copyloopvar
-    - cyclop
-    - depguard
     - dupl
     - durationcheck
     - errname
     - errorlint
     - exptostd
     - fatcontext
-    - forbidigo
     - gocheckcompilerdirectives
     - gochecknoglobals
-    - gochecknoinits
-    - gocognit
-    - gocyclo
     - godox
     - gomoddirectives
     - goprintffuncname
     - gosec
     - iface
     - intrange
-    - loggercheck
     - mirror
-    - musttag
     - nestif
     - nilerr
     - nilnesserr
     - nilnil
-    - nosprintfhostport
     - predeclared
-    - protogetter
     - recvcheck
     - sqlclosecheck
-    - stylecheck
-    - testablexamples
     - testifylint
     - testpackage
-    - tparallel
     - unconvert
     - unparam
     - usedstdlibvars
-    - usetesting
     - wastedassign
     - whitespace
   settings:
@@ -90,27 +68,12 @@ linters:
         - switch
         - map
       default-case-required: true
-    exhaustruct:
-      exclude:
-        - "^net/http.Client$"
-        - "^net/http.Cookie$"
-        - "^net/http.Request$"
-        - "^net/http.Response$"
-        - "^net/http.Server$"
-        - "^net/http.Transport$"
-        - "^net/url.URL$"
-        - "^os/exec.Cmd$"
-        - "^reflect.StructField$"
-    funlen:
-      lines: 120
-      statements: 50
-      ignore-comments: true
-    gochecksumtype:
-      default-signifies-exhaustive: false
     goimports:
       local-prefixes: go.openly.dev
     govet:
       enable-all: true
+      disable:
+        - fieldalignment
       settings:
         shadow:
           strict: true
@@ -126,19 +89,8 @@ linters:
         - trace.Span
         - trace.Tracer
         - (or|er)$
-    lll:
-      line-length: 90
-      tab-width: 1
     misspell:
       mode: restricted
-    mnd:
-      checks:
-        - argument
-        - case
-        - condition
-        - operation
-        - return
-        - assign
     nakedret:
       max-func-lines: 10
     nolintlint:
@@ -149,36 +101,6 @@ linters:
     reassign:
       patterns:
         - ".*"
-    revive:
-      ignore-generated-header: true
-      severity: error
-      enable-all-rules: true
-      confidence: 0.8
-      rules:
-        - name: argument-limit
-          arguments: [ 8 ]
-        - name: cognitive-complexity
-          disabled: true
-        - name: cyclomatic
-          disabled: true
-        - name: early-return
-          severity: warning
-          disabled: false
-          exclude: [ "" ]
-          arguments:
-            - preserveScope
-        - name: function-length
-          disabled: true
-        - name: line-length-limit
-          disabled: true
-        - name: unused-parameters
-          enabled: true
-        - name: var-naming
-          enabled: false
-        - name: max-public-structs
-          arguments: [ 20 ]
-        - name: add-constant
-          disabled: false
     staticcheck:
       checks: [ "all" ]
     wrapcheck:

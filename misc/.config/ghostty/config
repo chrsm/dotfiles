@@ -1,0 +1,13 @@
+theme = Black Metal (Venom)
+font-family = FiraCode Nerd Font Mono
+font-size = 14
+
+cursor-color = 7b47bb
+
+background-opacity = 0.5
+background-blur = 35
+
+# system stuff
+maximize = true
+initial-window = true
+auto-update = off

@@ -150,6 +150,9 @@ plugs =
     dependencies:
       * 'mfussenegger/nvim-dap'
   }
+  * {
+    'pimalaya/himalaya-vim'
+  }
 
   -- LSP and related tooling
   * 'williamboman/mason.nvim'

@@ -1,0 +1,15 @@
+# shit
+node_modules\/
+vendor\/
+go\/pkg
+
+# mac bullshit
+\.DS_Store
+Downloads
+Applications
+Pictures
+Library
+Desktop
+Music
+Movies
+Documents

@@ -1,5 +1,15 @@
 import "macros" as { $ }
 
+-- per env build tags
+go_build_tags = { 'postgres', 'integration' }
+if tags := os.getenv 'VIM_LOCAL_GOBUILDTAGS'
+  for v in tags\gmatch '([^,]+)'
+    go_build_tags[] = v
+
+go_build_flags = {}
+if #go_build_tags > 0
+  go_build_flags[] = "-tags=#{ table.concat go_build_tags, ' ' }"
+
 handlers =
   clangd:
     cmd: { 'clangd' }
@@ -32,9 +42,8 @@ handlers =
     -- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md,
     -- https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
     settings:
-      env:
-        GOFLAGS: '-tags=postgres integration'
-      buildFlags: { '-tags=postgres integration' }
+      gopls:
+        buildFlags: go_build_flags
       gofumpt: true
       staticcheck: true
       codelenses:

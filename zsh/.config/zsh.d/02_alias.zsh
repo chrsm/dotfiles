@@ -21,12 +21,11 @@ function gnvim {
 alias vim="nvim"
 alias wvim="GOOS=windows nvim"
 
-function note {
+function notes {
 	pushd $HOME/notes
 	vim -c "Telekasten show_calendar" -c "lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<c-w>', true, false, true) .. 'h', 'n', true); "
 	popd
 }
-alias notes=note
 
 alias wgo="GOOS=windows go"
 
@@ -48,6 +47,4 @@ fi
 # no alias needed for nix
 
 alias gcppwd="gcloud auth print-access-token|tr -d '\n'|$CLIP_IMPL"
-alias gcplogin="gcloud auth login --update-adc"
-
-alias upd-nvim="asdf uninstall neovim nightly && asdf install neovim nightly"
+alias gcplogin="yes | gcloud auth login --update-adc"

@@ -1,0 +1,27 @@
+export default {
+  enable_compilation: false
+
+  enabled_rules:
+    cond_identical_exprs: true
+    cond_impossible: true
+    unreachable: true
+    basic_nilness: true
+    --
+    global_writes: true
+    stdlib_usage: true
+    --
+    style_comment_space: true
+    style_zero_index: true
+    style_import_as_ident: true
+    style_unnecessary_doublestring: true
+    style_conditionals: true
+    style_simplify_if_to_switch: true
+    style_discourage_require: true
+    style_discourage_unnecessary_sb: true
+    --
+    stdlib_match: true
+
+  rules:
+    global_writes:
+      patterns: { '_ENV', 'package' }
+}

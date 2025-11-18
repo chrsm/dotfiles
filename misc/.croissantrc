@@ -1,0 +1,29 @@
+return {
+  prompt = "→ ",
+  -- Prompt used when editing multiple lines of code
+  continuationPrompt = ".... ",
+
+  -- Maximum amount of remembered lines (~/._history, ~/._debugger_history)
+  historyLimit = 1000,
+
+  -- How many rows `where` should print around the current line
+  whereRows = 4,
+
+  -- Syntax highlighting colors
+  -- Available colors are: black, red, green, yellow, blue, magenta, cyan, white.
+  -- They can also be combined with modifiers: bright, dim, underscore, blink, reverse, hidden
+  syntaxColors = {
+    constant   = { "bright", "yellow" },
+    string     = { "green" },
+    comment    = { "dim", "cyan" },
+    number     = { "yellow" },
+    operator   = { "yellow" },
+    keywords   = { "bright", "magenta" },
+    identifier = { "blue" },
+  },
+
+  dump = {
+    depthLimit = 5,
+    itemsLimit = 30
+  }
+}

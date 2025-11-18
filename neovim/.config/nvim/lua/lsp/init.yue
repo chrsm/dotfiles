@@ -11,6 +11,12 @@ if #go_build_tags > 0
   go_build_flags[] = "-tags=#{ table.concat go_build_tags, ' ' }"
 
 handlers =
+  yue:
+    cmd: { 'bash', '-c', 'cd $HOME/src/yuecheck/src && yue -e yuecheck/exp/lsp.yue' }
+    root_markers:
+      * '.git'
+      * '.yuecheck'
+    filetypes: { 'yue' }
   clangd:
     cmd: { 'clangd' }
     filetypes: { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'cc', 'hh' }
@@ -275,18 +281,6 @@ handlers =
         ST1022: true
         ST1023: true
 
-old_handlers =
-  * (name) ->
-    import 'lspconfig' as lsp_c
-    lsp_c[name].setup {}
-  clangd: (->
-    import 'lspconfig' as lsp_c
-
-    lsp_c.clangd.setup
-      filetypes: { 'c', 'cpp', 'objc', 'cuda' }
-  )
-
-
 keyb = (key, cmd, desc) ->
   unless (cmd\sub -(#cmd)) == ')'
     cmd ..= '()'
@@ -295,6 +289,9 @@ keyb = (key, cmd, desc) ->
 
 export default {
   setup: ->
+    if handlers.yue
+      vim.lsp.set_log_level 'DEBUG'
+
     import 'lsp-zero' as lsp_z
     import 'mason'
     import 'mason-lspconfig' as lsp_m

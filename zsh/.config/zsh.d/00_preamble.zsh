@@ -1,4 +1,3 @@
-# asdf for local tooling
 export IS_MAC=false
 if [[ `uname` == "Darwin" ]]; then
 	export IS_MAC=true

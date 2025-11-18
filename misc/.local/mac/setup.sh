@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -euxo pipefail
 
 defaults write NSGlobalDomain AppleShowScrollbars -string "Always"
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
@@ -33,3 +33,7 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 
 # shit's loud
 sudo nvram SystemAudioVolume=" "
+
+defaults write com.apple.finder AppleShowAllFiles -boolean true
+
+killall Finder

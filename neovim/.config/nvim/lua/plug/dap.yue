@@ -1,5 +1,8 @@
 import 'macros' as { $ }
 
+paths =
+  mac: '/Library/Developer/CommandLineTools/usr/bin/lldb-dap'
+
 cfg =
   breakpoint:
     key: 'b'
@@ -33,7 +36,7 @@ export default {
       group: 'debugging'
 
     for k, v in pairs cfg
-      map[] = { 
+      map[] = {
         '<leader>e#{ v.key }', "<CMD>lua require('dap').#{ v.fn }()<CR>",
         desc: v.desc
       }
@@ -63,26 +66,16 @@ export default {
               vars
       }
 
+    adapter = switch true
+      when (vim.fn.has 'mac') == 1
+        paths.mac
+      else
+        error 'paths not set'
+
     dap.adapters.lldb =
       name: 'lldb'
-      command: '/usr/bin/lldb-vscode'
+      command: adapter
       type: 'executable'
-
-    --[[
-    dap.adapters.executable =
-      type: 'executable'
-      command: '#{ vim.fn.stdpath 'data' }/mason/bin/codelldb'
-      name: 'lldb1'
-      host: '127.0.0.1'
-      port: 13000
-    dap.adapters.codelldb =
-      name: 'codelldb server'
-      type: 'server'
-      port: '${port}'
-      executable:
-        command: '#{ vim.fn.stdpath 'data' }/mason/bin/codelldb'
-        args: { --port', '${port}' }
-    ]]
 
     dap.configurations.c = dap.configurations.cpp
     dap.configurations.rust = dap.configurations.cpp

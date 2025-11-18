@@ -289,8 +289,7 @@ keyb = (key, cmd, desc) ->
 
 export default {
   setup: ->
-    if handlers.yue
-      vim.lsp.set_log_level 'DEBUG'
+    vim.lsp.log.set_level 'DEBUG'
 
     import 'lsp-zero' as lsp_z
     import 'mason'

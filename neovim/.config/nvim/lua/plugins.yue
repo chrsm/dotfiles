@@ -109,10 +109,6 @@ plugs =
       hex.setup!
   }
 
-  * {
-    dir: '~/src/impulse.nvim'
-    config: $do_cfg 'impulse'
-  }
 
   -- dev related, but not lang-specific
   * 'rhysd/committia.vim'

@@ -109,7 +109,6 @@ plugs =
       hex.setup!
   }
 
-
   -- dev related, but not lang-specific
   * 'rhysd/committia.vim'
   * {
@@ -181,7 +180,7 @@ plugs =
   }
   * {
     'mhartington/formatter.nvim'
-      config: $do_cfg 'formatter'
+    config: $do_cfg 'formatter'
   }
   * 'nvim-lua/lsp-status.nvim'
   * 'nvim-lua/diagnostic-nvim'
@@ -222,10 +221,6 @@ plugs =
     'leoluz/nvim-dap-go'
     config: $do_cfg 'dap_go'
   }
-  * {
-    'vim-crystal/vim-crystal'
-  }
-  * 'chaimleib/vim-renpy'
 
 export default {
   setup: ->

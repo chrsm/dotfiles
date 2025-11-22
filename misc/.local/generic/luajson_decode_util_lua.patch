@@ -1,0 +1,7 @@
+19a20
+> local type = type
+97c98,99
+< local DecimalLpegVersion = lpeg.version and tonumber(lpeg.version():match("^(%d+%.%d+)")) or 0.7
+---
+> -- local DecimalLpegVersion = lpeg.version and tonumber(lpeg.version():match("^(%d+%.%d+)")) or 0.7
+> local DecimalLpegVersion = lpeg.version and tonumber((type(lpeg.version) == "string" and lpeg.version or lpeg.version()):match("^(%d+%.%d+)")) or 0.7

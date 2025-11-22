@@ -1,7 +1,10 @@
 import 'macros' as { $ }
 
 paths =
+  linux: '/usr/bin/lldb-dap'
   mac: '/Library/Developer/CommandLineTools/usr/bin/lldb-dap'
+  wsl: ''
+  windows: ''
 
 cfg =
   breakpoint:
@@ -67,10 +70,16 @@ export default {
       }
 
     adapter = switch true
-      when (vim.fn.has 'mac') == 1
+      when vim.fn.has'wsl' == 1
+        paths.wsl
+      when vim.fn.has'linux' == 1
+        paths.linux
+      when vim.fn.has'mac' == 1
         paths.mac
+      when vim.fn.has'win32' == 1
+        paths.windows
       else
-        error 'paths not set'
+        error 'lldb-dap path not found'
 
     dap.adapters.lldb =
       name: 'lldb'
